@@ -203,7 +203,7 @@ export default function CollectAI() {
         <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, transition: "all .4s", ...navStyle }}>
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 28px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
-              <a href="#" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <a href="/" style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(135deg,#059669,#10b981)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(16,185,129,.28)" }}>
                   <LogoSvg />
                 </div>
@@ -841,14 +841,14 @@ export default function CollectAI() {
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 28px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1fr", gap: 48, marginBottom: 52 }}>
               <div>
-                <a href="#" style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+                <a href="/" style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
                   <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(135deg,#059669,#10b981)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(16,185,129,.28)" }}><LogoSvg /></div>
                   <span style={{ fontSize: 20, fontWeight: 800, color: "#f1f5f9" }}>Collect<span style={{ color: "#34d399" }}>AI</span></span>
                 </a>
                 <p style={{ fontSize: 13, color: "#475569", lineHeight: 1.75, marginBottom: 22 }}>AI-powered client management and revenue tracking for modern businesses.</p>
                 <div style={{ display: "flex", gap: 10 }}>
                   {[Icons.Twitter, Icons.LI, Icons.GH, Icons.IG].map((Ic, i) => (
-                    <a key={i} href="#" style={{ width: 38, height: 38, borderRadius: 10, background: "#1e293b", display: "flex", alignItems: "center", justifyContent: "center", color: "#475569", transition: "all .2s" }}
+                    <a key={i} href="/" style={{ width: 38, height: 38, borderRadius: 10, background: "#1e293b", display: "flex", alignItems: "center", justifyContent: "center", color: "#475569", transition: "all .2s" }}
                       {...p({ background: "#1e293b", color: "#475569" }, { background: "#334155", color: "#f1f5f9" })}>
                       <Ic s={15} />
                     </a>
@@ -860,7 +860,7 @@ export default function CollectAI() {
                   <h4 style={{ fontSize: 11, fontWeight: 700, color: "#f1f5f9", marginBottom: 18, textTransform: "uppercase", letterSpacing: "1.5px" }}>{title}</h4>
                   <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
                     {links.map(l => (
-                      <li key={l}><a href="#" style={{ fontSize: 13, color: "#475569", transition: "color .2s" }}
+                      <li key={l}><a href="/" style={{ fontSize: 13, color: "#475569", transition: "color .2s" }}
                         {...p({ color: "#475569" }, { color: "#34d399" })}>{l}</a></li>
                     ))}
                   </ul>
@@ -871,7 +871,7 @@ export default function CollectAI() {
               <p style={{ fontSize: 12, color: "#334155" }}>© 2025 CollectAI Technologies. All rights reserved.</p>
               <div style={{ display: "flex", gap: 22 }}>
                 {["Privacy", "Terms", "Cookies"].map(l => (
-                  <a key={l} href="#" style={{ fontSize: 12, color: "#334155", transition: "color .2s" }}
+                  <a key={l} href="/" style={{ fontSize: 12, color: "#334155", transition: "color .2s" }}
                     {...p({ color: "#334155" }, { color: "#64748b" })}>{l}</a>
                 ))}
               </div>
