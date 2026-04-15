@@ -6,11 +6,11 @@ import PremiumBackground from "./ui/premium-background";
 import ThemeToggle from "./ThemeToggle";
 
 const pageTitles = {
-    "/dashboard":   { title: "Dashboard",  sub: "Overview of your business metrics" },
-    "/clients":     { title: "Clients",    sub: "Manage your client relationships" },
-    "/payments":    { title: "Payments",   sub: "Track invoices and transactions" },
-    "/ai-insights": { title: "AI Insights",sub: "AI-powered revenue analytics" },
-    "/settings":    { title: "Settings",   sub: "Manage your account preferences" },
+    "/dashboard": { title: "Dashboard", sub: "Overview of your business metrics" },
+    "/clients": { title: "Clients", sub: "Manage your client relationships" },
+    "/payments": { title: "Payments", sub: "Track invoices and transactions" },
+    "/ai-insights": { title: "AI Insights", sub: "AI-powered revenue analytics" },
+    "/settings": { title: "Settings", sub: "Manage your account preferences" },
 };
 
 const TopNavbar = () => {
@@ -72,24 +72,25 @@ const TopNavbar = () => {
 
 const Layout = ({ children }) => {
     return (
-        <div className="flex bg-white dark:bg-[#020617] text-gray-900 dark:text-white min-h-screen relative overflow-hidden transition-colors duration-300">
-            {/* Premium dark background — navy, grid, radial glows */}
-            <div className="hidden dark:block">
-                <PremiumBackground />
-            </div>
+        <div className="flex min-h-screen relative overflow-hidden text-gray-900 dark:text-white">
+
+            {/* 🔥 ALWAYS VISIBLE BACKGROUND */}
+            <PremiumBackground />
 
             {/* Sidebar */}
             <Sidebar />
 
-            {/* Main column: navbar + content */}
-            <div className="flex-1 md:ml-64 flex flex-col min-h-screen relative z-10 w-full overflow-hidden">
+            {/* Main */}
+            <div className="flex-1 md:ml-64 flex flex-col min-h-screen relative z-10 w-full">
                 <TopNavbar />
+
                 <main className="flex-1 p-6 sm:p-8 overflow-y-auto">
                     <div className="max-w-7xl mx-auto">
                         {children}
                     </div>
                 </main>
             </div>
+
         </div>
     );
 };
