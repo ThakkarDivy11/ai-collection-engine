@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Search, Bell } from "lucide-react";
 import Sidebar from "./Sidebar";
-import PremiumBackground from "./ui/premium-background";
+import BackgroundWrapper from "./Background";
 import ThemeToggle from "./ThemeToggle";
 
 const pageTitles = {
@@ -72,26 +72,25 @@ const TopNavbar = () => {
 
 const Layout = ({ children }) => {
     return (
-        <div className="flex min-h-screen relative overflow-hidden text-gray-900 dark:text-white">
+        <BackgroundWrapper>
+            <div className="flex min-h-screen relative overflow-hidden text-gray-900 dark:text-white">
 
-            {/* 🔥 ALWAYS VISIBLE BACKGROUND */}
-            <PremiumBackground />
+                {/* Sidebar */}
+                <Sidebar />
 
-            {/* Sidebar */}
-            <Sidebar />
+                {/* Main */}
+                <div className="flex-1 md:ml-64 flex flex-col min-h-screen relative z-10 w-full">
+                    <TopNavbar />
 
-            {/* Main */}
-            <div className="flex-1 md:ml-64 flex flex-col min-h-screen relative z-10 w-full">
-                <TopNavbar />
+                    <main className="flex-1 p-6 sm:p-8 overflow-y-auto">
+                        <div className="max-w-7xl mx-auto">
+                            {children}
+                        </div>
+                    </main>
+                </div>
 
-                <main className="flex-1 p-6 sm:p-8 overflow-y-auto">
-                    <div className="max-w-7xl mx-auto">
-                        {children}
-                    </div>
-                </main>
             </div>
-
-        </div>
+        </BackgroundWrapper>
     );
 };
 
