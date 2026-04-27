@@ -8,6 +8,7 @@ import Hero from "../components/landing/Hero";
 import { Stats, HowItWorks, CTA, Footer } from "../components/landing/LandingMisc";
 import HorizontalFeatures from "../components/landing/HorizontalFeatures";
 import Intelligence from "../components/landing/Intelligence";
+import CircleGrid from "../components/landing/CircleGrid";
 import Pricing from "../components/landing/Pricing";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -58,7 +59,7 @@ const LandingPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden bg-white dark:bg-[#020617] text-slate-900 dark:text-white selection:bg-[#16a34a]/10">
+    <div className="relative w-full overflow-hidden bg-white dark:bg-[#1a2a37] text-slate-900 dark:text-white selection:bg-[#4b8aac]/10">
       <div className="fixed inset-0 z-0 opacity-40 dark:opacity-100 grayscale dark:grayscale-0 pointer-events-none">
         <ThreeBackground />
       </div>
@@ -78,8 +79,22 @@ const LandingPage: React.FC = () => {
 
         {/* AI SECTION - Split layout with soft glow blobs */}
         <section className="relative">
-          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-calypso-600/10 blur-[150px] rounded-full pointer-events-none" />
           <Intelligence />
+        </section>
+
+        {/* CIRCLE GRID - Interactive GSAP Animation */}
+        <section className="relative py-0 bg-white dark:bg-[#1a2a37] overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 pt-24 pb-0">
+            <div className="text-center mb-16">
+              <span className="text-calypso-600 dark:text-calypso-300 font-semibold text-xs uppercase tracking-[0.4em] mb-4 block">Live Engine</span>
+              <h2 className="text-5xl md:text-6xl font-semibold text-slate-900 dark:text-white tracking-tighter">Neural <span className="text-calypso-500">Pulse</span></h2>
+              <p className="text-slate-500 dark:text-slate-400 mt-4 max-w-md mx-auto text-base">Click to pause the simulation. Our AI runs thousands of micro-calculations every second.</p>
+            </div>
+          </div>
+          <div className="w-full" style={{ height: '60vh' }}>
+            <CircleGrid />
+          </div>
         </section>
 
         {/* HOW IT WORKS - Minimal design */}

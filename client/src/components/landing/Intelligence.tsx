@@ -11,7 +11,7 @@ const Intelligence: React.FC = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 dark:bg-[#00ff7f]/5 text-green-700 dark:text-[#00ff7f] text-[10px] font-semibold mb-10 uppercase tracking-[0.4em] border border-green-500/10 dark:border-[#00ff7f]/10"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-calypso-500/10 dark:bg-calypso-300/5 text-calypso-700 dark:text-calypso-300 text-[10px] font-semibold mb-10 uppercase tracking-[0.4em] border border-calypso-500/10 dark:border-calypso-300/10"
           >
             <Sparkles size={12} />
             <span>Neural Intelligence</span>
@@ -25,7 +25,7 @@ const Intelligence: React.FC = () => {
           >
             Predict. <br />
             Optimize. <br />
-            <span className="text-[#16a34a] dark:text-[#00ff7f]">Automate.</span>
+            <span className="text-calypso-500 dark:text-calypso-300">Automate.</span>
           </motion.h2>
           
           <motion.p
@@ -50,7 +50,7 @@ const Intelligence: React.FC = () => {
                 transition={{ delay: i * 0.1 }}
                 className="flex items-center gap-6 group"
               >
-                <div className="w-12 h-12 rounded-2xl bg-green-500/5 dark:bg-[#00ff7f]/5 border border-green-500/10 dark:border-[#00ff7f]/10 flex items-center justify-center text-[#16a34a] dark:text-[#00ff7f] group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-calypso-500/5 border border-calypso-500/10 flex items-center justify-center text-calypso-500 group-hover:scale-110 transition-transform">
                   <CheckCircle2 size={20} />
                 </div>
                 <span className="text-slate-900 dark:text-white font-semibold text-xl tracking-tight">{item}</span>
@@ -66,18 +66,21 @@ const Intelligence: React.FC = () => {
           className="relative"
         >
              {/* Visual Preview Elements - No heavy container box */}
-             <div className="p-10 rounded-[3rem] bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 shadow-xl">
-                <div className="flex items-center gap-4 mb-10">
-                    <div className="w-12 h-12 rounded-2xl bg-green-500/10 dark:bg-[#00ff7f]/10 flex items-center justify-center text-green-700 dark:text-[#00ff7f] border border-green-500/10 dark:border-[#00ff7f]/10">
+             <div className="p-10 rounded-[3rem] bg-white dark:bg-white/[0.02] border border-calypso-100 dark:border-calypso-800/20 shadow-2xl relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-calypso-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[3rem] pointer-events-none" />
+                
+                <div className="flex items-center gap-4 mb-10 relative z-10">
+                    <div className="w-12 h-12 rounded-2xl bg-calypso-500/10 flex items-center justify-center text-calypso-600 dark:text-calypso-300 border border-calypso-500/10">
                         <Cpu size={24} />
                     </div>
                     <div>
-                        <div className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">Nexus Core Processing</div>
-                        <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Active Simulation</div>
+                        <div className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">Nexus Core Processing</div>
+                        <div className="text-[10px] font-bold text-slate-400 dark:text-calypso-500 uppercase tracking-widest">Active Simulation</div>
                     </div>
+                    <div className="ml-auto text-calypso-500 font-bold text-xs animate-pulse">LIVE</div>
                 </div>
 
-                <div className="flex items-end gap-3 h-64 mb-8">
+                <div className="flex items-end gap-3 h-64 mb-10 relative z-10">
                     {[40, 70, 50, 95, 60, 85, 45, 75, 55, 90, 65, 80].map((h, i) => (
                         <motion.div
                             key={i}
@@ -85,16 +88,20 @@ const Intelligence: React.FC = () => {
                             whileInView={{ scaleY: h / 100 }}
                             transition={{ duration: 1.5, delay: 0.5 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                             style={{ transformOrigin: "bottom" }}
-                            className="flex-1 h-full bg-gradient-to-t from-[#16a34a]/40 dark:from-[#00ff7f]/40 to-[#16a34a]/5 dark:to-[#00ff7f]/5 rounded-t-xl"
+                            className="flex-1 h-full bg-gradient-to-t from-calypso-500 to-calypso-500/20 rounded-t-xl"
                         />
                     ))}
                 </div>
 
-                <div className="grid grid-cols-3 gap-6">
-                    {[1, 2, 3].map(i => (
-                        <div key={i} className="h-20 rounded-2xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5 p-4">
-                             <div className="w-8 h-1 bg-slate-200 dark:bg-white/10 rounded-full mb-3" />
-                             <div className="w-full h-1 bg-slate-100 dark:bg-white/5 rounded-full" />
+                <div className="grid grid-cols-3 gap-6 relative z-10">
+                    {[
+                      { label: "Throughput", value: "840/s" },
+                      { label: "Accuracy", value: "99.2%" },
+                      { label: "Latency", value: "0.4ms" }
+                    ].map((stat, i) => (
+                        <div key={i} className="h-24 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-calypso-800/20 p-4 flex flex-col justify-between">
+                             <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{stat.label}</div>
+                             <div className="text-xl font-bold text-slate-900 dark:text-white">{stat.value}</div>
                         </div>
                     ))}
                 </div>

@@ -41,7 +41,7 @@ const AiActions = () => {
     };
 
     const getStatusBadgeColor = (status) => {
-        if (!status || status === "sent") return "bg-emerald-100 text-emerald-700";
+        if (!status || status === "sent") return "bg-calypso-100 text-calypso-700";
         if (status === "failed") return "bg-rose-100 text-rose-700";
         return "bg-amber-100 text-amber-700";
     };

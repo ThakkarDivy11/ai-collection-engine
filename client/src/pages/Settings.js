@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const TabButton = ({ active, icon: Icon, label, onClick }) => (
     <button
         onClick={onClick}
-        className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all relative ${active ? "text-blue-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+        className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all relative ${active ? "text-calypso-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
             }`}
     >
         <Icon size={18} />
@@ -24,7 +24,7 @@ const TabButton = ({ active, icon: Icon, label, onClick }) => (
         {active && (
             <motion.div
                 layoutId="activeTab"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-calypso-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
             />
         )}
     </button>
@@ -49,7 +49,7 @@ const InputField = ({ label, icon: Icon, ...props }) => (
             {Icon && <Icon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />}
             <input
                 {...props}
-                className={`w-full bg-slate-900 border border-slate-800 rounded-xl py-3 ${Icon ? 'pl-11' : 'px-4'} pr-4 text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all`}
+                className={`w-full bg-slate-900 border border-slate-800 rounded-xl py-3 ${Icon ? 'pl-11' : 'px-4'} pr-4 text-white focus:ring-2 focus:ring-calypso-500/20 focus:border-calypso-500 outline-none transition-all`}
             />
         </div>
     </div>
@@ -88,8 +88,8 @@ export default function Settings() {
                     onClick={handleSave}
                     disabled={saving}
                     className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all ${saved
-                            ? "bg-emerald-500 text-white"
-                            : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-900/20"
+                            ? "bg-calypso-500 text-white"
+                            : "bg-calypso-600 hover:bg-calypso-700 text-white shadow-lg shadow-blue-900/20"
                         } disabled:opacity-50`}
                 >
                     {saving ? (
@@ -140,7 +140,7 @@ export default function Settings() {
                                 <div className="pt-8 border-t border-slate-800/50">
                                     <h3 className="text-lg font-bold text-white mb-6">Profile Appearance</h3>
                                     <div className="flex items-center gap-6">
-                                        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl font-bold text-white shadow-xl shadow-blue-500/20">
+                                        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-calypso-500 to-purple-600 flex items-center justify-center text-3xl font-bold text-white shadow-xl shadow-calypso-500/20">
                                             A
                                         </div>
                                         <div className="space-y-2">
@@ -167,7 +167,7 @@ export default function Settings() {
                                 <div className="space-y-4 pt-4">
                                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Company Address</label>
                                     <textarea
-                                        className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-white h-32 outline-none focus:border-blue-500 transition-all font-medium"
+                                        className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-white h-32 outline-none focus:border-calypso-500 transition-all font-medium"
                                         defaultValue="123 Tech Avenue, Silicon Valley, CA 94025"
                                     />
                                 </div>
@@ -186,13 +186,13 @@ export default function Settings() {
                                     label="Two-Factor Authentication"
                                     description="Add an extra layer of security to your account by requiring more than just a password to log in."
                                 >
-                                    <button className="bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 px-4 py-2 rounded-lg text-sm font-bold transition-all">Enable 2FA</button>
+                                    <button className="bg-calypso-600/10 text-calypso-400 hover:bg-calypso-600/20 px-4 py-2 rounded-lg text-sm font-bold transition-all">Enable 2FA</button>
                                 </SettingRow>
                                 <SettingRow
                                     label="Password Requirements"
                                     description="Enforce strong passwords for all team members."
                                 >
-                                    <div className="flex items-center gap-2 text-emerald-400 text-sm font-bold">
+                                    <div className="flex items-center gap-2 text-calypso-400 text-sm font-bold">
                                         <CheckCircle2 size={16} />
                                         Enabled
                                     </div>
@@ -217,7 +217,7 @@ export default function Settings() {
                                 className="space-y-4"
                             >
                                 <SettingRow label="Email Notifications" description="Receive updates and alerts via email.">
-                                    <div className="w-12 h-6 bg-blue-600 rounded-full relative cursor-pointer shadow-inner">
+                                    <div className="w-12 h-6 bg-calypso-600 rounded-full relative cursor-pointer shadow-inner">
                                         <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full" />
                                     </div>
                                 </SettingRow>
@@ -227,12 +227,12 @@ export default function Settings() {
                                     </div>
                                 </SettingRow>
                                 <SettingRow label="Payment Success" description="Notify when a client completes a payment.">
-                                    <div className="w-12 h-6 bg-blue-600 rounded-full relative cursor-pointer">
+                                    <div className="w-12 h-6 bg-calypso-600 rounded-full relative cursor-pointer">
                                         <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full" />
                                     </div>
                                 </SettingRow>
                                 <SettingRow label="Churn Alerts" description="AI alerts for clients at risk of churning.">
-                                    <div className="w-12 h-6 bg-blue-600 rounded-full relative cursor-pointer">
+                                    <div className="w-12 h-6 bg-calypso-600 rounded-full relative cursor-pointer">
                                         <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full" />
                                     </div>
                                 </SettingRow>

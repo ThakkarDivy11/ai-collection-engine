@@ -84,7 +84,7 @@ export default function Payments() {
                 </div>
                 <button
                     onClick={() => setShowModal(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all shadow-lg shadow-blue-900/40"
+                    className="bg-calypso-600 hover:bg-calypso-700 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all shadow-lg shadow-blue-900/40"
                 >
                     <Plus size={20} />
                     Create Invoice
@@ -117,7 +117,7 @@ export default function Payments() {
                             {loading ? (
                                 <tr>
                                     <td colSpan="6" className="py-20 text-center">
-                                        <Loader2 className="mx-auto animate-spin text-blue-500" size={32} />
+                                        <Loader2 className="mx-auto animate-spin text-calypso-500" size={32} />
                                     </td>
                                 </tr>
                             ) : invoices.length === 0 ? (
@@ -134,8 +134,8 @@ export default function Payments() {
                                     <td className="px-6 py-4 text-white font-bold">₹{invoice.amount.toLocaleString()}</td>
                                     <td className="px-6 py-4 text-slate-400">{new Date(invoice.dueDate).toLocaleDateString()}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${invoice.status === "paid" ? "bg-emerald-500/10 text-emerald-400" :
-                                            invoice.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-blue-500/10 text-blue-400"
+                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${invoice.status === "paid" ? "bg-calypso-500/10 text-calypso-400" :
+                                            invoice.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-calypso-500/10 text-calypso-400"
                                             }`}>
                                             {invoice.status.toUpperCase()}
                                         </span>
@@ -169,7 +169,7 @@ export default function Payments() {
                         >
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-2xl font-bold flex items-center gap-2">
-                                    <Plus className="text-blue-500" />
+                                    <Plus className="text-calypso-500" />
                                     New Invoice
                                 </h3>
                                 <button onClick={() => setShowModal(false)} className="text-slate-500 hover:text-white"><X size={24} /></button>
@@ -180,7 +180,7 @@ export default function Payments() {
                                     <label className="text-sm text-slate-400 block mb-2">Select Client</label>
                                     <select
                                         required
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-calypso-500"
                                         value={formData.clientId}
                                         onChange={(e) => setFormData({ ...formData, clientId: e.target.value })}
                                     >
@@ -197,7 +197,7 @@ export default function Payments() {
                                         <Hash className="absolute left-3 top-3.5 text-slate-500" size={18} />
                                         <input
                                             required
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-calypso-500"
                                             value={formData.invoiceNumber}
                                             onChange={(e) => setFormData({ ...formData, invoiceNumber: e.target.value })}
                                         />
@@ -212,7 +212,7 @@ export default function Payments() {
                                             <input
                                                 required
                                                 type="number"
-                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-500"
+                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-calypso-500"
                                                 value={formData.amount}
                                                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                                             />
@@ -225,7 +225,7 @@ export default function Payments() {
                                             <input
                                                 required
                                                 type="date"
-                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-blue-500"
+                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-calypso-500"
                                                 value={formData.dueDate}
                                                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
                                             />
@@ -236,7 +236,7 @@ export default function Payments() {
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/40 mt-4 flex justify-center items-center gap-2"
+                                    className="w-full bg-calypso-600 hover:bg-calypso-700 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/40 mt-4 flex justify-center items-center gap-2"
                                 >
                                     {submitting ? <Loader2 className="animate-spin" size={20} /> : "Generate & Send Invoice"}
                                 </button>

@@ -47,7 +47,7 @@ const ThemeToggle = () => {
                 {theme === 'light' ? (
                     <Sun className="w-full h-full text-amber-500 absolute" />
                 ) : (
-                    <Moon className="w-full h-full text-blue-400 absolute" />
+                    <Moon className="w-full h-full text-calypso-400 absolute" />
                 )}
             </motion.div>
         </button>

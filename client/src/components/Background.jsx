@@ -42,9 +42,9 @@ export default function BackgroundWrapper({ children }) {
 
           <defs>
             <linearGradient id="waveGradient" x1="0" x2="1">
-              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="0%" stopColor="#4b8aac" />
               <stop offset="50%" stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#4b8aac" />
             </linearGradient>
           </defs>
         </svg>
@@ -55,7 +55,7 @@ export default function BackgroundWrapper({ children }) {
         {[...Array(25)].map((_, i) => (
           <span
             key={i}
-            className="absolute bg-blue-400/20 rounded-full"
+            className="absolute bg-calypso-400/20 rounded-full"
             style={{
               width: "1px",
               height: "1px",

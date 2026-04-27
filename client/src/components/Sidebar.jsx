@@ -29,7 +29,7 @@ const Sidebar = () => {
     return (
         <div className="w-64 h-screen bg-white/70 dark:bg-black/40 backdrop-blur-xl border-r border-gray-200 dark:border-white/10 text-gray-900 dark:text-white flex flex-col fixed left-0 top-0 hidden md:flex transition-colors duration-300">
             <div className="p-6 flex items-center gap-3">
-                <BrainCircuit className="text-blue-500 dark:text-blue-400 w-8 h-8" />
+                <BrainCircuit className="text-calypso-500 dark:text-calypso-400 w-8 h-8" />
                 <span className="text-xl font-bold tracking-tight">CollectAI</span>
             </div>
 
@@ -41,7 +41,7 @@ const Sidebar = () => {
                             <motion.div
                                 whileHover={{ x: 5 }}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
-                                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30 dark:shadow-blue-900/40"
+                                    ? "bg-calypso-600 text-white shadow-md shadow-calypso-600/30 dark:shadow-calypso-900/40"
                                     : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5"
                                     }`}
                             >

@@ -10,7 +10,7 @@ import {
     ResponsiveContainer, PieChart, Pie, Cell
 } from "recharts";
 
-const COLORS = ["#10b981", "#6366f1", "#f59e0b", "#ef4444"];
+const COLORS = ["#10b981", "#376b8b", "#f59e0b", "#ef4444"];
 
 const StatCard = ({ title, value, icon: Icon, color, subtitle, loading }) => (
     <motion.div
@@ -229,14 +229,14 @@ export default function AiInsights() {
 
     const clientHealthData = analytics ? [
         { name: "Active", value: analytics.activeClients, color: "#10b981" },
-        { name: "Inactive", value: analytics.inactiveClients, color: "#6366f1" },
+        { name: "Inactive", value: analytics.inactiveClients, color: "#376b8b" },
         { name: "Churn Risk", value: analytics.churnRisk, color: "#ef4444" },
     ].filter(d => d.value > 0) : [];
 
     const riskColor = (level) => {
         if (level === "high") return "bg-rose-500/10 text-rose-400 border-rose-500/20";
         if (level === "medium") return "bg-amber-500/10 text-amber-400 border-amber-500/20";
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+        return "bg-calypso-500/10 text-calypso-400 border-calypso-500/20";
     };
 
     return (
@@ -249,7 +249,7 @@ export default function AiInsights() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         className={`fixed top-8 right-8 z-50 px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 border backdrop-blur-md ${notification.type === "success"
-                            ? "bg-emerald-500/90 border-emerald-400 text-white"
+                            ? "bg-calypso-500/90 border-calypso-400 text-white"
                             : "bg-rose-500/90 border-rose-400 text-white"
                             }`}
                     >
@@ -274,7 +274,7 @@ export default function AiInsights() {
                     title="Total Clients"
                     value={analytics?.totalClients || 0}
                     icon={Users}
-                    color="bg-blue-600"
+                    color="bg-calypso-600"
                     subtitle={`${analytics?.activeClients || 0} active`}
                     loading={analyticsLoading}
                 />
@@ -282,7 +282,7 @@ export default function AiInsights() {
                     title="Total Revenue"
                     value={`₹${(analytics?.totalRevenue || 0).toLocaleString()}`}
                     icon={IndianRupee}
-                    color="bg-emerald-600"
+                    color="bg-calypso-600"
                     subtitle={`${analytics?.paidInvoices || 0} invoices paid`}
                     loading={analyticsLoading}
                 />
@@ -322,7 +322,7 @@ export default function AiInsights() {
                     className="lg:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"
                 >
                     <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                        <TrendingUp className="text-emerald-400" size={20} />
+                        <TrendingUp className="text-calypso-400" size={20} />
                         Revenue Trend
                         <span className="text-xs text-slate-500 font-normal ml-auto">Last 6 months</span>
                     </h3>
@@ -362,7 +362,7 @@ export default function AiInsights() {
                     className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"
                 >
                     <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                        <Users className="text-blue-400" size={20} />
+                        <Users className="text-calypso-400" size={20} />
                         Client Health
                     </h3>
                     <div className="h-48 flex items-center justify-center">
@@ -437,7 +437,7 @@ export default function AiInsights() {
                             >
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="font-bold text-sm">{pred.name}</span>
-                                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${pred.riskLevel === "high" ? "bg-rose-500/20" : pred.riskLevel === "medium" ? "bg-amber-500/20" : "bg-emerald-500/20"}`}>
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${pred.riskLevel === "high" ? "bg-rose-500/20" : pred.riskLevel === "medium" ? "bg-amber-500/20" : "bg-calypso-500/20"}`}>
                                         {pred.riskLevel}
                                     </span>
                                 </div>
@@ -469,7 +469,7 @@ export default function AiInsights() {
                         {analytics.recentInvoices.map((inv, idx) => (
                             <div key={idx} className="flex items-center justify-between p-3 bg-slate-800/40 rounded-xl border border-slate-800 hover:bg-slate-800/60 transition-colors">
                                 <div className="flex items-center gap-3">
-                                    <div className={`p-2 rounded-lg ${inv.status === "paid" ? "bg-emerald-500/10 text-emerald-400" : inv.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-blue-500/10 text-blue-400"}`}>
+                                    <div className={`p-2 rounded-lg ${inv.status === "paid" ? "bg-calypso-500/10 text-calypso-400" : inv.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-calypso-500/10 text-calypso-400"}`}>
                                         <FileText size={16} />
                                     </div>
                                     <div>
@@ -479,7 +479,7 @@ export default function AiInsights() {
                                 </div>
                                 <div className="text-right">
                                     <p className="text-white font-bold text-sm">₹{inv.amount.toLocaleString()}</p>
-                                    <span className={`text-[10px] font-bold uppercase tracking-wider ${inv.status === "paid" ? "text-emerald-400" : inv.status === "overdue" ? "text-rose-400" : "text-blue-400"}`}>
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider ${inv.status === "paid" ? "text-calypso-400" : inv.status === "overdue" ? "text-rose-400" : "text-calypso-400"}`}>
                                         {inv.status}
                                     </span>
                                 </div>
@@ -532,7 +532,7 @@ export default function AiInsights() {
                     {/* AI Smart Search */}
                     <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
                         <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                            <Search className="text-blue-400" size={20} />
+                            <Search className="text-calypso-400" size={20} />
                             AI Smart Search
                         </h3>
                         <form onSubmit={handleSearch} className="relative mb-6">
@@ -541,12 +541,12 @@ export default function AiInsights() {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Ask like: 'Show me clients who haven't paid this month'"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-4 pl-6 pr-14 text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all outline-none"
+                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-4 pl-6 pr-14 text-white focus:ring-2 focus:ring-calypso-500/50 focus:border-calypso-500 transition-all outline-none"
                             />
                             <button
                                 type="submit"
                                 disabled={searchLoading}
-                                className="absolute right-3 top-3 bg-blue-600 p-2 rounded-lg text-white disabled:opacity-50 shadow-lg shadow-blue-900/20"
+                                className="absolute right-3 top-3 bg-calypso-600 p-2 rounded-lg text-white disabled:opacity-50 shadow-lg shadow-blue-900/20"
                             >
                                 {searchLoading ? <Loader2 className="animate-spin" size={20} /> : <Send size={20} />}
                             </button>
@@ -581,7 +581,7 @@ export default function AiInsights() {
                 <div className="space-y-6">
                     <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl h-full flex flex-col shadow-xl">
                         <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                            <Send className="text-emerald-400" size={20} />
+                            <Send className="text-calypso-400" size={20} />
                             AI Email Generator
                         </h3>
                         <div className="space-y-4 flex-grow">
@@ -590,7 +590,7 @@ export default function AiInsights() {
                                 <select
                                     value={selectedClient}
                                     onChange={handleClientChange}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50"
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:ring-2 focus:ring-calypso-500/20 focus:border-calypso-500/50"
                                 >
                                     <option value="">Select a client...</option>
                                     {clients.map(client => (
@@ -603,7 +603,7 @@ export default function AiInsights() {
                                 <select
                                     value={emailType}
                                     onChange={(e) => setEmailType(e.target.value)}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500/50"
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:ring-2 focus:ring-calypso-500/20 focus:border-calypso-500/50"
                                 >
                                     <option>Payment Reminder</option>
                                     <option>Welcome Email</option>
@@ -621,7 +621,7 @@ export default function AiInsights() {
                                             value={clientName}
                                             onChange={(e) => setClientName(e.target.value)}
                                             placeholder="John Doe"
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-9 pr-3 text-white outline-none focus:border-emerald-500/50 text-sm"
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-9 pr-3 text-white outline-none focus:border-calypso-500/50 text-sm"
                                         />
                                     </div>
                                 </div>
@@ -634,7 +634,7 @@ export default function AiInsights() {
                                             value={companyName}
                                             onChange={(e) => setCompanyName(e.target.value)}
                                             placeholder="Acme Inc"
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-9 pr-3 text-white outline-none focus:border-emerald-500/50 text-sm"
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-9 pr-3 text-white outline-none focus:border-calypso-500/50 text-sm"
                                         />
                                     </div>
                                 </div>
@@ -646,13 +646,13 @@ export default function AiInsights() {
                                     value={emailContext}
                                     onChange={(e) => setEmailContext(e.target.value)}
                                     placeholder="Briefly describe what you want to say..."
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none resize-none focus:border-emerald-500/50 text-sm"
+                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none resize-none focus:border-calypso-500/50 text-sm"
                                 ></textarea>
                             </div>
                             <button
                                 onClick={handleGenerateEmail}
                                 disabled={emailLoading || !clientName}
-                                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-all flex justify-center items-center gap-2 disabled:opacity-50 mt-2 shadow-lg shadow-emerald-900/20"
+                                className="w-full bg-calypso-600 hover:bg-calypso-700 text-white py-3 rounded-xl font-bold transition-all flex justify-center items-center gap-2 disabled:opacity-50 mt-2 shadow-lg shadow-calypso-900/20"
                             >
                                 {emailLoading ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={18} />}
                                 Generate Email
@@ -665,7 +665,7 @@ export default function AiInsights() {
                                     className="mt-6 p-4 bg-slate-800 border border-slate-700 rounded-xl relative group"
                                 >
                                     <div className="flex justify-between items-center mb-3">
-                                        <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Preview</span>
+                                        <span className="text-[10px] font-bold text-calypso-400 uppercase tracking-widest">Preview</span>
                                         <button
                                             onClick={() => navigator.clipboard.writeText(generatedEmail)}
                                             className="text-[10px] font-bold text-slate-500 hover:text-white transition-colors uppercase"
@@ -679,9 +679,9 @@ export default function AiInsights() {
                                     <button
                                         onClick={handleSendEmail}
                                         disabled={sendingEmail || !clientEmail}
-                                        className="w-full bg-white text-slate-900 py-2.5 rounded-lg font-bold text-sm hover:bg-emerald-50 transition-all flex justify-center items-center gap-2 shadow-xl"
+                                        className="w-full bg-white text-slate-900 py-2.5 rounded-lg font-bold text-sm hover:bg-calypso-50 transition-all flex justify-center items-center gap-2 shadow-xl"
                                     >
-                                        {sendingEmail ? <Loader2 className="animate-spin text-emerald-600" size={18} /> : <Send size={16} className="text-emerald-600" />}
+                                        {sendingEmail ? <Loader2 className="animate-spin text-calypso-600" size={18} /> : <Send size={16} className="text-calypso-600" />}
                                         Send to {clientName}
                                     </button>
                                     {!clientEmail && (

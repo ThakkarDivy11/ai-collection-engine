@@ -31,7 +31,7 @@ const AiVoiceCalls = () => {
         if (!status) return "bg-gray-100 text-gray-800";
         switch (status.toLowerCase()) {
             case "completed":
-                return "bg-emerald-100 text-emerald-800";
+                return "bg-calypso-100 text-calypso-800";
             case "failed":
                 return "bg-rose-100 text-rose-800";
             case "no-answer":
@@ -61,7 +61,7 @@ const AiVoiceCalls = () => {
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-100 rounded-lg">
-                        <PhoneCall size={20} className="text-blue-600" />
+                        <PhoneCall size={20} className="text-calypso-600" />
                     </div>
                     <div>
                         <h3 className="text-lg font-semibold text-gray-800">AI Voice Calls</h3>

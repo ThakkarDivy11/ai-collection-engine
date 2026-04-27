@@ -50,7 +50,7 @@ export default function Login() {
             <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
                 {/* Overlay Gradients */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-                    <div className="absolute -top-24 -left-24 w-[500px] h-[500px] bg-blue-500/30 blur-[150px] rounded-full"></div>
+                    <div className="absolute -top-24 -left-24 w-[500px] h-[500px] bg-calypso-500/30 blur-[150px] rounded-full"></div>
                     <div className="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-purple-500/30 blur-[150px] rounded-full"></div>
                 </div>
 
@@ -60,7 +60,7 @@ export default function Login() {
                     className="bg-slate-900 border border-slate-800 p-10 rounded-3xl w-full max-w-[440px] shadow-2xl relative z-10"
                 >
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="bg-blue-600 p-2 rounded-xl text-white">
+                        <div className="bg-calypso-600 p-2 rounded-xl text-white">
                             <BrainCircuit size={32} />
                         </div>
                         <h1 className="text-white text-3xl font-bold tracking-tight">
@@ -109,7 +109,7 @@ export default function Login() {
                                 type="email"
                                 required
                                 placeholder="Email address"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-slate-500"
+                                className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white outline-none focus:ring-2 focus:ring-calypso-500/50 transition-all placeholder:text-slate-500"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
@@ -120,7 +120,7 @@ export default function Login() {
                                 type="password"
                                 required
                                 placeholder="Password"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-slate-500"
+                                className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white outline-none focus:ring-2 focus:ring-calypso-500/50 transition-all placeholder:text-slate-500"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
@@ -128,7 +128,7 @@ export default function Login() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 rounded-2xl text-white font-bold bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-900/40 transition-all flex justify-center items-center gap-2"
+                            className="w-full py-4 rounded-2xl text-white font-bold bg-calypso-600 hover:bg-calypso-700 shadow-lg shadow-blue-900/40 transition-all flex justify-center items-center gap-2"
                         >
                             {loading ? <Loader2 className="animate-spin" size={20} /> : "Sign In to Dashboard"}
                         </button>
