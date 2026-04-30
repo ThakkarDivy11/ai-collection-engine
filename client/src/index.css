@@ -224,6 +224,10 @@
     animation: fade-slide-blur-in 1s cubic-bezier(0.2, 1, 0.3, 1) both;
   }
 
+  .will-change-transform {
+    will-change: transform, opacity;
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }

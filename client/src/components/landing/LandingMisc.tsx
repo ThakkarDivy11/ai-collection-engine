@@ -1,13 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { BrainCircuit, Sparkles, Globe, Zap, Twitter, Github, Linkedin, Mail } from "lucide-react";
+import collectAILogo from "../../assets/images/collectai-logo.png";
+import { useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { AuroraHero } from "../ui/aurora-hero-bg";
+import { cn } from "../../lib/utils";
+
+const Counter = ({ value, duration = 2 }: { value: number; duration?: number }) => {
+  const count = useMotionValue(0);
+  const rounded = useTransform<number, string>(count, (latest) => {
+    if (value % 1 !== 0) return latest.toFixed(1);
+    return Math.round(latest).toString();
+  });
+  const ref = React.useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  React.useEffect(() => {
+    if (inView) {
+      const controls = animate(count, value, {
+        duration,
+        ease: [0.2, 0.65, 0.3, 0.9],
+      });
+      return controls.stop;
+    }
+  }, [inView, value, count, duration]);
+
+  return <span ref={ref}><motion.span>{rounded}</motion.span></span>;
+};
 
 export const Stats: React.FC = () => {
   const stats = [
-    { label: "Revenue Recovered", val: "₹250Cr+" },
-    { label: "AI Predictions", val: "2.4M+" },
-    { label: "Collection Rate", val: "94.2%" },
-    { label: "Default Reduced", val: "68%" },
+    { label: "Revenue Recovered", prefix: "₹", val: 250, suffix: "Cr+" },
+    { label: "AI Predictions", prefix: "", val: 2.4, suffix: "M+" },
+    { label: "Collection Rate", prefix: "", val: 94.2, suffix: "%" },
+    { label: "Default Reduced", prefix: "", val: 68, suffix: "%" },
   ];
 
   return (
@@ -22,7 +48,9 @@ export const Stats: React.FC = () => {
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
           >
-            <div className="text-4xl md:text-6xl font-semibold text-slate-900 dark:text-white tracking-tighter mb-2">{s.val}</div>
+            <div className="text-4xl md:text-6xl font-semibold text-slate-900 dark:text-white tracking-tighter mb-2">
+              {s.prefix}<Counter value={s.val} />{s.suffix}
+            </div>
             <div className="text-calypso-600 dark:text-calypso-300 font-semibold text-[10px] uppercase tracking-[0.3em]">{s.label}</div>
           </motion.div>
         ))}
@@ -86,40 +114,56 @@ export const HowItWorks: React.FC = () => {
 
 export const CTA: React.FC = () => {
   return (
-    <section className="py-32 px-6">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto rounded-[3.5rem] bg-white p-12 md:p-24 text-center relative overflow-hidden shadow-2xl border border-calypso-100"
-      >
+    <AuroraHero className="border-y border-white/5 py-40">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {/* Decorative elements */}
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-calypso-500/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-calypso-400/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-calypso-500/10 blur-[150px] rounded-full pointer-events-none" />
 
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-calypso-50 border border-calypso-100 text-calypso-700 text-[10px] font-semibold uppercase tracking-[0.4em] mb-10">
+        <div className="relative z-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-calypso-500/10 border border-calypso-500/20 text-calypso-300 text-[10px] font-semibold uppercase tracking-[0.4em] mb-12"
+          >
             <span className="w-2 h-2 rounded-full bg-calypso-500 animate-pulse" />
             Get Started Today
-          </div>
-          <h2 className="text-5xl md:text-8xl font-semibold text-slate-900 tracking-tighter leading-none mb-6">
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-6xl md:text-[10rem] font-semibold text-white tracking-tighter leading-[0.8] mb-12"
+          >
             Ready to <br />
-            <span className="text-calypso-500">Scale?</span>
-          </h2>
-          <p className="text-slate-500 text-xl mb-16 font-normal max-w-xl mx-auto leading-relaxed">
-            Join the leading financial institutions using Nexus to automate recovery and maximize capital.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button className="px-12 py-5 bg-calypso-600 hover:bg-calypso-700 text-white font-semibold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-lg shadow-calypso-500/20 text-base">
+            <span className="text-calypso-400">Scale?</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-slate-400 text-xl md:text-2xl mb-20 font-normal max-w-2xl mx-auto leading-relaxed"
+          >
+            Join the leading financial institutions using Nexus to automate recovery and maximize capital efficiency.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-8"
+          >
+            <button className="px-16 py-7 bg-calypso-600 hover:bg-calypso-700 text-white font-semibold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-calypso-500/40 text-lg">
               Start Free Trial
             </button>
-            <button className="px-12 py-5 bg-transparent text-slate-700 font-semibold rounded-2xl border border-slate-200 hover:border-calypso-300 hover:text-calypso-600 transition-all text-base">
+            <button className="px-16 py-7 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-2xl border border-white/10 hover:border-calypso-500/50 transition-all text-lg backdrop-blur-3xl">
               Contact Nexus Eng
             </button>
-          </div>
+          </motion.div>
         </div>
-      </motion.div>
-    </section>
+      </div>
+    </AuroraHero>
   );
 };
 
@@ -129,7 +173,9 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1 md:col-span-2">
-            <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-8 tracking-tighter">CollectAI</div>
+            <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-8 tracking-tighter">
+              <img src={collectAILogo} alt="CollectAI" className="h-14 w-auto dark:invert" />
+            </div>
             <p className="text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed font-normal">
               Architecting the world's most sophisticated autonomous financial infrastructure.
             </p>

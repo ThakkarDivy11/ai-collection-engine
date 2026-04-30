@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/Loading.css";
 import { useLoading } from "../../context/LoadingProvider";
 import Marquee from "react-fast-marquee";
+import collectAILogo from "../../assets/images/collectai-logo.png";
 
 const Loading: React.FC<{ percent: number }> = ({ percent }) => {
   const { setIsLoading, setProgress: setLocalProgress } = useLoading();
@@ -62,7 +63,7 @@ const Loading: React.FC<{ percent: number }> = ({ percent }) => {
       <div className={`loading-screen ${clicked ? "loading-clicked" : ""}`}>
         <div className="loading-header">
           <div className="loader-title">
-            <span>COLLECT AI</span>
+            <img src={collectAILogo} alt="CollectAI" className="h-14 w-auto brightness-0 invert mix-blend-screen" />
           </div>
           <div className={`loaderGame ${clicked ? "loader-out" : ""}`}>
             <div className="loaderGame-container">

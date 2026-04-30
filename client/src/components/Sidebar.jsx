@@ -9,6 +9,7 @@ import {
     LogOut
 } from "lucide-react";
 import { motion } from "framer-motion";
+import collectAILogo from "../assets/images/collectai-logo.png";
 
 const Sidebar = () => {
     const location = useLocation();
@@ -28,9 +29,31 @@ const Sidebar = () => {
 
     return (
         <div className="w-64 h-screen bg-white/70 dark:bg-black/40 backdrop-blur-xl border-r border-gray-200 dark:border-white/10 text-gray-900 dark:text-white flex flex-col fixed left-0 top-0 hidden md:flex transition-colors duration-300">
-            <div className="p-6 flex items-center gap-3">
-                <BrainCircuit className="text-calypso-500 dark:text-calypso-400 w-8 h-8" />
-                <span className="text-xl font-bold tracking-tight">CollectAI</span>
+            <style>{`
+                .navbar-brand {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+                .logo {
+                    height: 48px;
+                    width: auto;
+                    filter: drop-shadow(0 2px 4px rgba(75, 138, 172, 0.2));
+                }
+                .logo-text {
+                    font-size: 20px;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                    text-shadow: 0 1px 2px rgba(75, 138, 172, 0.1);
+                }
+            `}</style>
+            <div className="px-4 py-5 flex items-center navbar-brand">
+                <div className="flex items-center gap-3">
+                    <img src={collectAILogo} alt="CollectAI" className="logo h-12 w-auto dark:invert" />
+                    <span className="logo-text text-xl font-bold text-slate-900 dark:text-white">
+                        CollectAI
+                    </span>
+                </div>
             </div>
 
             <nav className="flex-1 px-4 py-6 space-y-2">

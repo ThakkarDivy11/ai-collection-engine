@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { BrainCircuit, Loader2, Lock, Mail } from "lucide-react";
+import { Loader2, Lock, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/Background";
+import collectAILogo from "../assets/images/collectai-logo.png";
 
 export default function Login() {
     const [activeTab, setActiveTab] = useState("admin");
@@ -60,12 +61,7 @@ export default function Login() {
                     className="bg-slate-900 border border-slate-800 p-10 rounded-3xl w-full max-w-[440px] shadow-2xl relative z-10"
                 >
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="bg-calypso-600 p-2 rounded-xl text-white">
-                            <BrainCircuit size={32} />
-                        </div>
-                        <h1 className="text-white text-3xl font-bold tracking-tight">
-                            CollectAI
-                        </h1>
+                        <img src={collectAILogo} alt="CollectAI" className="h-16 w-auto brightness-0 invert" />
                     </div>
 
                     <div className="flex bg-slate-800 rounded-2xl p-1 mb-8">

@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import AiActions from "../components/AiActions";
 import AiVoiceCalls from "../components/AiVoiceCalls";
+import AnimatedAnalyticsChart from "../components/AnimatedAnalyticsChart";
 
 
 
@@ -134,31 +135,14 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 p-6 rounded-2xl transition-colors duration-300">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Revenue Overview</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">AI Revenue Analytics</h3>
                     <div className="h-80 w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={stats?.chartData || []}>
-                                <defs>
-                                    <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#376b8b" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#376b8b" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
-                                <XAxis dataKey="name" stroke="#64748b" />
-                                <YAxis stroke="#64748b" />
-                                <Tooltip
-                                    contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "8px" }}
-                                    itemStyle={{ color: "#fff" }}
-                                />
-                                <Area type="monotone" dataKey="revenue" stroke="#376b8b" fillOpacity={1} fill="url(#colorRev)" strokeWidth={3} />
-                            </AreaChart>
-                        </ResponsiveContainer>
+                        <AnimatedAnalyticsChart data={stats?.chartData || []} />
                     </div>
                 </div>
 
                 <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 p-6 rounded-2xl transition-colors duration-300">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Client Growth</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Client Growth Analytics</h3>
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={stats?.chartData || []}>
