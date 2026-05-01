@@ -68,8 +68,7 @@ const Hero: React.FC = () => {
             ref={titleRef}
             className="hero-title text-[7.5vw] md:text-[6.5rem] font-semibold text-slate-900 dark:text-white tracking-tighter leading-[1.1] mb-10 will-change-transform"
           >
-            AI-Powered Revenue.  <br />
-            <span className="text-calypso-500 dark:text-calypso-300">Fully Automated.</span>
+            AI-Powered Revenue. <span className="text-calypso-500 dark:text-calypso-300">Fully Automated.</span>
           </h1>
 
           <p
