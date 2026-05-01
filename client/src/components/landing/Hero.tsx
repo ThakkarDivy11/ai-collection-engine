@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { BrainCircuit, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import GsapThreeHeroBackground from "./GsapThreeHeroBackground";
 import {
@@ -80,13 +81,17 @@ const Hero: React.FC = () => {
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <button className="hero-button px-12 py-6 bg-slate-950 dark:bg-calypso-500 dark:text-white text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-[0_30px_60px_rgba(0,0,0,0.1)] text-lg will-change-transform">
-              Start Recovery
-            </button>
+            <Link to="/login">
+              <button className="hero-button px-12 py-6 bg-slate-950 dark:bg-calypso-500 dark:text-white text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-[0_30px_60px_rgba(0,0,0,0.1)] text-lg will-change-transform">
+                Start Free Trial
+              </button>
+            </Link>
 
-            <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:text-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
-              See Platform <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            <Link to="/login">
+              <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:text-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
+                See Platform <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
           </div>
         </div>
 
