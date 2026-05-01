@@ -152,7 +152,7 @@ export default function Dashboard() {
                                     contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "8px" }}
                                     itemStyle={{ color: "#fff" }}
                                 />
-                                <Bar dataKey="clients" fill="#2f5975" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="clients" fill="#2d84ca" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

@@ -239,7 +239,7 @@ const GsapThreeHero: React.FC = () => {
         position: absolute;
         width: ${size}px;
         height: ${size}px;
-        background: radial-gradient(circle, rgba(75, 138, 172, 0.2) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(45, 132, 202, 0.2) 0%, transparent 70%);
         border-radius: 50%;
         left: ${Math.random() * 100}%;
         top: ${Math.random() * 100}%;

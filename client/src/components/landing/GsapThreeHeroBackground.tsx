@@ -170,7 +170,7 @@ const GsapThreeHeroBackground: React.FC = () => {
 
       // Move Spotlight
       gsap.to(overlay, {
-        background: `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(75, 138, 172, 0.15) 0%, transparent 60%)`,
+        background: `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(45, 132, 202, 0.15) 0%, transparent 60%)`,
         duration: 0.5,
         ease: "power2.out"
       });
@@ -237,7 +237,7 @@ const GsapThreeHeroBackground: React.FC = () => {
         ref={overlayRef}
         className="absolute inset-0 pointer-events-none will-change-[transform,opacity] z-[5]"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(75, 138, 172, 0.15) 0%, transparent 60%)'
+          background: 'radial-gradient(circle at 50% 50%, rgba(45, 132, 202, 0.15) 0%, transparent 60%)'
         }}
       />
 

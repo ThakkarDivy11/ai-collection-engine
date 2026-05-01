@@ -47,12 +47,12 @@ export function AuroraHero({
                 const maxDist = 200;
                 
                 let size = 1.5;
-                let color = "rgba(75, 138, 172, 0.2)";
+                let color = "rgba(45, 132, 202, 0.2)";
                 
                 if (mouse.current.active && dist < maxDist) {
                     const ratio = 1 - dist / maxDist;
                     size = 1.5 + ratio * 4;
-                    color = `rgba(75, 138, 172, ${0.2 + ratio * 0.8})`;
+                    color = `rgba(45, 132, 202, ${0.2 + ratio * 0.8})`;
                     
                     // Subtle push effect
                     dot.x = dot.originX + (dx / dist) * ratio * 5;

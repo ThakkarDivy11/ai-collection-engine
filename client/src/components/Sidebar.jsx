@@ -28,7 +28,7 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="w-64 h-screen bg-white/70 dark:bg-black/40 backdrop-blur-xl border-r border-gray-200 dark:border-white/10 text-gray-900 dark:text-white flex flex-col fixed left-0 top-0 hidden md:flex transition-colors duration-300">
+        <div className="w-64 h-screen bg-white/70 dark:bg-[#112740]/95 backdrop-blur-xl border-r border-gray-200 dark:border-white/10 text-gray-900 dark:text-white flex flex-col fixed left-0 top-0 hidden md:flex transition-colors duration-300">
             <style>{`
                 .navbar-brand {
                     display: flex;
@@ -38,13 +38,13 @@ const Sidebar = () => {
                 .logo {
                     height: 48px;
                     width: auto;
-                    filter: drop-shadow(0 2px 4px rgba(75, 138, 172, 0.2));
+                    filter: drop-shadow(0 2px 4px rgba(45, 132, 202, 0.2));
                 }
                 .logo-text {
                     font-size: 20px;
                     font-weight: 700;
                     letter-spacing: -0.5px;
-                    text-shadow: 0 1px 2px rgba(75, 138, 172, 0.1);
+                    text-shadow: 0 1px 2px rgba(45, 132, 202, 0.1);
                 }
             `}</style>
             <div className="px-4 py-5 flex items-center navbar-brand">

@@ -169,7 +169,7 @@ export const animatePricingSection = (container: HTMLElement) => {
   const popularCard = container.querySelector('.pricing-card.popular');
   if (popularCard) {
     gsap.to(popularCard, {
-      boxShadow: '0 0 60px rgba(75, 138, 172, 0.3)',
+      boxShadow: '0 0 60px rgba(45, 132, 202, 0.3)',
       duration: 1,
       scrollTrigger: {
         trigger: popularCard,
@@ -232,7 +232,7 @@ export const createGlowPulse = (selector: string) => {
 
   elements.forEach((el) => {
     gsap.to(el, {
-      boxShadow: '0 0 30px rgba(75, 138, 172, 0.6), 0 0 60px rgba(75, 138, 172, 0.3)',
+      boxShadow: '0 0 30px rgba(45, 132, 202, 0.6), 0 0 60px rgba(45, 132, 202, 0.3)',
       duration: 2,
       repeat: -1,
       yoyo: true,
@@ -421,7 +421,7 @@ export const createButtonGlow = (selector: string) => {
 
     btn.addEventListener('mouseenter', () => {
       gsap.to(btn, {
-        boxShadow: '0 0 30px rgba(75, 138, 172, 0.5), 0 0 60px rgba(75, 138, 172, 0.3)',
+        boxShadow: '0 0 30px rgba(45, 132, 202, 0.5), 0 0 60px rgba(45, 132, 202, 0.3)',
         duration: 0.3,
         ease: 'power2.out'
       });

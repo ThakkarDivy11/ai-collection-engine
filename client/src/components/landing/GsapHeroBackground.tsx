@@ -10,7 +10,7 @@ const GsapHeroBackground: React.FC = () => {
 
     // Create floating shapes
     const colors = [
-      'rgba(75, 138, 172, 0.1)',  // calypso
+      'rgba(45, 132, 202, 0.1)',  // calypso
       'rgba(59, 130, 246, 0.08)',  // blue
       'rgba(16, 185, 129, 0.06)',  // emerald
       'rgba(245, 158, 11, 0.04)',  // amber
@@ -110,8 +110,8 @@ const GsapHeroBackground: React.FC = () => {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(75, 138, 172, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(75, 138, 172, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(45, 132, 202, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 132, 202, 0.02) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
       mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);

@@ -179,10 +179,10 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
 
       <svg viewBox="0 0 600 250" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         <defs>
-          {/* Blue gradient for left bars */}
+          {/* Matisse gradient for left bars */}
           <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.6" />
+            <stop offset="0%" stopColor="#2d84ca" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#19538b" stopOpacity="0.6" />
           </linearGradient>
 
           {/* Green gradient for right bars */}
@@ -202,9 +202,9 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
 
           {/* Line gradient */}
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#06b6d4" />
-            <stop offset="50%" stopColor="#0891b2" />
-            <stop offset="100%" stopColor="#06b6d4" />
+            <stop offset="0%" stopColor="#53a0dd" />
+            <stop offset="50%" stopColor="#2d84ca" />
+            <stop offset="100%" stopColor="#53a0dd" />
           </linearGradient>
         </defs>
 
@@ -292,7 +292,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
                 cy={y}
                 r={8}
                 fill="none"
-                stroke="#06b6d4"
+                stroke="#53a0dd"
                 strokeWidth="2"
                 opacity="0.3"
               />
@@ -303,7 +303,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
                 cx={x}
                 cy={y}
                 r={4}
-                fill="#06b6d4"
+                fill="#53a0dd"
                 filter="url(#glow)"
               />
             </g>
@@ -314,7 +314,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
       {/* Legend */}
       <div className="absolute bottom-4 left-4 flex gap-6">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-gradient-to-b from-blue-500 to-blue-700" />
+          <div className="w-3 h-3 rounded-full bg-gradient-to-b from-matisse-400 to-matisse-600" />
           <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Revenue</span>
         </div>
         <div className="flex items-center gap-2">
@@ -322,7 +322,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
           <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Growth</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-cyan-500" />
+          <div className="w-3 h-3 rounded-full bg-matisse-400" />
           <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Trend</span>
         </div>
       </div>
