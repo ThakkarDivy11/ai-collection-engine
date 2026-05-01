@@ -137,6 +137,8 @@ const GsapThreeHeroBackground: React.FC = () => {
   const [dpr, setDpr] = useState(1);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const checkTheme = () => {
       setIsDark(document.documentElement.classList.contains("dark"));
     };
