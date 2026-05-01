@@ -148,7 +148,6 @@ const ThreeBackground = () => {
           saturation={0}
           fade
           speed={1}
-          color="#4b8aac"
         />
 
         {/* Sparkles Effect */}

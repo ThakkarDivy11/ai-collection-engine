@@ -52,8 +52,7 @@ const InteractiveGlobe = ({ isDark }: { isDark: boolean }) => {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={1000}
-            array={useMemo(() => {
+            args={[useMemo(() => {
               const positions = new Float32Array(1000 * 3);
               for (let i = 0; i < 1000; i++) {
                 const theta = Math.random() * Math.PI * 2;
@@ -64,8 +63,7 @@ const InteractiveGlobe = ({ isDark }: { isDark: boolean }) => {
                 positions[i * 3 + 2] = r * Math.cos(phi);
               }
               return positions;
-            }, [])}
-            itemSize={3}
+            }, []), 3]}
           />
         </bufferGeometry>
         <pointsMaterial
@@ -108,9 +106,7 @@ const NeuralNetwork = ({ isDark }: { isDark: boolean }) => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <lineBasicMaterial
@@ -209,7 +205,6 @@ const PremiumThreeBackground: React.FC = () => {
           saturation={0}
           fade
           speed={1}
-          color={isDark ? "#ffffff" : "#4a90a4"}
         />
 
         {/* Main Interactive Elements */}
