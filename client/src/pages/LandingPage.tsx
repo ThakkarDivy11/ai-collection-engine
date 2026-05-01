@@ -66,9 +66,6 @@ const LandingPage: React.FC = () => {
           <Hero />
         </section>
 
-        {/* STATS - Clean horizontal layout */}
-        <Stats />
-
         {/* HORIZONTAL FEATURES - GSAP ScrollTrigger Pinned Section */}
         <HorizontalFeatures />
 

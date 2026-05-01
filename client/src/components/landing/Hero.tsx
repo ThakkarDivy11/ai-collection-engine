@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-[70vh] flex flex-col items-center justify-center pt-32 pb-8 px-6 z-10 overflow-visible">
+    <section ref={containerRef} className="relative flex flex-col items-center pt-32 pb-12 px-6 z-10 overflow-visible">
       <div className="absolute inset-0 z-0 pointer-events-none">
         <GsapThreeHeroBackground />
       </div>
