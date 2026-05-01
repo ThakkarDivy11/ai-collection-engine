@@ -10,7 +10,6 @@ import {
     ResponsiveContainer, PieChart, Pie, Cell
 } from "recharts";
 
-const COLORS = ["#10b981", "#376b8b", "#f59e0b", "#ef4444"];
 
 const StatCard = ({ title, value, icon: Icon, color, subtitle, loading }) => (
     <motion.div

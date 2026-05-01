@@ -212,7 +212,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
         {[...Array(5)].map((_, i) => (
           <line
             key={`grid-${i}`}
-            className="grid-line"
+            className="grid-line text-slate-400 dark:text-slate-600"
             x1="40"
             y1={40 + i * 50}
             x2="560"
@@ -220,7 +220,6 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
             stroke="currentColor"
             strokeWidth="1"
             strokeOpacity="0.1"
-            className="text-slate-400 dark:text-slate-600"
           />
         ))}
 

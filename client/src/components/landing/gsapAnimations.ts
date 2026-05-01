@@ -4,8 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export const animateHeroSection = (container: HTMLElement) => {
-  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
   // Animate title with stagger effect
   const title = container.querySelector('.hero-title');
   if (title) {

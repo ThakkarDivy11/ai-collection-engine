@@ -7,9 +7,7 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    ResponsiveContainer,
-    AreaChart,
-    Area
+    ResponsiveContainer
 } from "recharts";
 import AiActions from "../components/AiActions";
 import AiVoiceCalls from "../components/AiVoiceCalls";
