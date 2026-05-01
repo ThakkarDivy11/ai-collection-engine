@@ -18,7 +18,7 @@ const InteractiveGlobe = ({ isDark }: { isDark: boolean }) => {
   });
 
   const globeColor = isDark ? "#1e3a5f" : "#4a90a4";
-  const particleColor = isDark ? "#4b8aac" : "#7ec8e3";
+  const particleColor = isDark ? "#2d84ca" : "#7ec8e3";
 
   return (
     <group>
@@ -99,7 +99,7 @@ const NeuralNetwork = ({ isDark }: { isDark: boolean }) => {
     }
   });
 
-  const lineColor = isDark ? "#4b8aac" : "#7ec8e3";
+  const lineColor = isDark ? "#2d84ca" : "#7ec8e3";
 
   return (
     <lineSegments ref={linesRef}>
@@ -193,7 +193,7 @@ const PremiumThreeBackground: React.FC = () => {
 
         {/* Lighting */}
         <ambientLight intensity={isDark ? 0.5 : 0.8} />
-        <pointLight position={[10, 10, 10]} intensity={isDark ? 0.5 : 1} color={isDark ? "#4b8aac" : "#7ec8e3"} />
+        <pointLight position={[10, 10, 10]} intensity={isDark ? 0.5 : 1} color={isDark ? "#2d84ca" : "#7ec8e3"} />
         <pointLight position={[-10, -10, 10]} intensity={isDark ? 0.3 : 0.5} color={isDark ? "#2a4c62" : "#6ea5c2"} />
 
         {/* Stars Background */}
@@ -219,7 +219,7 @@ const PremiumThreeBackground: React.FC = () => {
           size={2}
           speed={0.4}
           opacity={0.5}
-          color={isDark ? "#4b8aac" : "#7ec8e3"}
+          color={isDark ? "#2d84ca" : "#7ec8e3"}
         />
       </Canvas>
 

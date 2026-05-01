@@ -33,7 +33,7 @@ const TopNavbar = () => {
 
                 {/* Right — actions */}
                 <div className="flex items-center gap-3 ml-auto">
-                    <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/80 dark:bg-white/5 border border-gray-200/80 dark:border-white/10 text-gray-500 dark:text-slate-400 text-sm w-52 focus-within:ring-2 focus-within:ring-calypso-500/30 transition-all">
+                    <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/80 dark:bg-white/5 border border-gray-200/80 dark:border-white/10 text-gray-500 dark:text-slate-400 text-sm w-52 focus-within:ring-2 focus-within:ring-matisse-500/30 transition-all">
                         <Search size={15} className="shrink-0" />
                         <input
                             type="text"
@@ -45,7 +45,7 @@ const TopNavbar = () => {
                     {/* Notification bell */}
                     <button className="relative p-2 rounded-xl bg-gray-100/80 dark:bg-white/5 border border-gray-200/80 dark:border-white/10 text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-white/10 transition-all">
                         <Bell size={17} />
-                        <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-calypso-500 ring-2 ring-white dark:ring-black" />
+                        <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-matisse-500 ring-2 ring-white dark:ring-black" />
                     </button>
 
                     {/* Theme toggle */}
@@ -56,7 +56,7 @@ const TopNavbar = () => {
 
                     {/* User avatar */}
                     <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-calypso-500 to-calypso-700 flex items-center justify-center text-white text-xs font-bold shadow-sm select-none">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-matisse-500 to-matisse-700 flex items-center justify-center text-white text-xs font-bold shadow-sm select-none">
                             {userName[0]}
                         </div>
                         <span className="hidden lg:block text-sm font-semibold text-gray-900 dark:text-white">

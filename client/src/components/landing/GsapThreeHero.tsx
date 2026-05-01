@@ -23,7 +23,7 @@ const AnimatedGlobe = () => {
     <Float speed={2} rotationIntensity={0.4} floatIntensity={0.3}>
       <Sphere ref={globeRef} args={[2.5, 64, 64]}>
         <MeshDistortMaterial
-          color="#4b8aac"
+          color="#2d84ca"
           speed={2}
           distort={0.4}
           transparent
@@ -106,10 +106,10 @@ const FloatingOrbs = () => {
             ]}
           >
             <meshStandardMaterial
-              color={i % 2 === 0 ? "#4b8aac" : "#7ec8e3"}
+              color={i % 2 === 0 ? "#2d84ca" : "#7ec8e3"}
               transparent
               opacity={0.6}
-              emissive={i % 2 === 0 ? "#4b8aac" : "#7ec8e3"}
+              emissive={i % 2 === 0 ? "#2d84ca" : "#7ec8e3"}
               emissiveIntensity={0.4}
             />
           </Sphere>
@@ -131,7 +131,7 @@ const ThreeBackground = () => {
 
         {/* Lighting */}
         <ambientLight intensity={0.6} />
-        <pointLight position={[10, 10, 10]} intensity={0.8} color="#4b8aac" />
+        <pointLight position={[10, 10, 10]} intensity={0.8} color="#2d84ca" />
         <pointLight position={[-10, -10, 10]} intensity={0.5} color="#7ec8e3" />
 
         {/* Three.js Elements */}
@@ -157,7 +157,7 @@ const ThreeBackground = () => {
           size={3}
           speed={0.5}
           opacity={0.6}
-          color="#4b8aac"
+          color="#2d84ca"
         />
       </Canvas>
     </div>
@@ -283,9 +283,9 @@ const GsapThreeHero: React.FC = () => {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-calypso-500/10 text-calypso-700 text-[10px] font-semibold mb-8 tracking-[0.3em] uppercase backdrop-blur-sm border border-calypso-500/10"
+          className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-matisse-500/10 text-matisse-700 text-[10px] font-semibold mb-8 tracking-[0.3em] uppercase backdrop-blur-sm border border-matisse-500/10"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-calypso-600 shadow-[0_0_8px_rgba(207,123,64,0.5)]" />
+          <div className="w-1.5 h-1.5 rounded-full bg-matisse-600 shadow-[0_0_8px_rgba(207,123,64,0.5)]" />
           <span>The Future of Recovery</span>
         </div>
 
@@ -295,7 +295,7 @@ const GsapThreeHero: React.FC = () => {
           className="text-[7.5vw] md:text-[6.5rem] font-semibold text-slate-900 tracking-tighter leading-[1.1] mb-10"
         >
           AI-Powered Revenue. <br />
-          <span className="text-calypso-500">Fully Automated.</span>
+          <span className="text-matisse-500">Fully Automated.</span>
         </h1>
 
         {/* Subtitle */}
@@ -328,7 +328,7 @@ const GsapThreeHero: React.FC = () => {
         className="w-full max-w-6xl mx-auto px-4 relative z-10"
       >
         <div className="relative group">
-          <div className="absolute -inset-40 bg-calypso-500/5 blur-[150px] rounded-full pointer-events-none" />
+          <div className="absolute -inset-40 bg-matisse-500/5 blur-[150px] rounded-full pointer-events-none" />
 
           <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_200px_rgba(0,0,0,0.15)] border border-slate-200 bg-white aspect-[16/9]">
             <div className="h-12 bg-slate-50 border-b border-slate-200 flex items-center px-6 gap-2">
@@ -351,7 +351,7 @@ const GsapThreeHero: React.FC = () => {
                             <div
                               key={j}
                               className={`flex-1 w-full rounded-sm transition-colors duration-500 ${(j + 1) * 12.5 <= h
-                                  ? i < 4 ? "bg-calypso-500" : i < 9 ? "bg-calypso-400" : "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                                  ? i < 4 ? "bg-matisse-500" : i < 9 ? "bg-matisse-400" : "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                                   : "bg-slate-100"
                                 }`}
                             />
@@ -374,17 +374,17 @@ const GsapThreeHero: React.FC = () => {
                 <div className="col-span-1 rounded-[2.5rem] bg-slate-50 border border-slate-200 p-8 text-center">
                   <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-10">Recovery Core</div>
                   <div className="flex flex-col items-center gap-6">
-                    <div className="w-24 h-24 rounded-full border-4 border-calypso-500/10 flex items-center justify-center relative">
-                      <div className="w-16 h-16 rounded-full bg-calypso-500/10 animate-ping absolute" />
-                      <div className="w-12 h-12 rounded-full bg-calypso-500/20 flex items-center justify-center">
-                        <div className="w-8 h-8 rounded-full bg-calypso-500" />
+                    <div className="w-24 h-24 rounded-full border-4 border-matisse-500/10 flex items-center justify-center relative">
+                      <div className="w-16 h-16 rounded-full bg-matisse-500/10 animate-ping absolute" />
+                      <div className="w-12 h-12 rounded-full bg-matisse-500/20 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-matisse-500" />
                       </div>
                     </div>
                     <div className="space-y-3 w-full">
                       {[1, 2, 3].map(i => (
                         <div key={i} className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
                           <div
-                            className="h-full w-1/3 bg-calypso-500 rounded-full animate-pulse"
+                            className="h-full w-1/3 bg-matisse-500 rounded-full animate-pulse"
                             style={{ animationDelay: `${i * 0.3}s` }}
                           />
                         </div>

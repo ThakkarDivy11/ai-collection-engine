@@ -384,7 +384,7 @@ export const createHeroFloatingElements = (container: HTMLElement) => {
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
-    particle.className = 'absolute rounded-full bg-calypso-500/20 dark:bg-calypso-400/20 pointer-events-none';
+    particle.className = 'absolute rounded-full bg-matisse-500/20 dark:bg-matisse-400/20 pointer-events-none';
     particle.style.cssText = `
       width: ${Math.random() * 10 + 5}px;
       height: ${Math.random() * 10 + 5}px;

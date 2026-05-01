@@ -57,7 +57,7 @@ const LandingPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden bg-white dark:bg-[#1a2a37] text-slate-900 dark:text-white selection:bg-[#4b8aac]/10">
+    <div className="relative w-full overflow-hidden bg-white dark:bg-[#112740] text-slate-900 dark:text-white selection:bg-[#2d84ca]/10">
       <Navbar />
 
       <main className="flex flex-col relative z-10">
@@ -74,7 +74,7 @@ const LandingPage: React.FC = () => {
 
         {/* AI SECTION - Split layout with soft glow blobs */}
         <section className="relative">
-          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-calypso-600/10 blur-[150px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-matisse-600/10 blur-[150px] rounded-full pointer-events-none" />
           <Intelligence />
         </section>
 

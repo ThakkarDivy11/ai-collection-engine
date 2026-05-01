@@ -23,7 +23,7 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading 
                 <Icon size={24} className="text-white" />
             </div>
             {!loading && (
-                <div className={`flex items-center gap-1 text-sm ${trend === "up" ? "text-calypso-400" : "text-rose-400"}`}>
+                <div className={`flex items-center gap-1 text-sm ${trend === "up" ? "text-matisse-400" : "text-rose-400"}`}>
                     {trend === "up" ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
                     {trendValue}
                 </div>
@@ -82,7 +82,7 @@ export default function Dashboard() {
         <div className="space-y-8">
             <div>
                 {alert && (
-                    <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${alert.type === "success" ? "bg-calypso-500/10 border border-calypso-500/20 text-calypso-400" : "bg-rose-500/10 border border-rose-500/20 text-rose-400"
+                    <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${alert.type === "success" ? "bg-matisse-500/10 border border-matisse-500/20 text-matisse-400" : "bg-rose-500/10 border border-rose-500/20 text-rose-400"
                         }`}>
                         <Activity size={20} />
                         <p className="font-medium text-sm">{alert.message}</p>
@@ -100,7 +100,7 @@ export default function Dashboard() {
                     icon={Users}
                     trend="up"
                     trendValue="+12%"
-                    color="bg-calypso-600"
+                    color="bg-matisse-600"
                     loading={loading}
                 />
                 <StatCard
@@ -109,7 +109,7 @@ export default function Dashboard() {
                     icon={IndianRupee}
                     trend="up"
                     trendValue="+8%"
-                    color="bg-calypso-600"
+                    color="bg-matisse-600"
                     loading={loading}
                 />
                 <StatCard
@@ -162,7 +162,7 @@ export default function Dashboard() {
             <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl transition-colors duration-300">
                 <div className="p-6 border-b border-gray-200 dark:border-slate-800 flex justify-between items-center">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">Recent Clients</h3>
-                    <button className="text-calypso-400 hover:text-blue-300 text-sm font-medium">View all</button>
+                    <button className="text-matisse-400 hover:text-blue-300 text-sm font-medium">View all</button>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
@@ -178,7 +178,7 @@ export default function Dashboard() {
                             {loading ? (
                                 <tr>
                                     <td colSpan="4" className="py-12 text-center">
-                                        <Loader2 className="mx-auto animate-spin text-calypso-500" size={32} />
+                                        <Loader2 className="mx-auto animate-spin text-matisse-500" size={32} />
                                     </td>
                                 </tr>
                             ) : !stats?.recentClients || stats?.recentClients.length === 0 ? (
@@ -188,11 +188,11 @@ export default function Dashboard() {
                             ) : stats?.recentClients.map((client, idx) => (
                                 <tr key={idx} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/30 transition-colors group">
                                     <td className="px-8 py-5">
-                                        <div className="font-bold text-gray-900 dark:text-white group-hover:text-calypso-500 dark:group-hover:text-calypso-400 transition-colors">{client.name}</div>
+                                        <div className="font-bold text-gray-900 dark:text-white group-hover:text-matisse-500 dark:group-hover:text-matisse-400 transition-colors">{client.name}</div>
                                         <div className="text-gray-500 dark:text-slate-500 text-xs font-medium uppercase tracking-tight">{client.company}</div>
                                     </td>
                                     <td className="px-8 py-5">
-                                        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${client.status === "Active" ? "bg-calypso-500/10 text-calypso-400" :
+                                        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${client.status === "Active" ? "bg-matisse-500/10 text-matisse-400" :
                                             client.status === "Churn-risk" ? "bg-rose-500/10 text-rose-400" : "bg-amber-500/10 text-amber-400"
                                             }`}>
                                             {client.status}

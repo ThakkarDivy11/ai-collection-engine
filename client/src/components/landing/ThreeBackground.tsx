@@ -86,7 +86,7 @@ const ThreeBackground: React.FC = () => {
 
   const themeColors = {
     grid: isDark ? "#2f5975" : "#e8f0f6",
-    particles: isDark ? "#4b8aac" : "#a0c4d9",
+    particles: isDark ? "#2d84ca" : "#a0c4d9",
     blob1: isDark ? "#376b8b" : "#cddfea",
     blob2: isDark ? "#274153" : "#6ea5c2",
     blob3: isDark ? "#2a4c62" : "#f4f8fb",
@@ -107,7 +107,7 @@ const ThreeBackground: React.FC = () => {
       </Canvas>
       
       {/* Layered Overlays - Updated for Theme */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f4f8fb] dark:to-[#1a2a37] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f4f8fb] dark:to-[#112740] pointer-events-none" />
     </div>
   );
 };

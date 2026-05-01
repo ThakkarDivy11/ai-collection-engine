@@ -100,7 +100,7 @@ export default function Clients() {
                         setFormData({ name: "", email: "", company: "", password: "", status: "active" });
                         setShowModal(true);
                     }}
-                    className="bg-calypso-600 hover:bg-calypso-700 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all shadow-lg shadow-blue-900/40"
+                    className="bg-matisse-600 hover:bg-matisse-700 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all shadow-lg shadow-blue-900/40"
                 >
                     <Plus size={20} />
                     Add Client
@@ -133,14 +133,14 @@ export default function Clients() {
                             {loading ? (
                                 <tr>
                                     <td colSpan="4" className="py-20 text-center">
-                                        <Loader2 className="mx-auto animate-spin text-calypso-500" size={32} />
+                                        <Loader2 className="mx-auto animate-spin text-matisse-500" size={32} />
                                     </td>
                                 </tr>
                             ) : clients.map((client) => (
                                 <tr key={client._id} className="hover:bg-slate-800/30 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-calypso-400 font-bold border border-slate-700 text-slate-200">
+                                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-matisse-400 font-bold border border-slate-700 text-slate-200">
                                                 {client.name.charAt(0)}
                                             </div>
                                             <div>
@@ -158,7 +158,7 @@ export default function Clients() {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${client.status === "active" ? "bg-calypso-500/10 text-calypso-400" :
+                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${client.status === "active" ? "bg-matisse-500/10 text-matisse-400" :
                                             client.status === "churn-risk" ? "bg-rose-500/10 text-rose-400" : "bg-slate-500/10 text-slate-400"
                                             }`}>
                                             {client.status?.toUpperCase()}
@@ -197,7 +197,7 @@ export default function Clients() {
                     <button
                         key={i}
                         onClick={() => setCurrentPage(i + 1)}
-                        className={`w-10 h-10 rounded-xl font-medium transition-all ${currentPage === i + 1 ? "bg-calypso-600 text-white" : "bg-slate-900 text-slate-400 hover:bg-slate-800"
+                        className={`w-10 h-10 rounded-xl font-medium transition-all ${currentPage === i + 1 ? "bg-matisse-600 text-white" : "bg-slate-900 text-slate-400 hover:bg-slate-800"
                             }`}
                     >
                         {i + 1}
@@ -232,7 +232,7 @@ export default function Clients() {
                                     <label className="text-sm text-slate-400 block mb-2">Full Name</label>
                                     <input
                                         required
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-calypso-500"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
@@ -242,7 +242,7 @@ export default function Clients() {
                                     <input
                                         required
                                         type="email"
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-calypso-500"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     />
@@ -251,7 +251,7 @@ export default function Clients() {
                                     <label className="text-sm text-slate-400 block mb-2">Company Name</label>
                                     <input
                                         required
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-calypso-500"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
                                         value={formData.company}
                                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                                     />
@@ -262,7 +262,7 @@ export default function Clients() {
                                         <input
                                             required
                                             type="password"
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-calypso-500"
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
                                             value={formData.password}
                                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                         />
@@ -271,7 +271,7 @@ export default function Clients() {
                                 <div>
                                     <label className="text-sm text-slate-400 block mb-2">Initial Status</label>
                                     <select
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-calypso-500"
+                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
                                         value={formData.status}
                                         onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                                     >
@@ -283,7 +283,7 @@ export default function Clients() {
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-calypso-600 hover:bg-calypso-700 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/40 mt-4"
+                                    className="w-full bg-matisse-600 hover:bg-matisse-700 text-white py-4 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/40 mt-4"
                                 >
                                     {editClient ? "Update Client Details" : "Create Client Account"}
                                 </button>

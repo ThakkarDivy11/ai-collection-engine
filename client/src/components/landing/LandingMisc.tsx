@@ -39,7 +39,7 @@ export const Stats: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-6 border-y border-calypso-100 dark:border-calypso-800/20 bg-white dark:bg-[#1a2a37]">
+    <section className="py-24 px-6 border-y border-matisse-100 dark:border-matisse-800/20 bg-white dark:bg-[#112740]">
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-12 lg:gap-8">
         {stats.map((s, i) => (
           <motion.div
@@ -53,7 +53,7 @@ export const Stats: React.FC = () => {
             <div className="text-4xl md:text-6xl font-semibold text-slate-900 dark:text-white tracking-tighter mb-2">
               {s.prefix}<Counter value={s.val} />{s.suffix}
             </div>
-            <div className="text-calypso-600 dark:text-calypso-300 font-semibold text-[10px] uppercase tracking-[0.3em]">{s.label}</div>
+            <div className="text-matisse-600 dark:text-matisse-300 font-semibold text-[10px] uppercase tracking-[0.3em]">{s.label}</div>
           </motion.div>
         ))}
       </div>
@@ -70,20 +70,20 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works" className="pt-20 pb-40 px-6 bg-calypso-50/50 dark:bg-white/[0.01]">
+    <section id="how-it-works" className="pt-20 pb-40 px-6 bg-matisse-50/50 dark:bg-white/[0.01]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-32">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-calypso-600 dark:text-calypso-300 font-semibold text-xs uppercase tracking-[0.4em] mb-6"
+            className="text-matisse-600 dark:text-matisse-300 font-semibold text-xs uppercase tracking-[0.4em] mb-6"
           >
             Operation
           </motion.div>
           <h2 className="text-5xl md:text-7xl font-semibold text-slate-900 dark:text-white tracking-tighter leading-tight">
             How Nexus <br />
-            <span className="text-calypso-600 dark:text-calypso-300 ">Orchestrates Capital.</span>
+            <span className="text-matisse-600 dark:text-matisse-300 ">Orchestrates Capital.</span>
           </h2>
         </div>
 
@@ -95,13 +95,13 @@ export const HowItWorks: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-calypso-100 dark:border-calypso-800/10 hover:border-calypso-500/50 dark:hover:border-calypso-300/30 transition-all duration-500 hover:shadow-2xl hover:shadow-calypso-500/5"
+              className="group p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-matisse-100 dark:border-matisse-800/10 hover:border-matisse-500/50 dark:hover:border-matisse-300/30 transition-all duration-500 hover:shadow-2xl hover:shadow-matisse-500/5"
             >
-              <div className="w-16 h-16 rounded-[1.5rem] bg-calypso-50 dark:bg-calypso-500/10 flex items-center justify-center text-calypso-600 dark:text-calypso-300 mb-8 group-hover:scale-110 group-hover:bg-calypso-500 group-hover:text-white transition-all duration-500 shadow-sm">
+              <div className="w-16 h-16 rounded-[1.5rem] bg-matisse-50 dark:bg-matisse-500/10 flex items-center justify-center text-matisse-600 dark:text-matisse-300 mb-8 group-hover:scale-110 group-hover:bg-matisse-500 group-hover:text-white transition-all duration-500 shadow-sm">
                 {s.icon}
               </div>
               <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4 tracking-tight">
-                <span className="text-slate-300 dark:text-calypso-800/40 mr-2 font-bold tracking-tighter">0{i + 1}</span> {s.title}
+                <span className="text-slate-300 dark:text-matisse-800/40 mr-2 font-bold tracking-tighter">0{i + 1}</span> {s.title}
               </h3>
               <p className="text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
                 {s.desc}
@@ -119,16 +119,16 @@ export const CTA: React.FC = () => {
     <AuroraHero className="border-y border-white/5 pt-40 pb-20">
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {/* Decorative elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-calypso-500/10 blur-[150px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-matisse-500/10 blur-[150px] rounded-full pointer-events-none" />
 
         <div className="relative z-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-calypso-500/10 border border-calypso-500/20 text-calypso-300 text-[10px] font-semibold uppercase tracking-[0.4em] mb-12"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-matisse-500/10 border border-matisse-500/20 text-matisse-300 text-[10px] font-semibold uppercase tracking-[0.4em] mb-12"
           >
-            <span className="w-2 h-2 rounded-full bg-calypso-500 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-matisse-500 animate-pulse" />
             Get Started Today
           </motion.div>
           <motion.h2
@@ -139,7 +139,7 @@ export const CTA: React.FC = () => {
             className="text-6xl md:text-[10rem] font-semibold text-white tracking-tighter leading-[0.8] mb-12"
           >
             Ready to <br />
-            <span className="text-calypso-400">Scale?</span>
+            <span className="text-matisse-400">Scale?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -158,7 +158,7 @@ export const CTA: React.FC = () => {
             className="flex items-center justify-center"
           >
             <Link to="/login">
-              <button className="px-16 py-7 bg-calypso-600 hover:bg-calypso-700 text-white font-semibold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-calypso-500/40 text-lg">
+              <button className="px-16 py-7 bg-matisse-600 hover:bg-matisse-700 text-white font-semibold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-matisse-500/40 text-lg">
                 Start Free Trial
               </button>
             </Link>
@@ -171,7 +171,7 @@ export const CTA: React.FC = () => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="pt-12 pb-24 px-6 bg-white dark:bg-[#1a2a37] border-t border-calypso-100 dark:border-calypso-800/20 relative z-10">
+    <footer className="pt-12 pb-24 px-6 bg-white dark:bg-[#112740] border-t border-matisse-100 dark:border-matisse-800/20 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1 md:col-span-2">
@@ -186,7 +186,7 @@ export const Footer: React.FC = () => {
             <div className="text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-widest mb-8">Protocol</div>
             <div className="space-y-4">
               {["Features", "Nexus Core", "Intelligence", "Pricing"].map(link => (
-                <a key={link} href="#!" className="block text-slate-500 hover:text-calypso-600 dark:hover:text-calypso-300 transition-colors font-normal">{link}</a>
+                <a key={link} href="#!" className="block text-slate-500 hover:text-matisse-600 dark:hover:text-matisse-300 transition-colors font-normal">{link}</a>
               ))}
             </div>
           </div>
@@ -201,7 +201,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="pt-12 border-t border-calypso-100 dark:border-calypso-800/20 flex flex-col md:flex-row justify-between gap-6 text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+        <div className="pt-12 border-t border-matisse-100 dark:border-matisse-800/20 flex flex-col md:flex-row justify-between gap-6 text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
           <div>© 2026 CollectAI Neural Network. All rights reserved.</div>
           <div className="flex gap-8">
             <a href="#!" className="hover:text-slate-900 dark:hover:text-white">Privacy Protocol</a>

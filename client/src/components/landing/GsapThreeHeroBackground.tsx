@@ -34,7 +34,7 @@ const AnimatedGlobe = memo(({ isDark }: { isDark: boolean }) => {
     <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.2}>
       <Sphere ref={globeRef} args={[2.5, 32, 32]}>
         <MeshDistortMaterial
-          color={isDark ? "#63b3ed" : "#4b8aac"}
+          color={isDark ? "#63b3ed" : "#2d84ca"}
           speed={1.5}
           distort={0.3}
           transparent
@@ -79,7 +79,7 @@ const NeuralParticles = memo(({ isDark, count = 300 }: { isDark: boolean; count?
       </bufferGeometry>
       <PointMaterial
         size={0.02}
-        color={isDark ? "#ffffff" : "#4b8aac"}
+        color={isDark ? "#ffffff" : "#2d84ca"}
         transparent
         opacity={isDark ? 0.8 : 0.7}
         sizeAttenuation
@@ -117,10 +117,10 @@ const FloatingOrbs = memo(({ isDark }: { isDark: boolean }) => {
             ]}
           >
             <meshStandardMaterial
-              color={i % 2 === 0 ? "#4b8aac" : "#7ec8e3"}
+              color={i % 2 === 0 ? "#2d84ca" : "#7ec8e3"}
               transparent
               opacity={isDark ? 0.6 : 0.5}
-              emissive={i % 2 === 0 ? "#4b8aac" : "#7ec8e3"}
+              emissive={i % 2 === 0 ? "#2d84ca" : "#7ec8e3"}
               emissiveIntensity={isDark ? 1.2 : 0.2}
             />
           </Sphere>
@@ -228,7 +228,7 @@ const GsapThreeHeroBackground: React.FC = () => {
       className="absolute inset-0 overflow-hidden pointer-events-none transition-colors duration-1000"
       style={{
         background: isDark 
-          ? 'linear-gradient(135deg, #0a0f1a 0%, #1a2a37 100%)' 
+          ? 'linear-gradient(135deg, #0a0f1a 0%, #112740 100%)' 
           : 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%)',
       }}
     >
@@ -244,7 +244,7 @@ const GsapThreeHeroBackground: React.FC = () => {
       {/* Scroll Progress Bar */}
       <div 
         id="scroll-progress" 
-        className="fixed top-0 left-0 h-1 bg-calypso-500 z-[100] origin-left"
+        className="fixed top-0 left-0 h-1 bg-matisse-500 z-[100] origin-left"
         style={{ width: '100%', transform: 'scaleX(0)' }}
       />
 
@@ -269,8 +269,8 @@ const GsapThreeHeroBackground: React.FC = () => {
             
             {/* Lighting - Enhanced for Dark Mode Visibility */}
             <ambientLight intensity={isDark ? 0.6 : 0.5} />
-            <pointLight position={[10, 10, 10]} intensity={isDark ? 1.5 : 1} color={isDark ? "#ffffff" : "#4b8aac"} />
-            <pointLight position={[-10, -10, -10]} intensity={isDark ? 0.8 : 0.5} color="#4b8aac" />
+            <pointLight position={[10, 10, 10]} intensity={isDark ? 1.5 : 1} color={isDark ? "#ffffff" : "#2d84ca"} />
+            <pointLight position={[-10, -10, -10]} intensity={isDark ? 0.8 : 0.5} color="#2d84ca" />
 
             {/* Main Interactive Group */}
             <group ref={groupRef}>
@@ -297,7 +297,7 @@ const GsapThreeHeroBackground: React.FC = () => {
               size={1.5}
               speed={0.3}
               opacity={0.4}
-              color={isDark ? "#ffffff" : "#4b8aac"}
+              color={isDark ? "#ffffff" : "#2d84ca"}
             />
           </PerformanceMonitor>
         </Suspense>

@@ -50,7 +50,7 @@ const Hero: React.FC = () => {
       <GsapThreeHeroBackground />
 
       {/* Floating decorative elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-calypso-500/10 dark:bg-calypso-400/10 blur-xl floating-element" />
+      <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-matisse-500/10 dark:bg-matisse-400/10 blur-xl floating-element" />
       <div className="absolute top-40 right-20 w-32 h-32 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 blur-xl floating-element" />
       <div className="absolute bottom-40 left-1/4 w-16 h-16 rounded-full bg-blue-500/10 dark:bg-blue-400/10 blur-xl floating-element" />
 
@@ -59,9 +59,9 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-calypso-500/10 dark:bg-calypso-300/5 text-calypso-700 dark:text-calypso-300 text-[10px] font-semibold mb-8 tracking-[0.3em] uppercase backdrop-blur-sm border border-calypso-500/10 dark:border-calypso-300/10"
+            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-matisse-500/10 dark:bg-matisse-300/5 text-matisse-700 dark:text-matisse-300 text-[10px] font-semibold mb-8 tracking-[0.3em] uppercase backdrop-blur-sm border border-matisse-500/10 dark:border-matisse-300/10"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-calypso-600 dark:bg-calypso-400 shadow-[0_0_8px_rgba(207,123,64,0.5)] dark:shadow-[0_0_8px_rgba(228,186,141,0.5)]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-matisse-600 dark:bg-matisse-400 shadow-[0_0_8px_rgba(207,123,64,0.5)] dark:shadow-[0_0_8px_rgba(228,186,141,0.5)]" />
             <span>The Future of Recovery</span>
           </motion.div>
 
@@ -69,7 +69,7 @@ const Hero: React.FC = () => {
             ref={titleRef}
             className="hero-title text-[7.5vw] md:text-[6.5rem] font-semibold text-slate-900 dark:text-white tracking-tighter leading-[1.1] mb-10 will-change-transform"
           >
-            AI-Powered Revenue. <span className="text-calypso-500 dark:text-calypso-300">Fully Automated.</span>
+            AI-Powered Revenue. <span className="text-matisse-500 dark:text-matisse-300">Fully Automated.</span>
           </h1>
 
           <p
@@ -82,13 +82,13 @@ const Hero: React.FC = () => {
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-8">
             <Link to="/login">
-              <button className="hero-button px-12 py-6 bg-slate-950 dark:bg-calypso-500 dark:text-white text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-[0_30px_60px_rgba(0,0,0,0.1)] text-lg will-change-transform">
+              <button className="hero-button px-12 py-6 bg-slate-950 dark:bg-matisse-500 dark:text-white text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-[0_30px_60px_rgba(0,0,0,0.1)] text-lg will-change-transform">
                 Start Free Trial
               </button>
             </Link>
 
             <Link to="/login">
-              <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:text-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
+              <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:text-matisse-300 font-semibold rounded-3xl border border-slate-200 dark:border-matisse-800/30 transition-all hover:bg-slate-50 dark:hover:bg-matisse-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
                 See Platform <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>

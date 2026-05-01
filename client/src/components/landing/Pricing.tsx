@@ -35,7 +35,7 @@ const Pricing: React.FC = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-calypso-600 dark:text-calypso-300 font-semibold text-xs uppercase tracking-[0.4em] mb-6"
+            className="text-matisse-600 dark:text-matisse-300 font-semibold text-xs uppercase tracking-[0.4em] mb-6"
           >
             Investment
           </motion.div>
@@ -55,12 +55,12 @@ const Pricing: React.FC = () => {
             transition={{ delay: i * 0.1 }}
             className={`relative p-12 rounded-[3.5rem] border ${
               p.featured 
-                ? "bg-white dark:bg-calypso-950/20 border-calypso-500 dark:border-calypso-300 shadow-2xl scale-105 z-10" 
-                : "bg-calypso-50/30 dark:bg-white/[0.01] border-calypso-100 dark:border-calypso-800/20"
+                ? "bg-white dark:bg-matisse-950/20 border-matisse-500 dark:border-matisse-300 shadow-2xl scale-105 z-10" 
+                : "bg-matisse-50/30 dark:bg-white/[0.01] border-matisse-100 dark:border-matisse-800/20"
             }`}
           >
             {p.featured && (
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-calypso-500 dark:bg-calypso-300 rounded-full text-[10px] font-semibold text-white dark:text-calypso-950 uppercase tracking-widest shadow-lg">
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-matisse-500 dark:bg-matisse-300 rounded-full text-[10px] font-semibold text-white dark:text-matisse-950 uppercase tracking-widest shadow-lg">
                 Most Popular
               </div>
             )}
@@ -74,7 +74,7 @@ const Pricing: React.FC = () => {
             <div className="space-y-4 mb-12">
               {p.features.map((f, j) => (
                 <div key={j} className="flex items-center gap-3 text-sm font-normal text-slate-600 dark:text-slate-400">
-                  <CheckCircle2 size={16} className="text-calypso-500 dark:text-calypso-300" />
+                  <CheckCircle2 size={16} className="text-matisse-500 dark:text-matisse-300" />
                   {f}
                 </div>
               ))}
@@ -83,8 +83,8 @@ const Pricing: React.FC = () => {
             <Link to="/login" className="block w-full">
               <button className={`w-full py-5 rounded-2xl font-semibold transition-all shadow-sm ${
                 p.featured 
-                  ? "bg-calypso-500 dark:bg-calypso-300 text-white dark:text-calypso-950 shadow-xl hover:scale-105" 
-                  : "bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-calypso-200 dark:border-calypso-800/20 hover:bg-calypso-50"
+                  ? "bg-matisse-500 dark:bg-matisse-300 text-white dark:text-matisse-950 shadow-xl hover:scale-105" 
+                  : "bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-matisse-200 dark:border-matisse-800/20 hover:bg-matisse-50"
               }`}>
                 {p.featured ? "Deploy Velocity" : "Get Started"}
               </button>

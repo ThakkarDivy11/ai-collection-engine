@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 w-full z-[100] transition-all duration-500",
         isScrolled
-          ? "bg-white/80 dark:bg-[#1a2a37]/80 backdrop-blur-xl border-b border-slate-200 dark:border-calypso-800/20 py-3 shadow-sm"
+          ? "bg-white/80 dark:bg-[#112740]/80 backdrop-blur-xl border-b border-slate-200 dark:border-matisse-800/20 py-3 shadow-sm"
           : "bg-transparent py-5"
       )}
     >
@@ -134,16 +134,16 @@ const Navbar: React.FC = () => {
                         {link.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid gap-3 p-4 bg-white dark:bg-[#1a2a37] border-slate-200 dark:border-calypso-800/20 w-[480px]">
+                        <ul className="grid gap-3 p-4 bg-white dark:bg-[#112740] border-slate-200 dark:border-matisse-800/20 w-[480px]">
                           {link.items.map((item, itemIndex) => (
                             <li key={itemIndex}>
                               <NavigationMenuLink asChild>
                                 <a
                                   href={item.href}
-                                  className="group/item flex items-start gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-colors hover:bg-calypso-50 dark:hover:bg-white/5"
+                                  className="group/item flex items-start gap-3 select-none rounded-xl p-3 leading-none no-underline outline-none transition-colors hover:bg-matisse-50 dark:hover:bg-white/5"
                                 >
                                   {"icon" in item && item.icon && (
-                                    <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-calypso-50 dark:bg-calypso-500/10 text-calypso-600 dark:text-calypso-300 group-hover/item:bg-calypso-500 group-hover/item:text-white transition-colors">
+                                    <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-matisse-50 dark:bg-matisse-500/10 text-matisse-600 dark:text-matisse-300 group-hover/item:bg-matisse-500 group-hover/item:text-white transition-colors">
                                       <item.icon size={18} />
                                     </div>
                                   )}
@@ -168,7 +168,7 @@ const Navbar: React.FC = () => {
                     <NavigationMenuLink asChild>
                       <a
                         href={"href" in link ? link.href : "#!"}
-                        className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-calypso-600 dark:hover:text-calypso-300 px-3 py-2 transition-colors uppercase tracking-[0.2em] whitespace-nowrap"
+                        className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-matisse-600 dark:hover:text-matisse-300 px-3 py-2 transition-colors uppercase tracking-[0.2em] whitespace-nowrap"
                       >
                         {link.label}
                       </a>
@@ -177,7 +177,7 @@ const Navbar: React.FC = () => {
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
-            <NavigationMenuViewport className="bg-white dark:bg-[#1a2a37] border-slate-200 dark:border-calypso-800/30 shadow-xl" />
+            <NavigationMenuViewport className="bg-white dark:bg-[#112740] border-slate-200 dark:border-matisse-800/30 shadow-xl" />
           </NavigationMenu>
         </div>
 
@@ -188,17 +188,17 @@ const Navbar: React.FC = () => {
             onClick={toggleTheme}
             variant="ghost"
             size="icon"
-            className="text-slate-600 dark:text-calypso-300 hover:text-calypso-600 hover:bg-slate-100 dark:hover:bg-calypso-900/50 rounded-xl"
+            className="text-slate-600 dark:text-matisse-300 hover:text-matisse-600 hover:bg-slate-100 dark:hover:bg-matisse-900/50 rounded-xl"
           >
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </Button>
 
           {/* Access/Start Buttons */}
           <div className="hidden sm:flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-calypso-600 dark:hover:text-calypso-300 uppercase tracking-[0.2em]">
+            <Button asChild variant="ghost" size="sm" className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-matisse-600 dark:hover:text-matisse-300 uppercase tracking-[0.2em]">
               <Link to="/login">Access</Link>
             </Button>
-            <Button asChild size="sm" className="bg-[#4b8aac] text-white font-semibold rounded-xl px-6 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#4b8aac]/20 text-xs uppercase tracking-[0.1em] border-0">
+            <Button asChild size="sm" className="bg-[#2d84ca] text-white font-semibold rounded-xl px-6 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-[#2d84ca]/20 text-xs uppercase tracking-[0.1em] border-0">
               <Link to="/login">Start</Link>
             </Button>
           </div>
@@ -238,14 +238,14 @@ const Navbar: React.FC = () => {
                 </svg>
               </Button>
             </PopoverTrigger>
-            <PopoverContent align="end" className="w-64 p-2 md:hidden bg-white dark:bg-[#1a2a37] border-slate-200 dark:border-calypso-800/30">
+            <PopoverContent align="end" className="w-64 p-2 md:hidden bg-white dark:bg-[#112740] border-slate-200 dark:border-matisse-800/30">
               <NavigationMenu className="max-w-none *:w-full">
                 <NavigationMenuList className="flex-col items-start gap-0">
                   {navigationLinks.map((link, index) => (
                     <NavigationMenuItem key={index} className="w-full">
                       {"submenu" in link && link.submenu ? (
                         <>
-                          <div className="text-slate-400 dark:text-calypso-400 px-2 py-1.5 text-xs font-semibold uppercase tracking-wider">
+                          <div className="text-slate-400 dark:text-matisse-400 px-2 py-1.5 text-xs font-semibold uppercase tracking-wider">
                             {link.label}
                           </div>
                           <ul>
@@ -253,9 +253,9 @@ const Navbar: React.FC = () => {
                               <li key={itemIndex}>
                                 <NavigationMenuLink
                                   href={item.href}
-                                  className="flex items-center gap-2 px-2 py-2 text-sm text-slate-700 dark:text-slate-300 hover:text-calypso-600 dark:hover:text-calypso-300 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
+                                  className="flex items-center gap-2 px-2 py-2 text-sm text-slate-700 dark:text-slate-300 hover:text-matisse-600 dark:hover:text-matisse-300 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
                                 >
-                                  {"icon" in item && item.icon && <item.icon size={16} className="text-calypso-500" />}
+                                  {"icon" in item && item.icon && <item.icon size={16} className="text-matisse-500" />}
                                   {item.label}
                                 </NavigationMenuLink>
                               </li>
@@ -265,7 +265,7 @@ const Navbar: React.FC = () => {
                       ) : (
                         <NavigationMenuLink
                           href={"href" in link ? link.href : "#!"}
-                          className="block px-2 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-calypso-600 dark:hover:text-calypso-300 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
+                          className="block px-2 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-matisse-600 dark:hover:text-matisse-300 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
                         >
                           {link.label}
                         </NavigationMenuLink>

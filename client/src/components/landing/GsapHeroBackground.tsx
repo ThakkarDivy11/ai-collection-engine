@@ -56,7 +56,7 @@ const GsapHeroBackground: React.FC = () => {
     gradient.style.cssText = `
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 20% 30%, rgba(75, 138, 172, 0.08) 0%, transparent 50%),
+      background: radial-gradient(ellipse at 20% 30%, rgba(45, 132, 202, 0.08) 0%, transparent 50%),
                   radial-gradient(ellipse at 80% 70%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
                   radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
       pointer-events: none;
@@ -65,7 +65,7 @@ const GsapHeroBackground: React.FC = () => {
 
     // Animate gradient
     gsap.to(gradient, {
-      background: 'radial-gradient(ellipse at 30% 40%, rgba(75, 138, 172, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(ellipse at 40% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 60%)',
+      background: 'radial-gradient(ellipse at 30% 40%, rgba(45, 132, 202, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(ellipse at 40% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 60%)',
       duration: 10,
       repeat: -1,
       yoyo: true,
@@ -81,12 +81,12 @@ const GsapHeroBackground: React.FC = () => {
         position: absolute;
         width: ${size}px;
         height: ${size}px;
-        background: rgba(75, 138, 172, ${Math.random() * 0.3 + 0.1});
+        background: rgba(45, 132, 202, ${Math.random() * 0.3 + 0.1});
         border-radius: 50%;
         left: ${Math.random() * 100}%;
         top: ${Math.random() * 100}%;
         pointer-events: none;
-        box-shadow: 0 0 ${size * 2}px rgba(75, 138, 172, 0.3);
+        box-shadow: 0 0 ${size * 2}px rgba(45, 132, 202, 0.3);
       `;
 
       containerRef.current.appendChild(particle);

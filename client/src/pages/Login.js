@@ -60,7 +60,7 @@ export default function Login() {
                     <Link to="/">
                         <img src={collectAILogo} alt="CollectAI" className="h-16 w-auto mx-auto mb-4 hover:scale-105 transition-transform" />
                     </Link>
-                    <div className="h-px w-12 bg-calypso-500/50 mx-auto" />
+                    <div className="h-px w-12 bg-matisse-500/50 mx-auto" />
                 </motion.div>
 
                 <motion.div
@@ -75,7 +75,7 @@ export default function Login() {
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === tab
-                                    ? "bg-calypso-600 text-white shadow-lg shadow-calypso-600/20"
+                                    ? "bg-matisse-600 text-white shadow-lg shadow-matisse-600/20"
                                     : "text-slate-500 hover:text-slate-300"
                                     }`}
                             >
@@ -109,26 +109,26 @@ export default function Login() {
                     <form onSubmit={handleLogin} className="space-y-5">
                         <div className="relative group">
                             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                                <Mail className="text-slate-500 group-focus-within:text-calypso-400 transition-colors" size={18} />
+                                <Mail className="text-slate-500 group-focus-within:text-matisse-400 transition-colors" size={18} />
                             </div>
                             <input
                                 type="email"
                                 required
                                 placeholder="Corporate Email"
-                                className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-5 pl-14 pr-5 text-white outline-none focus:border-calypso-500/50 focus:ring-4 focus:ring-calypso-500/10 transition-all placeholder:text-slate-600 text-sm"
+                                className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-5 pl-14 pr-5 text-white outline-none focus:border-matisse-500/50 focus:ring-4 focus:ring-matisse-500/10 transition-all placeholder:text-slate-600 text-sm"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
 
                         <div className="relative group">
                             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                                <Lock className="text-slate-500 group-focus-within:text-calypso-400 transition-colors" size={18} />
+                                <Lock className="text-slate-500 group-focus-within:text-matisse-400 transition-colors" size={18} />
                             </div>
                             <input
                                 type="password"
                                 required
                                 placeholder="Access Key"
-                                className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-5 pl-14 pr-5 text-white outline-none focus:border-calypso-500/50 focus:ring-4 focus:ring-calypso-500/10 transition-all placeholder:text-slate-600 text-sm"
+                                className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-5 pl-14 pr-5 text-white outline-none focus:border-matisse-500/50 focus:ring-4 focus:ring-matisse-500/10 transition-all placeholder:text-slate-600 text-sm"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
@@ -136,7 +136,7 @@ export default function Login() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-5 mt-4 rounded-2xl text-white font-bold bg-white/5 hover:bg-calypso-600 transition-all flex justify-center items-center gap-3 border border-white/10 hover:border-transparent group"
+                            className="w-full py-5 mt-4 rounded-2xl text-white font-bold bg-white/5 hover:bg-matisse-600 transition-all flex justify-center items-center gap-3 border border-white/10 hover:border-transparent group"
                         >
                             {loading ? (
                                 <Loader2 className="animate-spin" size={20} />
@@ -154,9 +154,9 @@ export default function Login() {
                             Institutional Grade Security Protocol
                         </p>
                         <div className="flex justify-center gap-6 text-[10px] text-slate-500 font-semibold uppercase tracking-widest">
-                            <a href="#!" className="hover:text-calypso-400 transition-colors">Privacy</a>
-                            <a href="#!" className="hover:text-calypso-400 transition-colors">Security</a>
-                            <a href="#!" className="hover:text-calypso-400 transition-colors">Contact</a>
+                            <a href="#!" className="hover:text-matisse-400 transition-colors">Privacy</a>
+                            <a href="#!" className="hover:text-matisse-400 transition-colors">Security</a>
+                            <a href="#!" className="hover:text-matisse-400 transition-colors">Contact</a>
                         </div>
                     </div>
                 </motion.div>

@@ -61,7 +61,7 @@ const Sidebar = () => {
                             <motion.div
                                 whileHover={{ x: 5 }}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
-                                    ? "bg-calypso-600 text-white shadow-md shadow-calypso-600/30 dark:shadow-calypso-900/40"
+                                    ? "bg-matisse-600 text-white shadow-md shadow-matisse-600/30 dark:shadow-matisse-900/40"
                                     : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5"
                                     }`}
                             >

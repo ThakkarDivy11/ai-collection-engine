@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 :root {
-  --brand-sky: #6ea5c2; /* calypso 400 */
+  --brand-sky: #53a0dd; /* matisse 400 */
   --brand-dark: #030303;
   --gradient-angle: 0deg;
   --gradient-angle-offset: 0deg;
   --gradient-percent: 20%;
-  --gradient-shine: #6ea5c2; /* calypso 400 */
+  --gradient-shine: #53a0dd; /* matisse 400 */
 }
 
 @property --gradient-angle {
@@ -33,7 +33,7 @@
 
 @property --gradient-shine {
   syntax: "<color>";
-  initial-value: #6ea5c2;
+  initial-value: #53a0dd;
   inherits: false;
 }
 
@@ -44,7 +44,7 @@
   }
 
   body {
-    @apply bg-black text-white selection:bg-calypso-500/30;
+    @apply bg-black text-white selection:bg-matisse-500/30;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: -0.011em;
   }
@@ -87,7 +87,7 @@
     font-weight: 500;
     color: #ffffff;
     background: linear-gradient(#030303, #030303) padding-box,
-      conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #4b8aac 5%, var(--gradient-shine) 15%, #4b8aac 30%, transparent 40%, transparent 100%) border-box;
+      conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #2d84ca 5%, var(--gradient-shine) 15%, #2d84ca 30%, transparent 40%, transparent 100%) border-box;
     border: 2px solid transparent;
     box-shadow: inset 0 0 0 1px #1a1818;
     cursor: pointer;
@@ -126,7 +126,7 @@
     z-index: 1;
     width: 100%;
     aspect-ratio: 1;
-    background: linear-gradient(-50deg, transparent, #4b8aac, transparent);
+    background: linear-gradient(-50deg, transparent, #2d84ca, transparent);
     mask-image: radial-gradient(circle at bottom, transparent 40%, black);
     opacity: 0.6;
     animation: shimmer 4s linear infinite;
@@ -259,8 +259,8 @@
     transform: translateX(-50%);
     width: 2px;
     height: 100%;
-    background: linear-gradient(to bottom, transparent, var(--light-color, #4b8aac), transparent);
-    box-shadow: 0 0 40px var(--glow-color-1, #4b8aac);
+    background: linear-gradient(to bottom, transparent, var(--light-color, #2d84ca), transparent);
+    box-shadow: 0 0 40px var(--glow-color-1, #2d84ca);
     animation: mainGlow 3s ease-in-out infinite alternate;
     opacity: 0.7;
   }
@@ -274,7 +274,7 @@
     position: absolute;
     bottom: -10%;
     height: 120%;
-    background: linear-gradient(to top, transparent, var(--light-color, #4b8aac), transparent);
+    background: linear-gradient(to top, transparent, var(--light-color, #2d84ca), transparent);
     opacity: 0;
     animation: rise linear infinite, fade linear infinite;
   }
@@ -302,15 +302,15 @@
 }
 
 :root {
-  --bg-color: #f4f8fb; /* calypso 50 */
-  --light-color: #4b8aac; /* calypso 500 */
-  --glow-color-1: rgba(75, 138, 172, 0.2);
-  --glow-color-2: rgba(110, 165, 194, 0.1);
+  --bg-color: #f2f7fd; /* matisse 50 */
+  --light-color: #2d84ca; /* matisse 500 */
+  --glow-color-1: rgba(45, 132, 202, 0.2);
+  --glow-color-2: rgba(83, 160, 221, 0.1);
 }
 
 .dark {
-  --bg-color: #1a2a37; /* calypso 950 */
-  --light-color: #a0c4d9; /* calypso 300 */
-  --glow-color-1: rgba(160, 196, 217, 0.4);
-  --glow-color-2: rgba(160, 196, 217, 0.2);
+  --bg-color: #112740; /* matisse 950 */
+  --light-color: #8fc0ea; /* matisse 300 */
+  --glow-color-1: rgba(143, 192, 234, 0.4);
+  --glow-color-2: rgba(143, 192, 234, 0.2);
 }
