@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo, useState, memo, Suspense } from "react";
-import { Canvas, useFrame, useThree, invalidate } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { 
   Float, 
   Sphere, 
