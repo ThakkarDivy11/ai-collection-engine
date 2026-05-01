@@ -15,6 +15,7 @@ import {
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "../../lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -147,16 +148,9 @@ const GsapThreeHeroBackground: React.FC = () => {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     // Interactive Spotlight Overlay
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(75, 138, 172, 0.15) 0%, transparent 60%);
-      pointer-events: none;
-      will-change: transform, opacity;
-    `;
-    const container = containerRef.current;
-    if (container) container.appendChild(overlay);
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+
 
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
@@ -224,9 +218,6 @@ const GsapThreeHeroBackground: React.FC = () => {
       observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
       ScrollTrigger.getAll().forEach(t => t.kill());
-      if (container && overlay.parentNode === container) {
-        container.removeChild(overlay);
-      }
     };
   }, []);
 
@@ -240,6 +231,15 @@ const GsapThreeHeroBackground: React.FC = () => {
           : 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%)',
       }}
     >
+      {/* Interactive Spotlight Overlay */}
+      <div 
+        ref={overlayRef}
+        className="absolute inset-0 pointer-events-none will-change-[transform,opacity] z-[5]"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(75, 138, 172, 0.15) 0%, transparent 60%)'
+        }}
+      />
+
       {/* Scroll Progress Bar */}
       <div 
         id="scroll-progress" 
