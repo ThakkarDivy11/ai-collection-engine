@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { BrainCircuit, Sparkles, Globe, Zap, Twitter, Github, Linkedin, Mail } from "lucide-react";
-import collectAILogo from "../../assets/images/collectai-logo.png";
 import { useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { AuroraHero } from "../ui/aurora-hero-bg";
 import { Link } from "react-router-dom";

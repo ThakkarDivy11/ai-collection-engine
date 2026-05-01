@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Loader2, Lock, Mail, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/Background";
-import collectAILogo from "../assets/images/collectai-logo.png";
 import { Link } from "react-router-dom";
 
 export default function Login() {

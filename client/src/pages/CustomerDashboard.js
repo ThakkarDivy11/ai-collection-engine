@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/Background";
-import collectAILogo from "../assets/images/collectai-logo.png";
 
 export default function CustomerDashboard() {
     const [invoices, setInvoices] = useState([]);
