@@ -253,11 +253,12 @@ const GsapThreeHeroBackground: React.FC = () => {
         gl={{ 
           alpha: true, 
           antialias: false, 
-          powerPreference: "high-performance",
           stencil: false,
           depth: true
         }}
         dpr={dpr}
+        eventSource={containerRef}
+        eventPrefix="client"
         frameloop="always"
         style={{ position: 'absolute', inset: 0 }}
       >
