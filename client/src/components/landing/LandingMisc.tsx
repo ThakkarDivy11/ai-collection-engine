@@ -116,7 +116,7 @@ export const HowItWorks: React.FC = () => {
 
 export const CTA: React.FC = () => {
   return (
-    <AuroraHero className="border-y border-white/5 py-40">
+    <AuroraHero className="border-y border-white/5 pt-40 pb-20">
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {/* Decorative elements */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-calypso-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -171,7 +171,7 @@ export const CTA: React.FC = () => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="py-24 px-6 bg-white dark:bg-[#1a2a37] border-t border-calypso-100 dark:border-calypso-800/20 relative z-10">
+    <footer className="pt-12 pb-24 px-6 bg-white dark:bg-[#1a2a37] border-t border-calypso-100 dark:border-calypso-800/20 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1 md:col-span-2">
