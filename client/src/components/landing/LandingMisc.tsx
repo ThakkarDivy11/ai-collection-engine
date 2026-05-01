@@ -126,7 +126,7 @@ export const CTA: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-matisse-500/10 border border-matisse-500/20 text-matisse-300 text-[10px] font-semibold uppercase tracking-[0.4em] mb-12"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-matisse-500/10 border border-matisse-500/20 text-matisse-600 dark:text-matisse-300 text-[10px] font-semibold uppercase tracking-[0.4em] mb-12"
           >
             <span className="w-2 h-2 rounded-full bg-matisse-500 animate-pulse" />
             Get Started Today
@@ -136,17 +136,17 @@ export const CTA: React.FC = () => {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-[10rem] font-semibold text-white tracking-tighter leading-[0.8] mb-12"
+            className="text-6xl md:text-[10rem] font-semibold text-slate-900 dark:text-white tracking-tighter leading-[0.8] mb-12"
           >
             Ready to <br />
-            <span className="text-matisse-400">Scale?</span>
+            <span className="text-matisse-600 dark:text-matisse-400">Scale?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
-            className="text-slate-400 text-xl md:text-2xl mb-20 font-normal max-w-2xl mx-auto leading-relaxed"
+            className="text-slate-600 dark:text-slate-400 text-xl md:text-2xl mb-20 font-normal max-w-2xl mx-auto leading-relaxed"
           >
             Join the leading financial institutions using Nexus to automate recovery and maximize capital efficiency.
           </motion.p>
@@ -176,7 +176,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1 md:col-span-2">
             <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-8 tracking-tighter">
-              <img src={collectAILogo} alt="CollectAI" className="h-14 w-auto" />
+              <img src="/logo.png" alt="CollectAI" className="h-14 w-auto" />
             </div>
             <p className="text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed font-normal">
               Architecting the world's most sophisticated autonomous financial infrastructure.

@@ -114,7 +114,7 @@ const Navbar: React.FC = () => {
           >
             <div className="flex items-center gap-3 py-1">
               <img
-                src={collectAILogo}
+                src="/logo.png"
                 alt="CollectAI"
                 className="logo h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-500"
               />

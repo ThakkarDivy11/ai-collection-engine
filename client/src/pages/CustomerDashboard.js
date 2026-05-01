@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/Background";
+import collectAILogo from "../assets/images/collectai-logo.png";
 
 export default function CustomerDashboard() {
     const [invoices, setInvoices] = useState([]);
@@ -162,9 +163,7 @@ export default function CustomerDashboard() {
                 <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-10">
                     <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <div className="bg-matisse-600 p-2 rounded-xl text-white">
-                                <CreditCard size={24} />
-                            </div>
+                            <img src="/logo.png" alt="CollectAI" className="h-12 w-auto" />
                             <h1 className="text-xl font-bold tracking-tight">Client Portal</h1>
                         </div>
                         <div className="flex items-center gap-6">

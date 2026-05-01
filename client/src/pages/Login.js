@@ -58,7 +58,7 @@ export default function Login() {
                     className="mb-12 text-center"
                 >
                     <Link to="/">
-                        <img src={collectAILogo} alt="CollectAI" className="h-16 w-auto mx-auto mb-4 hover:scale-105 transition-transform" />
+                        <img src="/logo.png" alt="CollectAI" className="h-16 w-auto mx-auto mb-4 hover:scale-105 transition-transform" />
                     </Link>
                     <div className="h-px w-12 bg-matisse-500/50 mx-auto" />
                 </motion.div>

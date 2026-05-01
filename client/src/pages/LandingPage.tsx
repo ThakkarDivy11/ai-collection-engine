@@ -86,7 +86,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* PRICING - Slightly lighter background for contrast */}
-        <section className="bg-slate-900/20 relative">
+        <section className="bg-slate-900/5 dark:bg-slate-900/20 relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)] pointer-events-none" />
           <Pricing />
         </section>

@@ -193,8 +193,8 @@ const Loading: React.FC = () => {
       <div className="loading-content">
         <div ref={textRef} className="loading-text">
           <div className="loading-logo">
-            <img src={collectAILogo} alt="CollectAI" className="h-16 w-auto mb-4" />
-            <h1 className="logo-text">CollectAI</h1>
+            <img src="/logo.png" alt="CollectAI" className="h-32 w-auto mb-4" />
+
           </div>
 
           <div className="loading-message">
@@ -203,10 +203,10 @@ const Loading: React.FC = () => {
               {progress < 30
                 ? "Loading AI Models..."
                 : progress < 60
-                ? "Establishing Secure Connections..."
-                : progress < 90
-                ? "Optimizing Performance..."
-                : "Ready to Launch"}
+                  ? "Establishing Secure Connections..."
+                  : progress < 90
+                    ? "Optimizing Performance..."
+                    : "Ready to Launch"}
             </p>
           </div>
 
