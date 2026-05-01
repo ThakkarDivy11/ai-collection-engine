@@ -257,7 +257,7 @@ const GsapThreeHeroBackground: React.FC = () => {
           depth: true
         }}
         dpr={dpr}
-        eventSource={containerRef}
+        eventSource={containerRef as any}
         eventPrefix="client"
         frameloop="always"
         style={{ position: 'absolute', inset: 0 }}
