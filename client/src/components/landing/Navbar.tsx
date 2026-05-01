@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
               <img
                 src={collectAILogo}
                 alt="CollectAI"
-                className="logo h-24 md:h-28 lg:h-32 w-auto object-contain brightness-110 contrast-110 group-hover:scale-105 transition-transform duration-500 dark:invert"
+                className="logo h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-500"
               />
             </div>
           </Link>

@@ -174,7 +174,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1 md:col-span-2">
             <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-8 tracking-tighter">
-              <img src={collectAILogo} alt="CollectAI" className="h-14 w-auto dark:invert" />
+              <img src={collectAILogo} alt="CollectAI" className="h-14 w-auto" />
             </div>
             <p className="text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed font-normal">
               Architecting the world's most sophisticated autonomous financial infrastructure.

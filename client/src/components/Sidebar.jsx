@@ -49,10 +49,7 @@ const Sidebar = () => {
             `}</style>
             <div className="px-4 py-5 flex items-center navbar-brand">
                 <div className="flex items-center gap-3">
-                    <img src={collectAILogo} alt="CollectAI" className="logo h-12 w-auto dark:invert" />
-                    <span className="logo-text text-xl font-bold text-slate-900 dark:text-white">
-                        CollectAI
-                    </span>
+                    <img src={collectAILogo} alt="CollectAI" className="logo h-12 w-auto" />
                 </div>
             </div>
 
