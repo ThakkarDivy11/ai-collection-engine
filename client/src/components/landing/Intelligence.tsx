@@ -4,7 +4,7 @@ import { Sparkles, CheckCircle2, Cpu } from "lucide-react";
 
 const Intelligence: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-6 pt-40 pb-0">
+    <div className="max-w-7xl mx-auto px-6 pt-40 pb-20">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
         <div>
           <motion.div
