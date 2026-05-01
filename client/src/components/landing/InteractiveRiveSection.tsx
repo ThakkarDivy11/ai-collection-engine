@@ -1,17 +1,7 @@
 import React from "react";
-import { useRive, Layout, Fit, Alignment } from "@rive-app/react-canvas";
 import { motion } from "framer-motion";
 
 const InteractiveRiveSection: React.FC = () => {
-  const { RiveComponent } = useRive({
-    src: "/crypto-concept.riv",
-    stateMachines: "State Machine 1", // Standard for many Rive files, might need adjustment if unknown
-    autoplay: true,
-    layout: new Layout({
-      fit: Fit.Contain,
-      alignment: Alignment.Center,
-    }),
-  });
 
   return (
     <section className="relative py-24 md:py-40 bg-white dark:bg-[#1a2a37] overflow-hidden border-t border-calypso-100 dark:border-calypso-800/20">
@@ -75,8 +65,16 @@ const InteractiveRiveSection: React.FC = () => {
           className="relative h-[400px] md:h-[600px] w-full rounded-[3rem] overflow-hidden bg-slate-50/50 dark:bg-white/[0.02] border border-calypso-100 dark:border-calypso-800/10 shadow-2xl shadow-calypso-500/5 group"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-calypso-500/5 to-transparent pointer-events-none" />
-          <div className="h-full w-full">
-            <RiveComponent />
+          <div className="h-full w-full flex items-center justify-center relative">
+            {/* Fallback animation since Rive was removed */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-calypso-500/20 via-transparent to-transparent opacity-50 blur-2xl animate-pulse" />
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="w-48 h-48 border-[1px] border-calypso-500/30 rounded-full flex items-center justify-center relative"
+            >
+              <div className="w-32 h-32 bg-calypso-500/10 rounded-full backdrop-blur-3xl border border-calypso-500/20" />
+            </motion.div>
           </div>
           
           {/* Decorative floating labels */}
