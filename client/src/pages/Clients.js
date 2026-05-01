@@ -89,10 +89,10 @@ export default function Clients() {
 
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center text-slate-200">
+            <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold mb-2">Client Management</h1>
-                    <p className="text-slate-400">Add, edit and monitor your client portfolio.</p>
+                    <h1 className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">Client Management</h1>
+                    <p className="text-slate-500 dark:text-slate-400">Add, edit and monitor your client portfolio.</p>
                 </div>
                 <button
                     onClick={() => {
@@ -107,29 +107,29 @@ export default function Clients() {
                 </button>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
-                <Search className="text-slate-500" size={20} />
+            <div className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 rounded-[2.5rem] p-5 flex items-center gap-4 transition-all duration-300 shadow-xl shadow-gray-200/50 dark:shadow-none">
+                <Search className="text-slate-400 dark:text-slate-500" size={20} />
                 <input
                     type="text"
                     placeholder="Search by name, company or email..."
-                    className="bg-transparent border-none text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-600"
+                    className="bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-400 dark:placeholder:text-slate-600"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <div className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-300 shadow-xl shadow-gray-200/50 dark:shadow-none">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="bg-slate-800/50 text-slate-400 text-sm uppercase tracking-wider">
+                            <tr className="bg-gray-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider">
                                 <th className="px-6 py-4">Client</th>
                                 <th className="px-6 py-4">Company</th>
                                 <th className="px-6 py-4">Status</th>
                                 <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-800">
+                        <tbody className="divide-y divide-gray-200 dark:divide-slate-800">
                             {loading ? (
                                 <tr>
                                     <td colSpan="4" className="py-20 text-center">
@@ -137,23 +137,23 @@ export default function Clients() {
                                     </td>
                                 </tr>
                             ) : clients.map((client) => (
-                                <tr key={client._id} className="hover:bg-slate-800/30 transition-colors">
+                                <tr key={client._id} className="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-matisse-400 font-bold border border-slate-700 text-slate-200">
+                                            <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-matisse-600 dark:text-matisse-400 font-bold border border-gray-200 dark:border-slate-700">
                                                 {client.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <div className="font-medium text-white">{client.name}</div>
-                                                <div className="text-slate-500 text-sm flex items-center gap-1">
+                                                <div className="font-medium text-slate-900 dark:text-white">{client.name}</div>
+                                                <div className="text-slate-500 dark:text-slate-500 text-sm flex items-center gap-1">
                                                     <Mail size={12} /> {client.email}
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <div className="flex items-center gap-2 text-slate-300">
-                                            <Building2 size={16} className="text-slate-500" />
+                                        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                                            <Building2 size={16} className="text-slate-400 dark:text-slate-500" />
                                             {client.company}
                                         </div>
                                     </td>
@@ -172,13 +172,13 @@ export default function Clients() {
                                                     setFormData(client);
                                                     setShowModal(true);
                                                 }}
-                                                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+                                                className="p-2 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-all"
                                             >
                                                 <Edit2 size={18} />
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(client._id)}
-                                                className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-all"
+                                                className="p-2 text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-lg transition-all"
                                             >
                                                 <Trash2 size={18} />
                                             </button>
@@ -197,7 +197,7 @@ export default function Clients() {
                     <button
                         key={i}
                         onClick={() => setCurrentPage(i + 1)}
-                        className={`w-10 h-10 rounded-xl font-medium transition-all ${currentPage === i + 1 ? "bg-matisse-600 text-white" : "bg-slate-900 text-slate-400 hover:bg-slate-800"
+                        className={`w-10 h-10 rounded-xl font-medium transition-all ${currentPage === i + 1 ? "bg-matisse-600 text-white" : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800 border border-gray-200 dark:border-slate-800"
                             }`}
                     >
                         {i + 1}
@@ -220,58 +220,58 @@ export default function Clients() {
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-8 relative z-50 text-slate-200"
+                            className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-8 relative z-50 text-slate-900 dark:text-slate-200"
                         >
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-2xl font-bold">{editClient ? "Edit Client" : "Add New Client"}</h3>
-                                <button onClick={() => setShowModal(false)} className="text-slate-500 hover:text-white"><X size={24} /></button>
+                                <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-900 dark:hover:text-white"><X size={24} /></button>
                             </div>
 
                             <form onSubmit={handleSave} className="space-y-4">
                                 <div>
-                                    <label className="text-sm text-slate-400 block mb-2">Full Name</label>
+                                    <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Full Name</label>
                                     <input
                                         required
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
+                                        className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white transition-colors"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-sm text-slate-400 block mb-2">Email Address</label>
+                                    <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Email Address</label>
                                     <input
                                         required
                                         type="email"
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
+                                        className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white transition-colors"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="text-sm text-slate-400 block mb-2">Company Name</label>
+                                    <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Company Name</label>
                                     <input
                                         required
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
+                                        className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white transition-colors"
                                         value={formData.company}
                                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                                     />
                                 </div>
                                 {!editClient && (
                                     <div>
-                                        <label className="text-sm text-slate-400 block mb-2">Assign Password</label>
+                                        <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Assign Password</label>
                                         <input
                                             required
                                             type="password"
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
+                                            className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white transition-colors"
                                             value={formData.password}
                                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                         />
                                     </div>
                                 )}
                                 <div>
-                                    <label className="text-sm text-slate-400 block mb-2">Initial Status</label>
+                                    <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Initial Status</label>
                                     <select
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
+                                        className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white"
                                         value={formData.status}
                                         onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                                     >

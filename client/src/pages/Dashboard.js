@@ -1,5 +1,6 @@
 // cache bust
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Users, IndianRupee, Activity, Clock, ArrowUpRight, ArrowDownRight, Loader2 } from "lucide-react";
 import {
     BarChart,
@@ -17,25 +18,39 @@ import AnimatedAnalyticsChart from "../components/AnimatedAnalyticsChart";
 
 
 const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading }) => (
-    <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 p-6 rounded-2xl relative overflow-hidden transition-colors duration-300">
-        <div className="flex justify-between items-start mb-4">
-            <div className={`p-3 rounded-xl ${color}`}>
-                <Icon size={24} className="text-white" />
+    <motion.div
+        whileHover={{ y: -4, scale: 1.02 }}
+        className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-6 rounded-[2.5rem] relative overflow-hidden group transition-all duration-300 shadow-xl shadow-gray-200/50 dark:shadow-none"
+    >
+        {/* Decorative Glow */}
+        <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full blur-3xl opacity-10 transition-opacity group-hover:opacity-20 ${color}`} />
+
+        <div className="flex justify-between items-start mb-5 relative z-10">
+            <div className={`p-3.5 rounded-2xl ${color} bg-opacity-10 dark:bg-opacity-20 text-slate-900 dark:text-white backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg shadow-black/5`}>
+                <Icon size={22} className={color.replace('bg-', 'text-').replace('-600', '-500')} />
             </div>
             {!loading && (
-                <div className={`flex items-center gap-1 text-sm ${trend === "up" ? "text-matisse-400" : "text-rose-400"}`}>
-                    {trend === "up" ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
+                <div className={`flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full bg-opacity-10 ${trend === "up" ? "text-matisse-600 bg-matisse-500" : "text-rose-600 bg-rose-500"}`}>
+                    {trend === "up" ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
                     {trendValue}
                 </div>
             )}
         </div>
-        <h3 className="text-gray-500 dark:text-slate-400 font-medium mb-1">{title}</h3>
-        {loading ? (
-            <div className="h-8 w-24 bg-gray-200 dark:bg-slate-800 animate-pulse rounded-lg"></div>
-        ) : (
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{value}</p>
-        )}
-    </div>
+
+        <div className="relative z-10">
+            <p className="text-slate-500 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">{title}</p>
+            {loading ? (
+                <div className="h-8 w-24 bg-gray-100 dark:bg-white/5 animate-pulse rounded-xl" />
+            ) : (
+                <h4 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tighter">
+                    {value}
+                </h4>
+            )}
+        </div>
+
+        {/* Bottom Accent Line */}
+        <div className={`absolute bottom-0 left-6 right-6 h-0.5 rounded-full opacity-0 group-hover:opacity-40 transition-all duration-500 ${color}`} />
+    </motion.div>
 );
 
 export default function Dashboard() {
@@ -89,8 +104,8 @@ export default function Dashboard() {
                         <button onClick={() => setAlert(null)} className="ml-auto text-current opacity-50 hover:opacity-100">&times;</button>
                     </div>
                 )}
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back, Admin</h1>
-                <p className="text-gray-500 dark:text-slate-400">Here's what's happening with your clients today.</p>
+                <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Welcome Back, Admin</h1>
+                <p className="text-slate-500 dark:text-slate-400">Here's what's happening with your clients today.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -133,33 +148,42 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 p-6 rounded-2xl transition-colors duration-300">
+                <motion.div
+                    whileHover={{ y: -4 }}
+                    className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                >
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">AI Revenue Analytics</h3>
                     <div className="h-80 w-full">
                         <AnimatedAnalyticsChart data={stats?.chartData || []} />
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 p-6 rounded-2xl transition-colors duration-300">
+                <motion.div
+                    whileHover={{ y: -4 }}
+                    className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                >
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Client Growth Analytics</h3>
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={stats?.chartData || []}>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" />
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-10 text-slate-300 dark:text-slate-800" />
                                 <XAxis dataKey="name" stroke="#64748b" />
                                 <YAxis stroke="#64748b" />
                                 <Tooltip
-                                    contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "8px" }}
-                                    itemStyle={{ color: "#fff" }}
+                                    contentStyle={{ backgroundColor: "rgba(255,255,255,0.9)", border: "1px solid #e2e8f0", borderRadius: "12px", color: "#0f172a" }}
+                                    itemStyle={{ color: "#0f172a" }}
                                 />
-                                <Bar dataKey="clients" fill="#2d84ca" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="clients" fill="#2d84ca" radius={[8, 8, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
-            <div className="bg-white/70 dark:bg-white/10 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl transition-colors duration-300">
+            <motion.div
+                whileHover={{ y: -4 }}
+                className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 rounded-[2.5rem] overflow-hidden shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+            >
                 <div className="p-6 border-b border-gray-200 dark:border-slate-800 flex justify-between items-center">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">Recent Clients</h3>
                     <button className="text-matisse-400 hover:text-blue-300 text-sm font-medium">View all</button>
@@ -205,7 +229,7 @@ export default function Dashboard() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </motion.div>
 
             <AiActions />
             <AiVoiceCalls />

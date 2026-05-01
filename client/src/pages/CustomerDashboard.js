@@ -157,9 +157,9 @@ export default function CustomerDashboard() {
 
     return (
         <BackgroundWrapper>
-            <div className="min-h-screen text-slate-200 relative overflow-hidden">
+            <div className="min-h-screen text-slate-900 dark:text-slate-200 relative overflow-hidden transition-colors duration-300">
                 {/* Header */}
-                <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-10">
+                <header className="border-b border-gray-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-10 transition-colors">
                     <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <img src="/logo.png" alt="CollectAI" className="h-12 w-auto" />
@@ -167,8 +167,8 @@ export default function CustomerDashboard() {
                         </div>
                         <div className="flex items-center gap-6">
                             <div className="text-right hidden sm:block">
-                                <div className="text-sm font-medium text-white">{user?.name}</div>
-                                <div className="text-xs text-slate-500">{user?.company}</div>
+                                <div className="text-sm font-medium text-slate-900 dark:text-white">{user?.name}</div>
+                                <div className="text-xs text-slate-500 dark:text-slate-500">{user?.company}</div>
                             </div>
                             <button
                                 onClick={logout}
@@ -201,7 +201,7 @@ export default function CustomerDashboard() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-slate-900 border border-slate-800 p-6 rounded-3xl"
+                            className="bg-white/70 dark:bg-slate-900/50 backdrop-blur-xl border border-gray-100 dark:border-slate-800 p-6 rounded-3xl transition-colors duration-300"
                         >
                             <div className="flex justify-between items-start mb-4">
                                 <div className="p-3 bg-matisse-600/10 text-matisse-400 rounded-xl">
@@ -209,7 +209,7 @@ export default function CustomerDashboard() {
                                 </div>
                                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Outstanding</span>
                             </div>
-                            <div className="text-3xl font-bold text-white mb-1">₹{totalDue.toLocaleString()}</div>
+                            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1">₹{totalDue.toLocaleString()}</div>
                             <div className="text-sm text-slate-500">{unpaidCount} Pending Invoices</div>
                         </motion.div>
 
@@ -225,7 +225,7 @@ export default function CustomerDashboard() {
                                 </div>
                                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Payments Made</span>
                             </div>
-                            <div className="text-3xl font-bold text-white mb-1">
+                            <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1">
                                 {invoices.filter(i => i.status === "paid").length}
                             </div>
                             <div className="text-sm text-slate-500">Completed Transactions</div>

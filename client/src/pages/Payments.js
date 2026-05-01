@@ -77,10 +77,10 @@ export default function Payments() {
 
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center text-slate-200">
+            <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold mb-2 text-white">Payments & Invoices</h1>
-                    <p className="text-slate-400">Track transactions and issue new billing requests.</p>
+                    <h1 className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">Payments & Invoices</h1>
+                    <p className="text-slate-500 dark:text-slate-400">Track transactions and issue new billing requests.</p>
                 </div>
                 <button
                     onClick={() => setShowModal(true)}
@@ -91,20 +91,20 @@ export default function Payments() {
                 </button>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
-                <Search className="text-slate-500" size={20} />
+            <div className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 rounded-[2.5rem] p-5 flex items-center gap-4 transition-all duration-300 shadow-xl shadow-gray-200/50 dark:shadow-none">
+                <Search className="text-slate-400 dark:text-slate-500" size={20} />
                 <input
                     type="text"
                     placeholder="Search invoices..."
-                    className="bg-transparent border-none text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-600"
+                    className="bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-400 dark:placeholder:text-slate-600"
                 />
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+            <div className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-300 shadow-xl shadow-gray-200/50 dark:shadow-none">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="bg-slate-800/50 text-slate-400 text-sm uppercase tracking-wider">
+                            <tr className="bg-gray-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider">
                                 <th className="px-6 py-4">Invoice #</th>
                                 <th className="px-6 py-4">Client</th>
                                 <th className="px-6 py-4">Amount</th>
@@ -113,7 +113,7 @@ export default function Payments() {
                                 <th className="px-6 py-4 text-right">Action</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-800">
+                        <tbody className="divide-y divide-gray-200 dark:divide-slate-800">
                             {loading ? (
                                 <tr>
                                     <td colSpan="6" className="py-20 text-center">
@@ -125,14 +125,14 @@ export default function Payments() {
                                     <td colSpan="6" className="py-20 text-center text-slate-500">No invoices found.</td>
                                 </tr>
                             ) : invoices.map((invoice) => (
-                                <tr key={invoice._id} className="hover:bg-slate-800/30 transition-colors">
-                                    <td className="px-6 py-4 text-white font-mono text-sm">{invoice.invoiceNumber}</td>
+                                <tr key={invoice._id} className="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
+                                    <td className="px-6 py-4 text-slate-900 dark:text-white font-mono text-sm">{invoice.invoiceNumber}</td>
                                     <td className="px-6 py-4">
-                                        <div className="text-white font-medium">{invoice.clientId?.name || "Deleted Client"}</div>
-                                        <div className="text-slate-500 text-xs">{invoice.clientId?.company}</div>
+                                        <div className="text-slate-900 dark:text-white font-medium">{invoice.clientId?.name || "Deleted Client"}</div>
+                                        <div className="text-slate-500 dark:text-slate-500 text-xs">{invoice.clientId?.company}</div>
                                     </td>
-                                    <td className="px-6 py-4 text-white font-bold">₹{invoice.amount.toLocaleString()}</td>
-                                    <td className="px-6 py-4 text-slate-400">{new Date(invoice.dueDate).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 text-slate-900 dark:text-white font-bold">₹{invoice.amount.toLocaleString()}</td>
+                                    <td className="px-6 py-4 text-slate-600 dark:text-slate-400">{new Date(invoice.dueDate).toLocaleDateString()}</td>
                                     <td className="px-6 py-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${invoice.status === "paid" ? "bg-matisse-500/10 text-matisse-400" :
                                             invoice.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-matisse-500/10 text-matisse-400"
@@ -165,22 +165,22 @@ export default function Payments() {
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-8 relative z-50 text-slate-200"
+                            className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-3xl w-full max-w-md p-8 relative z-50 text-slate-900 dark:text-slate-200"
                         >
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-2xl font-bold flex items-center gap-2">
-                                    <Plus className="text-matisse-500" />
+                                    <Plus className="text-matisse-600 dark:text-matisse-500" />
                                     New Invoice
                                 </h3>
-                                <button onClick={() => setShowModal(false)} className="text-slate-500 hover:text-white"><X size={24} /></button>
+                                <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-900 dark:hover:text-white"><X size={24} /></button>
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <label className="text-sm text-slate-400 block mb-2">Select Client</label>
+                                    <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Select Client</label>
                                     <select
                                         required
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500"
+                                        className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white"
                                         value={formData.clientId}
                                         onChange={(e) => setFormData({ ...formData, clientId: e.target.value })}
                                     >
@@ -192,12 +192,12 @@ export default function Payments() {
                                 </div>
 
                                 <div>
-                                    <label className="text-sm text-slate-400 block mb-2">Invoice Number</label>
+                                    <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Invoice Number</label>
                                     <div className="relative">
-                                        <Hash className="absolute left-3 top-3.5 text-slate-500" size={18} />
+                                        <Hash className="absolute left-3 top-3.5 text-slate-400 dark:text-slate-500" size={18} />
                                         <input
                                             required
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-matisse-500"
+                                            className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white"
                                             value={formData.invoiceNumber}
                                             onChange={(e) => setFormData({ ...formData, invoiceNumber: e.target.value })}
                                         />
@@ -206,26 +206,26 @@ export default function Payments() {
 
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="text-sm text-slate-400 block mb-2">Amount (₹)</label>
+                                        <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Amount (₹)</label>
                                         <div className="relative">
-                                            <IndianRupee className="absolute left-3 top-3.5 text-slate-500" size={18} />
+                                            <IndianRupee className="absolute left-3 top-3.5 text-slate-400 dark:text-slate-500" size={18} />
                                             <input
                                                 required
                                                 type="number"
-                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-matisse-500"
+                                                className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white transition-colors"
                                                 value={formData.amount}
                                                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                                             />
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="text-sm text-slate-400 block mb-2">Due Date</label>
+                                        <label className="text-sm text-slate-500 dark:text-slate-400 block mb-2">Due Date</label>
                                         <div className="relative">
-                                            <Calendar className="absolute left-3 top-3.5 text-slate-500" size={18} />
+                                            <Calendar className="absolute left-3 top-3.5 text-slate-400 dark:text-slate-500" size={18} />
                                             <input
                                                 required
                                                 type="date"
-                                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-matisse-500"
+                                                className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-matisse-500 text-slate-900 dark:text-white transition-colors"
                                                 value={formData.dueDate}
                                                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
                                             />

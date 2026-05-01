@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const TabButton = ({ active, icon: Icon, label, onClick }) => (
     <button
         onClick={onClick}
-        className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all relative ${active ? "text-matisse-400" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+        className={`flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all relative ${active ? "text-matisse-600 dark:text-matisse-400" : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-gray-100/50 dark:hover:bg-slate-800/50"
             }`}
     >
         <Icon size={18} />
@@ -31,10 +31,10 @@ const TabButton = ({ active, icon: Icon, label, onClick }) => (
 );
 
 const SettingRow = ({ label, description, children }) => (
-    <div className="flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-slate-800/50 gap-4">
+    <div className="flex flex-col md:flex-row md:items-center justify-between py-6 border-b border-gray-100 dark:border-slate-800/50 gap-4">
         <div className="max-w-md">
-            <h4 className="text-white font-medium mb-1">{label}</h4>
-            <p className="text-slate-400 text-sm">{description}</p>
+            <h4 className="text-slate-900 dark:text-white font-medium mb-1">{label}</h4>
+            <p className="text-slate-500 dark:text-slate-400 text-sm">{description}</p>
         </div>
         <div className="flex-shrink-0">
             {children}
@@ -46,10 +46,10 @@ const InputField = ({ label, icon: Icon, ...props }) => (
     <div className="space-y-2">
         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{label}</label>
         <div className="relative">
-            {Icon && <Icon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />}
+            {Icon && <Icon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" />}
             <input
                 {...props}
-                className={`w-full bg-slate-900 border border-slate-800 rounded-xl py-3 ${Icon ? 'pl-11' : 'px-4'} pr-4 text-white focus:ring-2 focus:ring-matisse-500/20 focus:border-matisse-500 outline-none transition-all`}
+                className={`w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl py-3 ${Icon ? 'pl-11' : 'px-4'} pr-4 text-slate-900 dark:text-white focus:ring-2 focus:ring-matisse-500/20 focus:border-matisse-500 outline-none transition-all`}
             />
         </div>
     </div>
@@ -81,8 +81,8 @@ export default function Settings() {
         <div className="max-w-5xl mx-auto space-y-8">
             <div className="flex justify-between items-end">
                 <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Settings</h1>
-                    <p className="text-slate-400">Manage your account preferences and system configuration.</p>
+                    <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Settings</h1>
+                    <p className="text-slate-500 dark:text-slate-400">Manage your account preferences and system configuration.</p>
                 </div>
                 <button
                     onClick={handleSave}
@@ -108,8 +108,8 @@ export default function Settings() {
                 </button>
             </div>
 
-            <div className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden backdrop-blur-sm">
-                <div className="flex border-b border-slate-800 bg-slate-900/30">
+            <div className="bg-white/70 dark:bg-slate-900 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-colors duration-300">
+                <div className="flex border-b border-gray-100 dark:border-slate-800 bg-gray-50/50 dark:bg-slate-900/30">
                     {tabs.map((tab) => (
                         <TabButton
                             key={tab.id}
@@ -137,15 +137,15 @@ export default function Settings() {
                                     <InputField label="Role" icon={ShieldCheck} defaultValue="System Administrator" disabled />
                                     <InputField label="Timezone" icon={Globe} defaultValue="(GMT+05:30) India Standard Time" />
                                 </div>
-                                <div className="pt-8 border-t border-slate-800/50">
-                                    <h3 className="text-lg font-bold text-white mb-6">Profile Appearance</h3>
+                                <div className="pt-8 border-t border-gray-100 dark:border-slate-800/50">
+                                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Profile Appearance</h3>
                                     <div className="flex items-center gap-6">
                                         <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-matisse-500 to-purple-600 flex items-center justify-center text-3xl font-bold text-white shadow-xl shadow-matisse-500/20">
                                             A
                                         </div>
                                         <div className="space-y-2">
-                                            <button className="bg-slate-800 hover:bg-slate-700 text-white text-sm px-4 py-2 rounded-lg transition-colors font-medium">Change Avatar</button>
-                                            <p className="text-slate-500 text-xs">JPG, GIF or PNG. Max size of 2MB</p>
+                                            <button className="bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm px-4 py-2 rounded-lg transition-colors font-medium">Change Avatar</button>
+                                            <p className="text-slate-500 dark:text-slate-500 text-xs">JPG, GIF or PNG. Max size of 2MB</p>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@ export default function Settings() {
                                 <div className="space-y-4 pt-4">
                                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Company Address</label>
                                     <textarea
-                                        className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-white h-32 outline-none focus:border-matisse-500 transition-all font-medium"
+                                        className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl p-4 text-slate-900 dark:text-white h-32 outline-none focus:border-matisse-500 transition-all font-medium"
                                         defaultValue="123 Tech Avenue, Silicon Valley, CA 94025"
                                     />
                                 </div>
@@ -242,17 +242,17 @@ export default function Settings() {
                 </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-center justify-between">
+            <div className="bg-white/70 dark:bg-slate-900 backdrop-blur-xl border border-gray-200 dark:border-slate-800 p-6 rounded-2xl flex items-center justify-between transition-colors duration-300">
                 <div className="flex items-center gap-4">
                     <div className="p-3 bg-amber-500/10 rounded-xl">
                         <Sparkles className="text-amber-500" />
                     </div>
                     <div>
-                        <h4 className="text-white font-bold">Pro Account</h4>
-                        <p className="text-slate-500 text-sm">Your trial expires in 12 days. Upgrade to keep premium features.</p>
+                        <h4 className="text-slate-900 dark:text-white font-bold">Pro Account</h4>
+                        <p className="text-slate-500 dark:text-slate-500 text-sm">Your trial expires in 12 days. Upgrade to keep premium features.</p>
                     </div>
                 </div>
-                <button className="bg-white text-slate-950 px-6 py-2 rounded-xl font-bold hover:bg-slate-200 transition-colors">Upgrade Now</button>
+                <button className="bg-matisse-600 dark:bg-white text-white dark:text-slate-950 px-6 py-2 rounded-xl font-bold hover:bg-matisse-700 dark:hover:bg-slate-200 transition-colors">Upgrade Now</button>
             </div>
         </div>
     );

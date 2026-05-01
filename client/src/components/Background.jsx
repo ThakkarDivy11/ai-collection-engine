@@ -1,19 +1,32 @@
 import React from "react";
 
 export default function BackgroundWrapper({ children }) {
-  return (
-    <div className="relative min-h-screen w-full bg-[#112740] overflow-hidden">
+  const [isDark, setIsDark] = React.useState(false);
 
-      {/* 🌌 BASE GRADIENT - Blue/Cyan only */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(59,130,246,0.1),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(6,182,212,0.1),transparent_40%)]" />
+  React.useEffect(() => {
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className={`relative min-h-screen w-full transition-colors duration-500 overflow-hidden ${isDark ? 'bg-[#0a0f1a]' : 'bg-slate-50'}`}>
+
+      {/* 🌌 BASE GRADIENT - Adjusted for theme */}
+      <div className={`absolute inset-0 transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-40'}`} 
+           style={{ background: 'radial-gradient(circle at 20% 30%, rgba(45, 132, 202, 0.1), transparent 40%), radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.1), transparent 40%)' }} />
 
       {/* ⚡ GRID */}
       <div
-        className="absolute inset-0 opacity-[0.05]"
+        className={`absolute inset-0 transition-opacity duration-500 ${isDark ? 'opacity-[0.05]' : 'opacity-[0.03]'}`}
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
+            linear-gradient(${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'} 1px, transparent 1px),
+            linear-gradient(90deg, ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'} 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px"
         }}

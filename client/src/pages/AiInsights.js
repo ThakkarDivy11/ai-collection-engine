@@ -13,25 +13,41 @@ import {
 
 const StatCard = ({ title, value, icon: Icon, color, subtitle, loading }) => (
     <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-slate-900 border border-slate-800 p-5 rounded-2xl relative overflow-hidden group hover:border-slate-700 transition-all"
+        whileHover={{ y: -4, scale: 1.02 }}
+        className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-6 rounded-[2.5rem] relative overflow-hidden group transition-all duration-300 shadow-xl shadow-gray-200/50 dark:shadow-none"
     >
-        <div className="flex justify-between items-start mb-3">
-            <div className={`p-2.5 rounded-xl ${color}`}>
-                <Icon size={20} className="text-white" />
+        {/* Decorative Glow */}
+        <div className={`absolute -right-4 -top-4 w-24 h-24 rounded-full blur-3xl opacity-10 transition-opacity group-hover:opacity-20 ${color}`} />
+        
+        <div className="flex justify-between items-start mb-5 relative z-10">
+            <div className={`p-3.5 rounded-2xl ${color} bg-opacity-10 dark:bg-opacity-20 text-slate-900 dark:text-white backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg shadow-black/5`}>
+                <Icon size={22} className={color.replace('bg-', 'text-').replace('-600', '-500')} />
             </div>
-            <ArrowUpRight size={16} className="text-slate-700 group-hover:text-slate-500 transition-colors" />
+            <div className="p-2 rounded-full bg-gray-50/50 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <ArrowUpRight size={16} className="text-slate-400 dark:text-slate-500" />
+            </div>
         </div>
-        <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">{title}</p>
-        {loading ? (
-            <div className="h-7 w-20 bg-slate-800 animate-pulse rounded-lg" />
-        ) : (
-            <>
-                <p className="text-2xl font-bold text-white tracking-tight">{value}</p>
-                {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
-            </>
-        )}
+        
+        <div className="relative z-10">
+            <p className="text-slate-500 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">{title}</p>
+            {loading ? (
+                <div className="h-8 w-24 bg-gray-100 dark:bg-white/5 animate-pulse rounded-xl" />
+            ) : (
+                <>
+                    <h4 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tighter mb-1">
+                        {value}
+                    </h4>
+                    {subtitle && (
+                        <p className="text-xs font-medium text-slate-400 dark:text-slate-500 flex items-center gap-1">
+                            {subtitle}
+                        </p>
+                    )}
+                </>
+            )}
+        </div>
+        
+        {/* Bottom Accent Line */}
+        <div className={`absolute bottom-0 left-6 right-6 h-0.5 rounded-full opacity-0 group-hover:opacity-40 transition-all duration-500 ${color}`} />
     </motion.div>
 );
 
@@ -260,11 +276,11 @@ export default function AiInsights() {
 
             {/* Header */}
             <div>
-                <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
-                    <BrainCircuit className="text-purple-400" />
+                <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-3">
+                    <BrainCircuit className="text-matisse-600 dark:text-purple-400" />
                     AI Insights & Analytics
                 </h1>
-                <p className="text-slate-400">Real-time analytics powered by AI to grow your business.</p>
+                <p className="text-slate-500 dark:text-slate-400">Real-time analytics powered by AI to grow your business.</p>
             </div>
 
             {/* ===== ANALYTICS SUMMARY CARDS ===== */}
@@ -315,12 +331,10 @@ export default function AiInsights() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Revenue Trend Chart */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="lg:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"
+                    whileHover={{ y: -4 }}
+                    className="lg:col-span-2 bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                 >
-                    <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                         <TrendingUp className="text-matisse-400" size={20} />
                         Revenue Trend
                         <span className="text-xs text-slate-500 font-normal ml-auto">Last 6 months</span>
@@ -339,11 +353,12 @@ export default function AiInsights() {
                                             <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="opacity-10 text-slate-300 dark:text-slate-800" />
                                     <XAxis dataKey="name" stroke="#64748b" fontSize={12} />
                                     <YAxis stroke="#64748b" fontSize={12} />
                                     <Tooltip
-                                        contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "12px", color: "#fff" }}
+                                        contentStyle={{ backgroundColor: "rgba(255,255,255,0.9)", border: "1px solid #e2e8f0", borderRadius: "12px", color: "#0f172a" }}
+                                        itemStyle={{ color: "#0f172a" }}
                                         formatter={(value) => [`₹${value.toLocaleString()}`, "Revenue"]}
                                     />
                                     <Area type="monotone" dataKey="revenue" stroke="#10b981" strokeWidth={2} fill="url(#colorRevenue)" />
@@ -355,12 +370,10 @@ export default function AiInsights() {
 
                 {/* Client Health Donut */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"
+                    whileHover={{ y: -4 }}
+                    className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                 >
-                    <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                         <Users className="text-matisse-400" size={20} />
                         Client Health
                     </h3>
@@ -384,7 +397,7 @@ export default function AiInsights() {
                                         ))}
                                     </Pie>
                                     <Tooltip
-                                        contentStyle={{ backgroundColor: "#0f172a", border: "1px solid #1e293b", borderRadius: "12px", color: "#fff" }}
+                                        contentStyle={{ backgroundColor: "rgba(255,255,255,0.9)", border: "1px solid #e2e8f0", borderRadius: "12px", color: "#0f172a" }}
                                     />
                                 </PieChart>
                             </ResponsiveContainer>
@@ -405,13 +418,11 @@ export default function AiInsights() {
 
             {/* ===== AI CHURN PREDICTION ===== */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"
+                whileHover={{ y: -4 }}
+                className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
             >
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <ShieldAlert className="text-rose-400" size={20} />
                         AI Churn Risk Prediction
                     </h3>
@@ -455,29 +466,27 @@ export default function AiInsights() {
             {/* ===== RECENT INVOICES ===== */}
             {analytics?.recentInvoices?.length > 0 && (
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl"
+                    whileHover={{ y: -4 }}
+                    className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                 >
-                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                         <FileText className="text-indigo-400" size={20} />
                         Recent Invoices
                     </h3>
                     <div className="space-y-3">
                         {analytics.recentInvoices.map((inv, idx) => (
-                            <div key={idx} className="flex items-center justify-between p-3 bg-slate-800/40 rounded-xl border border-slate-800 hover:bg-slate-800/60 transition-colors">
+                            <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-800/40 rounded-xl border border-gray-100 dark:border-slate-800 hover:bg-gray-100 dark:hover:bg-slate-800/60 transition-colors">
                                 <div className="flex items-center gap-3">
                                     <div className={`p-2 rounded-lg ${inv.status === "paid" ? "bg-matisse-500/10 text-matisse-400" : inv.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-matisse-500/10 text-matisse-400"}`}>
                                         <FileText size={16} />
                                     </div>
                                     <div>
-                                        <p className="text-white text-sm font-bold">{inv.invoiceNumber}</p>
+                                        <p className="text-slate-900 dark:text-white text-sm font-bold">{inv.invoiceNumber}</p>
                                         <p className="text-slate-500 text-xs">{inv.client}</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-white font-bold text-sm">₹{inv.amount.toLocaleString()}</p>
+                                    <p className="text-slate-900 dark:text-white font-bold text-sm">₹{inv.amount.toLocaleString()}</p>
                                     <span className={`text-[10px] font-bold uppercase tracking-wider ${inv.status === "paid" ? "text-matisse-400" : inv.status === "overdue" ? "text-rose-400" : "text-matisse-400"}`}>
                                         {inv.status}
                                     </span>
@@ -492,9 +501,12 @@ export default function AiInsights() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-6">
                     {/* Smart Business Analysis */}
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
+                    <motion.div
+                        whileHover={{ y: -4 }}
+                        className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                    >
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                                 <Sparkles className="text-amber-400" size={20} />
                                 Smart Business Analysis
                             </h3>
@@ -515,7 +527,7 @@ export default function AiInsights() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: id * 0.1 }}
                                         key={id}
-                                        className="p-4 bg-slate-800/50 border border-slate-700 rounded-xl text-slate-300 backdrop-blur-sm"
+                                        className="p-4 bg-gray-50/50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 backdrop-blur-sm"
                                     >
                                         {item}
                                     </motion.div>
@@ -526,12 +538,15 @@ export default function AiInsights() {
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* AI Smart Search */}
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                        <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                            <Search className="text-matisse-400" size={20} />
+                    <motion.div
+                        whileHover={{ y: -4 }}
+                        className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                    >
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                            <Search className="text-matisse-600 dark:text-matisse-400" size={20} />
                             AI Smart Search
                         </h3>
                         <form onSubmit={handleSearch} className="relative mb-6">
@@ -540,7 +555,7 @@ export default function AiInsights() {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Ask like: 'Show me clients who haven't paid this month'"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-xl py-4 pl-6 pr-14 text-white focus:ring-2 focus:ring-matisse-500/50 focus:border-matisse-500 transition-all outline-none"
+                                className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl py-4 pl-6 pr-14 text-slate-900 dark:text-white focus:ring-2 focus:ring-matisse-500/50 focus:border-matisse-500 transition-all outline-none"
                             />
                             <button
                                 type="submit"
@@ -561,9 +576,9 @@ export default function AiInsights() {
                                     {searchResults.length > 0 ? (
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {searchResults.map((client) => (
-                                                <div key={client._id} className="p-4 bg-slate-800/30 border border-slate-700/50 rounded-xl transition-colors hover:bg-slate-800/50">
-                                                    <div className="font-bold text-white">{client.name}</div>
-                                                    <div className="text-slate-400 text-xs">{client.company} • {client.status}</div>
+                                                <div key={client._id} className="p-4 bg-gray-50/50 dark:bg-slate-800/30 border border-gray-100 dark:border-slate-700/50 rounded-xl transition-colors hover:bg-gray-100 dark:hover:bg-slate-800/50">
+                                                    <div className="font-bold text-slate-900 dark:text-white">{client.name}</div>
+                                                    <div className="text-slate-500 dark:text-slate-400 text-xs">{client.company} • {client.status}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -573,23 +588,26 @@ export default function AiInsights() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* AI Email Generator */}
-                <div className="space-y-6">
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl h-full flex flex-col shadow-xl">
-                        <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                            <Send className="text-matisse-400" size={20} />
+                <div className="space-y-6 h-full">
+                    <motion.div
+                        whileHover={{ y: -4 }}
+                        className="bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/40 dark:border-white/10 p-8 rounded-[2.5rem] h-full flex flex-col shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                    >
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                            <Send className="text-matisse-600 dark:text-matisse-400" size={20} />
                             AI Email Generator
                         </h3>
                         <div className="space-y-4 flex-grow">
                             <div>
-                                <label className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Target Client</label>
+                                <label className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block mb-2">Target Client</label>
                                 <select
                                     value={selectedClient}
                                     onChange={handleClientChange}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:ring-2 focus:ring-matisse-500/20 focus:border-matisse-500/50"
+                                    className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-matisse-500/20 focus:border-matisse-500/50"
                                 >
                                     <option value="">Select a client...</option>
                                     {clients.map(client => (
@@ -598,11 +616,11 @@ export default function AiInsights() {
                                 </select>
                             </div>
                             <div>
-                                <label className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Email Type</label>
+                                <label className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block mb-2">Email Type</label>
                                 <select
                                     value={emailType}
                                     onChange={(e) => setEmailType(e.target.value)}
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none focus:ring-2 focus:ring-matisse-500/20 focus:border-matisse-500/50"
+                                    className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-matisse-500/20 focus:border-matisse-500/50 transition-colors"
                                 >
                                     <option>Payment Reminder</option>
                                     <option>Welcome Email</option>
@@ -612,40 +630,40 @@ export default function AiInsights() {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Client Name</label>
+                                    <label className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block mb-2">Client Name</label>
                                     <div className="relative">
-                                        <User size={14} className="absolute left-3 top-3.5 text-slate-500" />
+                                        <User size={14} className="absolute left-3 top-3.5 text-slate-400 dark:text-slate-500" />
                                         <input
                                             type="text"
                                             value={clientName}
                                             onChange={(e) => setClientName(e.target.value)}
                                             placeholder="John Doe"
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-9 pr-3 text-white outline-none focus:border-matisse-500/50 text-sm"
+                                            className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl py-3 pl-9 pr-3 text-slate-900 dark:text-white outline-none focus:border-matisse-500/50 text-sm transition-colors"
                                         />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Company</label>
+                                    <label className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block mb-2">Company</label>
                                     <div className="relative">
-                                        <Building2 size={14} className="absolute left-3 top-3.5 text-slate-500" />
+                                        <Building2 size={14} className="absolute left-3 top-3.5 text-slate-400 dark:text-slate-500" />
                                         <input
                                             type="text"
                                             value={companyName}
                                             onChange={(e) => setCompanyName(e.target.value)}
                                             placeholder="Acme Inc"
-                                            className="w-full bg-slate-800 border border-slate-700 rounded-xl py-3 pl-9 pr-3 text-white outline-none focus:border-matisse-500/50 text-sm"
+                                            className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl py-3 pl-9 pr-3 text-slate-900 dark:text-white outline-none focus:border-matisse-500/50 text-sm transition-colors"
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label className="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-2">Context / Details</label>
+                                <label className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block mb-2">Context / Details</label>
                                 <textarea
                                     rows="3"
                                     value={emailContext}
                                     onChange={(e) => setEmailContext(e.target.value)}
                                     placeholder="Briefly describe what you want to say..."
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-white outline-none resize-none focus:border-matisse-500/50 text-sm"
+                                    className="w-full bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-3 text-slate-900 dark:text-white outline-none resize-none focus:border-matisse-500/50 text-sm transition-colors"
                                 ></textarea>
                             </div>
                             <button
@@ -661,7 +679,7 @@ export default function AiInsights() {
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className="mt-6 p-4 bg-slate-800 border border-slate-700 rounded-xl relative group"
+                                    className="mt-6 p-4 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl relative group"
                                 >
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="text-[10px] font-bold text-matisse-400 uppercase tracking-widest">Preview</span>
@@ -672,13 +690,13 @@ export default function AiInsights() {
                                             Copy
                                         </button>
                                     </div>
-                                    <div className="text-sm text-slate-300 whitespace-pre-wrap leading-relaxed italic mb-4 max-h-60 overflow-y-auto custom-scrollbar">
+                                    <div className="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap leading-relaxed italic mb-4 max-h-60 overflow-y-auto custom-scrollbar">
                                         {generatedEmail}
                                     </div>
                                     <button
                                         onClick={handleSendEmail}
                                         disabled={sendingEmail || !clientEmail}
-                                        className="w-full bg-white text-slate-900 py-2.5 rounded-lg font-bold text-sm hover:bg-matisse-50 transition-all flex justify-center items-center gap-2 shadow-xl"
+                                        className="w-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all flex justify-center items-center gap-2 shadow-xl shadow-black/10"
                                     >
                                         {sendingEmail ? <Loader2 className="animate-spin text-matisse-600" size={18} /> : <Send size={16} className="text-matisse-600" />}
                                         Send to {clientName}
@@ -689,7 +707,7 @@ export default function AiInsights() {
                                 </motion.div>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>
