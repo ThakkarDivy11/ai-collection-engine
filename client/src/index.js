@@ -4,14 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { LoadingProvider } from './context/LoadingProvider';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LoadingProvider>
-      <App />
-    </LoadingProvider>
+    <App />
   </React.StrictMode>
 );
 
