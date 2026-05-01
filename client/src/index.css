@@ -44,18 +44,18 @@
   }
 
   body {
-    @apply bg-black text-white selection:bg-matisse-500/30;
+    @apply bg-white dark:bg-[#112740] text-slate-900 dark:text-white selection:bg-matisse-500/30;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: -0.011em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight text-white;
+    @apply font-semibold tracking-tight text-slate-900 dark:text-white;
     letter-spacing: -0.022em;
   }
 
   p {
-    @apply text-slate-400 leading-relaxed;
+    @apply text-slate-600 dark:text-slate-400 leading-relaxed;
     line-height: 1.6;
   }
 }
