@@ -3,6 +3,7 @@ import * as THREE from "three";
 import gsap from "gsap";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Float, PerspectiveCamera } from "@react-three/drei";
+import collectAILogo from "../../assets/images/collectai-logo.png";
 import "../styles/Loading.css";
 
 // 3D Particle Sphere Component
@@ -192,10 +193,7 @@ const Loading: React.FC = () => {
       <div className="loading-content">
         <div ref={textRef} className="loading-text">
           <div className="loading-logo">
-            <div className="logo-icon">
-              <div className="logo-ring" />
-              <div className="logo-core" />
-            </div>
+            <img src={collectAILogo} alt="CollectAI" className="h-16 w-auto mb-4" />
             <h1 className="logo-text">CollectAI</h1>
           </div>
 
