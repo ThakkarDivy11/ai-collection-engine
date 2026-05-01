@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Pricing: React.FC = () => {
   const plans = [
@@ -79,13 +80,15 @@ const Pricing: React.FC = () => {
               ))}
             </div>
 
-            <button className={`w-full py-5 rounded-2xl font-semibold transition-all shadow-sm ${
-              p.featured 
-                ? "bg-calypso-500 dark:bg-calypso-300 text-white dark:text-calypso-950 shadow-xl hover:scale-105" 
-                : "bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-calypso-200 dark:border-calypso-800/20 hover:bg-calypso-50"
-            }`}>
-              {p.featured ? "Deploy Velocity" : "Get Started"}
-            </button>
+            <Link to="/login" className="block w-full">
+              <button className={`w-full py-5 rounded-2xl font-semibold transition-all shadow-sm ${
+                p.featured 
+                  ? "bg-calypso-500 dark:bg-calypso-300 text-white dark:text-calypso-950 shadow-xl hover:scale-105" 
+                  : "bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-calypso-200 dark:border-calypso-800/20 hover:bg-calypso-50"
+              }`}>
+                {p.featured ? "Deploy Velocity" : "Get Started"}
+              </button>
+            </Link>
           </motion.div>
         ))}
       </div>
