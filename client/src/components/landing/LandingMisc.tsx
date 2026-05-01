@@ -131,19 +131,20 @@ export const CTA: React.FC = () => {
             Get Started Today
           </motion.div>
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 40, filter: "blur(20px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="text-6xl md:text-[10rem] font-semibold text-white tracking-tighter leading-[0.8] mb-12"
           >
             Ready to <br />
             <span className="text-calypso-400">Scale?</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
             className="text-slate-400 text-xl md:text-2xl mb-20 font-normal max-w-2xl mx-auto leading-relaxed"
           >
             Join the leading financial institutions using Nexus to automate recovery and maximize capital efficiency.

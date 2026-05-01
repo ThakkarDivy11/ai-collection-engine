@@ -20,73 +20,55 @@ export function AuroraHero({
                 className
             )}
         >
-            {/* Aurora Gradient Background - Customized for Calypso Theme */}
-            <div className="absolute inset-0 overflow-hidden opacity-60 dark:opacity-90" aria-hidden="true">
-                <motion.div
-                    className="absolute inset-[-100%]"
+            {/* Unique Cinematic Background */}
+            <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+                {/* Dark Base */}
+                <div className="absolute inset-0 bg-[#0a0f1a]" />
+                
+                {/* Perspective Grid */}
+                <div 
+                    className="absolute inset-0 opacity-[0.15]" 
                     style={{
-                        background: `
-              repeating-linear-gradient(100deg, 
-                #4b8aac 10%, 
-                #6ea5c2 15%, 
-                #1a2a37 20%, 
-                #4b8aac 25%, 
-                #6ea5c2 30%)
-            `,
-                        backgroundSize: "300% 100%",
-                        filter: "blur(100px)",
+                        backgroundImage: `linear-gradient(#4b8aac 1px, transparent 1px), linear-gradient(90deg, #4b8aac 1px, transparent 1px)`,
+                        backgroundSize: '40px 40px',
+                        transform: 'perspective(1000px) rotateX(60deg) translateY(-100px)',
+                        transformOrigin: 'top',
                     }}
+                />
+
+                {/* Pulsing Light Beams */}
+                <motion.div
+                    className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-calypso-500 to-transparent opacity-50"
                     animate={{
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                        top: ["0%", "100%", "0%"],
+                        opacity: [0, 0.5, 0],
                     }}
                     transition={{
-                        duration: 25,
+                        duration: 8,
                         repeat: Infinity,
                         ease: "linear",
                     }}
                 />
+                
                 <motion.div
-                    className="absolute inset-[-10px]"
-                    style={{
-                        background: `
-              repeating-linear-gradient(100deg, 
-                rgba(75, 138, 172, 0.1) 0%, 
-                rgba(75, 138, 172, 0.1) 7%, 
-                transparent 10%, 
-                transparent 12%, 
-                rgba(75, 138, 172, 0.1) 16%),
-              repeating-linear-gradient(100deg, 
-                #4b8aac 10%, 
-                #6ea5c2 15%, 
-                #2dd4bf 20%, 
-                #4b8aac 25%, 
-                #6ea5c2 30%)
-            `,
-                        backgroundSize: "200%, 100%",
-                        backgroundPosition: "50% 50%, 50% 50%",
-                        mixBlendMode: "overlay",
-                    }}
+                    className="absolute top-0 left-1/4 w-[2px] h-full bg-gradient-to-b from-transparent via-calypso-400/30 to-transparent"
                     animate={{
-                        backgroundPosition: [
-                            "50% 50%, 50% 50%",
-                            "100% 50%, 150% 50%",
-                            "50% 50%, 50% 50%",
-                        ],
+                        left: ["25%", "75%", "25%"],
                     }}
                     transition={{
-                        duration: 20,
+                        duration: 15,
                         repeat: Infinity,
-                        ease: "linear",
+                        ease: "easeInOut",
                     }}
                 />
+
+                {/* Soft Glow Hubs */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-calypso-600/10 blur-[120px] rounded-full" />
             </div>
 
             {/* Vignette Overlay */}
             <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                    background: "radial-gradient(ellipse at center, transparent 0%, rgba(3, 3, 3, 0.7) 100%)",
-                }}
+                className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,15,26,0.8)_100%)]"
                 aria-hidden="true"
             />
 
