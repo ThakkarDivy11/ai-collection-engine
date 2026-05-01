@@ -7,7 +7,11 @@ import {
   animateHeroSection,
   createFloatingElements,
   createGlowPulse,
-  createMagnetEffect
+  createMagnetEffect,
+  createMouseParallax,
+  createHeroFloatingElements,
+  createButtonGlow,
+  createHeroScrollAnimations
 } from "./gsapAnimations";
 
 const Hero: React.FC = () => {
@@ -22,16 +26,35 @@ const Hero: React.FC = () => {
       createFloatingElements('.floating-element');
       createGlowPulse('.glow-element');
       createMagnetEffect('.hero-button');
-    }
+      createButtonGlow('.hero-button');
+      createHeroScrollAnimations();
 
-    return () => {
-      // Cleanup animations if needed
-    };
+      // Add mouse parallax to dashboard elements
+      if (containerRef.current) {
+        createMouseParallax(containerRef.current, ['.hero-dashboard > div > div']);
+      }
+
+      // Create floating particles
+      const cleanupParticles = createHeroFloatingElements(containerRef.current);
+
+      return () => {
+        cleanupParticles();
+        // Cleanup animations if needed
+      };
+    }
   }, []);
 
   return (
     <section ref={containerRef} className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-24 px-6 z-10 overflow-visible">
-      <GsapThreeHeroBackground />
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <GsapThreeHeroBackground />
+      </div>
+
+      {/* Floating decorative elements */}
+      <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-calypso-500/10 dark:bg-calypso-400/10 blur-xl floating-element" />
+      <div className="absolute top-40 right-20 w-32 h-32 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 blur-xl floating-element" />
+      <div className="absolute bottom-40 left-1/4 w-16 h-16 rounded-full bg-blue-500/10 dark:bg-blue-400/10 blur-xl floating-element" />
+
       <div className="max-w-7xl mx-auto text-center mb-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -74,13 +97,14 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-6xl mx-auto px-4 hero-dashboard"
+          className="w-full max-w-6xl mx-auto px-4 hero-dashboard relative z-10"
         >
           <div className="relative group">
             <div className="absolute -inset-40 bg-calypso-500/5 blur-[150px] rounded-full pointer-events-none glow-element" />
+            <div className="absolute -inset-20 bg-emerald-500/5 blur-[100px] rounded-full pointer-events-none glow-element" style={{ animationDelay: '1s' }} />
 
-            <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_200px_rgba(0,0,0,0.15)] border border-slate-200 bg-white aspect-[16/9]">
-              <div className="h-12 bg-slate-50 border-b border-slate-200 flex items-center px-6 gap-2">
+            <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_200px_rgba(0,0,0,0.15)] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 aspect-[16/9]">
+              <div className="h-12 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-white/10 flex items-center px-6 gap-2">
                 <div className="flex gap-2">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                   <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -88,10 +112,10 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-10 h-full bg-white relative overflow-hidden">
-                <div className="relative z-10 grid grid-cols-4 gap-8 h-full text-slate-900 text-left">
-                  <div className="col-span-3 space-y-8">
-                    <div className="h-2/3 rounded-[2.5rem] bg-slate-50 p-10 flex flex-col justify-between border border-slate-200">
+              <div className="p-10 h-full bg-white dark:bg-slate-900 relative overflow-hidden">
+                <div className="relative z-10 grid grid-cols-4 gap-8 h-full text-slate-900 dark:text-white text-left">
+                  <div className="col-span-3 space-y-8 floating-element">
+                    <div className="h-2/3 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 p-10 flex flex-col justify-between border border-slate-200 dark:border-white/10">
                       <div className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Active Recovery Stream</div>
                       <div className="flex items-end gap-3 h-40">
                         {[30, 60, 45, 90, 65, 85, 55, 75, 40, 95, 60, 80, 50, 90].map((h, i) => (
@@ -121,17 +145,17 @@ const Hero: React.FC = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-8">
-                      <div className="h-40 rounded-[2.5rem] bg-slate-50 border border-slate-200 p-8">
-                        <div className="text-3xl font-semibold text-slate-900 mb-2">99.98%</div>
-                        <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Prediction Accuracy</div>
+                      <div className="h-40 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 p-8 floating-element">
+                        <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-2">99.98%</div>
+                        <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Prediction Accuracy</div>
                       </div>
-                      <div className="h-40 rounded-[2.5rem] bg-slate-50 border border-slate-200 p-8">
-                        <div className="text-3xl font-semibold text-slate-900 mb-2">₹48.2Cr</div>
-                        <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Recovered Today</div>
+                      <div className="h-40 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 p-8 floating-element" style={{ animationDelay: '0.2s' }}>
+                        <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-2">₹48.2Cr</div>
+                        <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Recovered Today</div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-span-1 rounded-[2.5rem] bg-slate-50 border border-slate-200 p-8 text-center">
+                  <div className="col-span-1 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 p-8 text-center floating-element" style={{ animationDelay: '0.4s' }}>
                     <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-10">Recovery Core</div>
                     <div className="flex flex-col items-center gap-6">
                       <div className="w-24 h-24 rounded-full border-4 border-calypso-500/10 flex items-center justify-center relative">
