@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
       <div className="absolute top-40 right-20 w-32 h-32 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 blur-xl floating-element" />
       <div className="absolute bottom-40 left-1/4 w-16 h-16 rounded-full bg-blue-500/10 dark:bg-blue-400/10 blur-xl floating-element" />
 
-      <div className="max-w-7xl mx-auto text-center mb-16 relative z-10">
+      <div className="max-w-7xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -87,99 +87,11 @@ const Hero: React.FC = () => {
               Start Recovery
             </button>
 
-            <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:text-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
+            <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:bg-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
               See Platform <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full max-w-6xl mx-auto px-4 hero-dashboard relative z-10"
-        >
-          <div className="relative group">
-            <div className="absolute -inset-40 bg-calypso-500/5 blur-[150px] rounded-full pointer-events-none glow-element" />
-            <div className="absolute -inset-20 bg-emerald-500/5 blur-[100px] rounded-full pointer-events-none glow-element" style={{ animationDelay: '1s' }} />
-
-            <div className="relative rounded-3xl overflow-hidden shadow-[0_80px_200px_rgba(0,0,0,0.15)] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 aspect-[16/9]">
-              <div className="h-12 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-white/10 flex items-center px-6 gap-2">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                  <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
-                </div>
-              </div>
-
-              <div className="p-10 h-full bg-white dark:bg-slate-900 relative overflow-hidden">
-                <div className="relative z-10 grid grid-cols-4 gap-8 h-full text-slate-900 dark:text-white text-left">
-                  <div className="col-span-3 space-y-8 floating-element">
-                    <div className="h-2/3 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 p-10 flex flex-col justify-between border border-slate-200 dark:border-white/10">
-                      <div className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Active Recovery Stream</div>
-                      <div className="flex items-end gap-3 h-40">
-                        {[30, 60, 45, 90, 65, 85, 55, 75, 40, 95, 60, 80, 50, 90].map((h, i) => (
-                          <div key={i} className="flex-1 flex flex-col-reverse gap-[2px] h-full">
-                            {Array.from({ length: 8 }).map((_, j) => (
-                              <motion.div
-                                key={j}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{
-                                  opacity: (j + 1) * 12.5 <= h ? 1 : 0.1,
-                                  scale: (j + 1) * 12.5 <= h ? 1 : 0.9
-                                }}
-                                transition={{
-                                  delay: 1 + i * 0.05 + j * 0.03,
-                                  duration: 0.4
-                                }}
-                                className={cn(
-                                  "flex-1 w-full rounded-sm transition-colors duration-500",
-                                  (j + 1) * 12.5 <= h
-                                    ? i < 4 ? "bg-calypso-500" : i < 9 ? "bg-calypso-400" : "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
-                                    : "bg-slate-100 dark:bg-white/5"
-                                )}
-                              />
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-8">
-                      <div className="h-40 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 p-8 floating-element">
-                        <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-2">99.98%</div>
-                        <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Prediction Accuracy</div>
-                      </div>
-                      <div className="h-40 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 p-8 floating-element" style={{ animationDelay: '0.2s' }}>
-                        <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-2">₹48.2Cr</div>
-                        <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Recovered Today</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-span-1 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 p-8 text-center floating-element" style={{ animationDelay: '0.4s' }}>
-                    <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-10">Recovery Core</div>
-                    <div className="flex flex-col items-center gap-6">
-                      <div className="w-24 h-24 rounded-full border-4 border-calypso-500/10 flex items-center justify-center relative">
-                        <div className="w-16 h-16 rounded-full bg-calypso-500/10 animate-ping absolute" />
-                        <BrainCircuit size={40} className="text-calypso-500" />
-                      </div>
-                      <div className="space-y-3 w-full">
-                        {[1, 2, 3].map(i => (
-                          <div key={i} className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                            <motion.div
-                              animate={{ x: ["-100%", "100%"] }}
-                              transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                              className="h-full w-1/3 bg-calypso-500 rounded-full"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </section>
     );
   };
