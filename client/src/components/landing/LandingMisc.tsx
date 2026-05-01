@@ -5,6 +5,7 @@ import { BrainCircuit, Sparkles, Globe, Zap, Twitter, Github, Linkedin, Mail } f
 import collectAILogo from "../../assets/images/collectai-logo.png";
 import { useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { AuroraHero } from "../ui/aurora-hero-bg";
+import { Link } from "react-router-dom";
 
 
 const Counter = ({ value, duration = 2 }: { value: number; duration?: number }) => {
@@ -154,14 +155,13 @@ export const CTA: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-8"
+            className="flex items-center justify-center"
           >
-            <button className="px-16 py-7 bg-calypso-600 hover:bg-calypso-700 text-white font-semibold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-calypso-500/40 text-lg">
-              Start Free Trial
-            </button>
-            <button className="px-16 py-7 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-2xl border border-white/10 hover:border-calypso-500/50 transition-all text-lg backdrop-blur-3xl">
-              Contact Nexus Eng
-            </button>
+            <Link to="/login">
+              <button className="px-16 py-7 bg-calypso-600 hover:bg-calypso-700 text-white font-semibold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-calypso-500/40 text-lg">
+                Start Free Trial
+              </button>
+            </Link>
           </motion.div>
         </div>
       </div>
