@@ -9,7 +9,7 @@ const ProductPreview: React.FC = () => {
           <div className="flex flex-col items-center">
             <h2 className="text-4xl md:text-7xl font-semibold text-white tracking-tighter mb-4">
               Orchestrate Recovery <br />
-              <span className="text-[#00ff7f] font-bold">At Global Scale.</span>
+              <span className="text-calypso-500 dark:text-calypso-300 font-bold">At Global Scale.</span>
             </h2>
             <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-normal">
               Experience the world's most sophisticated neural engine for 
