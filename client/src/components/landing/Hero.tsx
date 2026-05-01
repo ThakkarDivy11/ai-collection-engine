@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { BrainCircuit, ChevronRight, Sparkles } from "lucide-react";
+import { BrainCircuit, ChevronRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 import GsapThreeHeroBackground from "./GsapThreeHeroBackground";
 import {

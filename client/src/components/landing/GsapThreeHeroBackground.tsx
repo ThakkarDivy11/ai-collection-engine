@@ -10,8 +10,7 @@ import {
   PointMaterial, 
   AdaptiveDpr, 
   AdaptiveEvents,
-  PerformanceMonitor,
-  Stats
+  PerformanceMonitor
 } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -156,7 +155,8 @@ const GsapThreeHeroBackground: React.FC = () => {
       pointer-events: none;
       will-change: transform, opacity;
     `;
-    containerRef.current.appendChild(overlay);
+    const container = containerRef.current;
+    if (container) container.appendChild(overlay);
 
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
@@ -224,8 +224,8 @@ const GsapThreeHeroBackground: React.FC = () => {
       observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
       ScrollTrigger.getAll().forEach(t => t.kill());
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
+      if (container && overlay.parentNode === container) {
+        container.removeChild(overlay);
       }
     };
   }, []);

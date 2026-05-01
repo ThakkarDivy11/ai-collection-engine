@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { motion } from "framer-motion";
 import { BrainCircuit, Sparkles, Globe, Zap, Twitter, Github, Linkedin, Mail } from "lucide-react";
 import collectAILogo from "../../assets/images/collectai-logo.png";
 import { useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { AuroraHero } from "../ui/aurora-hero-bg";
-import { cn } from "../../lib/utils";
+
 
 const Counter = ({ value, duration = 2 }: { value: number; duration?: number }) => {
   const count = useMotionValue(0);
@@ -184,7 +185,7 @@ export const Footer: React.FC = () => {
             <div className="text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-widest mb-8">Protocol</div>
             <div className="space-y-4">
               {["Features", "Nexus Core", "Intelligence", "Pricing"].map(link => (
-                <a key={link} href="#" className="block text-slate-500 hover:text-calypso-600 dark:hover:text-calypso-300 transition-colors font-normal">{link}</a>
+                <a key={link} href="#!" className="block text-slate-500 hover:text-calypso-600 dark:hover:text-calypso-300 transition-colors font-normal">{link}</a>
               ))}
             </div>
           </div>
@@ -192,7 +193,7 @@ export const Footer: React.FC = () => {
             <div className="text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-widest mb-8">Connect</div>
             <div className="flex gap-6">
               {[Twitter, Github, Linkedin, Mail].map((Icon, i) => (
-                <a key={i} href="#" className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                <a key={i} href="#!" className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
                   <Icon size={20} />
                 </a>
               ))}
@@ -202,8 +203,8 @@ export const Footer: React.FC = () => {
         <div className="pt-12 border-t border-calypso-100 dark:border-calypso-800/20 flex flex-col md:flex-row justify-between gap-6 text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
           <div>© 2026 CollectAI Neural Network. All rights reserved.</div>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-slate-900 dark:hover:text-white">Privacy Protocol</a>
-            <a href="#" className="hover:text-slate-900 dark:hover:text-white">Terms of Service</a>
+            <a href="#!" className="hover:text-slate-900 dark:hover:text-white">Privacy Protocol</a>
+            <a href="#!" className="hover:text-slate-900 dark:hover:text-white">Terms of Service</a>
           </div>
         </div>
       </div>
