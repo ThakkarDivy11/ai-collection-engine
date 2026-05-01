@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Loader2, Lock, Mail } from "lucide-react";
+import { Loader2, Lock, Mail, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import BackgroundWrapper from "../components/Background";
 import collectAILogo from "../assets/images/collectai-logo.png";
+import { Link } from "react-router-dom";
 
 export default function Login() {
     const [activeTab, setActiveTab] = useState("admin");
@@ -48,75 +49,86 @@ export default function Login() {
 
     return (
         <BackgroundWrapper>
-            <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-                {/* Overlay Gradients */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-                    <div className="absolute -top-24 -left-24 w-[500px] h-[500px] bg-calypso-500/30 blur-[150px] rounded-full"></div>
-                    <div className="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-purple-500/30 blur-[150px] rounded-full"></div>
-                </div>
+            <div className="min-h-screen flex flex-col items-center justify-center px-4 relative">
+                
+                {/* Branding Top */}
+                <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-12 text-center"
+                >
+                    <Link to="/">
+                        <img src={collectAILogo} alt="CollectAI" className="h-16 w-auto mx-auto mb-4 hover:scale-105 transition-transform" />
+                    </Link>
+                    <div className="h-px w-12 bg-calypso-500/50 mx-auto" />
+                </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-slate-900 border border-slate-800 p-10 rounded-3xl w-full max-w-[440px] shadow-2xl relative z-10"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-[#0f172a]/80 backdrop-blur-3xl border border-white/5 p-10 rounded-[2.5rem] w-full max-w-[480px] shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
                 >
-                    <div className="flex items-center gap-3 mb-8">
-                        <img src={collectAILogo} alt="CollectAI" className="h-14 w-auto" />
-                    </div>
-
-                    <div className="flex bg-slate-800 rounded-2xl p-1 mb-8">
+                    {/* Tab Switcher */}
+                    <div className="flex bg-slate-900/50 rounded-2xl p-1.5 mb-10 border border-white/5">
                         {["admin", "customer"].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all ${activeTab === tab
-                                    ? "bg-slate-950 text-white shadow-xl"
-                                    : "text-slate-400 hover:text-slate-200"
+                                className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === tab
+                                    ? "bg-calypso-600 text-white shadow-lg shadow-calypso-600/20"
+                                    : "text-slate-500 hover:text-slate-300"
                                     }`}
                             >
-                                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                                {tab}
                             </button>
                         ))}
                     </div>
 
-                    <div className="mb-8">
-                        <h2 className="text-white text-2xl font-bold mb-2">
-                            {activeTab === "admin" ? "Admin Access" : "Client Portal"}
+                    <div className="mb-10">
+                        <h2 className="text-white text-3xl font-semibold tracking-tighter mb-3">
+                            {activeTab === "admin" ? "Enterprise Login" : "Client Portal"}
                         </h2>
-                        <p className="text-slate-400 text-sm">
-                            Enterprise AI Client Management System
+                        <p className="text-slate-400 text-sm font-normal leading-relaxed">
+                            {activeTab === "admin" 
+                                ? "Secure terminal for autonomous collection management." 
+                                : "Access your institutional recovery dashboard and insights."}
                         </p>
                     </div>
 
                     {error && (
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="bg-rose-500/10 border border-rose-500/20 text-rose-500 py-3 px-4 rounded-xl text-sm mb-6"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="bg-rose-500/10 border border-rose-500/20 text-rose-400 py-4 px-5 rounded-2xl text-xs font-semibold mb-8 flex items-center gap-3"
                         >
+                            <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                             {error}
                         </motion.div>
                     )}
 
-                    <form onSubmit={handleLogin} className="space-y-4">
-                        <div className="relative">
-                            <Mail className="absolute left-4 top-4 text-slate-500" size={20} />
+                    <form onSubmit={handleLogin} className="space-y-5">
+                        <div className="relative group">
+                            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                                <Mail className="text-slate-500 group-focus-within:text-calypso-400 transition-colors" size={18} />
+                            </div>
                             <input
                                 type="email"
                                 required
-                                placeholder="Email address"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white outline-none focus:ring-2 focus:ring-calypso-500/50 transition-all placeholder:text-slate-500"
+                                placeholder="Corporate Email"
+                                className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-5 pl-14 pr-5 text-white outline-none focus:border-calypso-500/50 focus:ring-4 focus:ring-calypso-500/10 transition-all placeholder:text-slate-600 text-sm"
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
 
-                        <div className="relative">
-                            <Lock className="absolute left-4 top-4 text-slate-500" size={20} />
+                        <div className="relative group">
+                            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                                <Lock className="text-slate-500 group-focus-within:text-calypso-400 transition-colors" size={18} />
+                            </div>
                             <input
                                 type="password"
                                 required
-                                placeholder="Password"
-                                className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white outline-none focus:ring-2 focus:ring-calypso-500/50 transition-all placeholder:text-slate-500"
+                                placeholder="Access Key"
+                                className="w-full bg-slate-900/50 border border-white/5 rounded-2xl py-5 pl-14 pr-5 text-white outline-none focus:border-calypso-500/50 focus:ring-4 focus:ring-calypso-500/10 transition-all placeholder:text-slate-600 text-sm"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
@@ -124,16 +136,34 @@ export default function Login() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 rounded-2xl text-white font-bold bg-calypso-600 hover:bg-calypso-700 shadow-lg shadow-blue-900/40 transition-all flex justify-center items-center gap-2"
+                            className="w-full py-5 mt-4 rounded-2xl text-white font-bold bg-white/5 hover:bg-calypso-600 transition-all flex justify-center items-center gap-3 border border-white/10 hover:border-transparent group"
                         >
-                            {loading ? <Loader2 className="animate-spin" size={20} /> : "Sign In to Dashboard"}
+                            {loading ? (
+                                <Loader2 className="animate-spin" size={20} />
+                            ) : (
+                                <>
+                                    <span>Establish Connection</span>
+                                    <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                </>
+                            )}
                         </button>
                     </form>
 
-                    <p className="text-center text-slate-500 text-xs mt-8">
-                        © 2026 Divy Systems • Secure Access
-                    </p>
+                    <div className="mt-10 pt-8 border-t border-white/5 flex flex-col gap-4">
+                        <p className="text-center text-slate-600 text-[10px] font-bold uppercase tracking-[0.2em]">
+                            Institutional Grade Security Protocol
+                        </p>
+                        <div className="flex justify-center gap-6 text-[10px] text-slate-500 font-semibold uppercase tracking-widest">
+                            <a href="#!" className="hover:text-calypso-400 transition-colors">Privacy</a>
+                            <a href="#!" className="hover:text-calypso-400 transition-colors">Security</a>
+                            <a href="#!" className="hover:text-calypso-400 transition-colors">Contact</a>
+                        </div>
+                    </div>
                 </motion.div>
+
+                <p className="mt-12 text-slate-600 text-[10px] font-semibold uppercase tracking-[0.3em]">
+                    © 2026 CollectAI Network Systems
+                </p>
             </div>
         </BackgroundWrapper>
     );
