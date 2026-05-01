@@ -64,9 +64,7 @@ const NeuralParticles = () => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={500}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <PointMaterial
@@ -353,11 +351,10 @@ const GsapThreeHero: React.FC = () => {
                           {Array.from({ length: 8 }).map((_, j) => (
                             <div
                               key={j}
-                              className={`flex-1 w-full rounded-sm transition-colors duration-500 ${
-                                (j + 1) * 12.5 <= h
+                              className={`flex-1 w-full rounded-sm transition-colors duration-500 ${(j + 1) * 12.5 <= h
                                   ? i < 4 ? "bg-calypso-500" : i < 9 ? "bg-calypso-400" : "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                                   : "bg-slate-100"
-                              }`}
+                                }`}
                             />
                           ))}
                         </div>
