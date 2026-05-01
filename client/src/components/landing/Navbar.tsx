@@ -108,18 +108,7 @@ const Navbar: React.FC = () => {
       <div className="w-full px-5 md:px-8 flex h-16 items-center justify-between gap-4">
         {/* Left column: Logo */}
         <div className="flex-1 flex justify-start items-center">
-          <Link
-            to="/"
-            className="flex items-center group flex-shrink-0 navbar-brand"
-          >
-            <div className="flex items-center gap-3 py-1">
-              <img
-                src={collectAILogo}
-                alt="CollectAI"
-                className="logo h-16 md:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          </Link>
+          {/* Logo removed as per user request */}
         </div>
 
         {/* Center column: Desktop Navigation */}
