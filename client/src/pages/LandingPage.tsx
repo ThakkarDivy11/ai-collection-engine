@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import Navbar from "../components/landing/Navbar";
 import Hero from "../components/landing/Hero";
-import { Stats, HowItWorks, CTA, Footer } from "../components/landing/LandingMisc";
+import { Stats, PartnerLogos, HowItWorks, CTA, Footer } from "../components/landing/LandingMisc";
 import HorizontalFeatures from "../components/landing/HorizontalFeatures";
 import Intelligence from "../components/landing/Intelligence";
 import Pricing from "../components/landing/Pricing";
@@ -68,6 +68,9 @@ const LandingPage: React.FC = () => {
 
         {/* STATS - Clean horizontal layout */}
         <Stats />
+
+        {/* PARTNER LOGOS - Infinite Loop */}
+        <PartnerLogos />
 
         {/* HORIZONTAL FEATURES - GSAP ScrollTrigger Pinned Section */}
         <HorizontalFeatures />

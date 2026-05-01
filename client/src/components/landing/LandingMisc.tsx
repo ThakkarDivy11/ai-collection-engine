@@ -5,6 +5,9 @@ import { BrainCircuit, Sparkles, Globe, Zap, Twitter, Github, Linkedin, Mail } f
 import { useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { AuroraHero } from "../ui/aurora-hero-bg";
 import { Link } from "react-router-dom";
+import LogoLoop from "../ui/LogoLoop";
+import { SiGoogle, SiApple, SiStripe, SiMeta, SiUber, SiNetflix, SiSlack, SiDiscord } from 'react-icons/si';
+import ElectricBorder from "../ui/ElectricBorder";
 
 
 const Counter = ({ value, duration = 2 }: { value: number; duration?: number }) => {
@@ -60,6 +63,42 @@ export const Stats: React.FC = () => {
   );
 };
 
+export const PartnerLogos: React.FC = () => {
+  const partners = [
+    { node: <SiGoogle />, title: "Google" },
+    { node: <SiApple />, title: "Apple" },
+    { node: <SiStripe />, title: "Stripe" },
+    { node: <SiMeta />, title: "Meta" },
+    { node: <SiUber />, title: "Uber" },
+    { node: <SiNetflix />, title: "Netflix" },
+    { node: <SiSlack />, title: "Slack" },
+    { node: <SiDiscord />, title: "Discord" },
+  ];
+
+  return (
+    <section className="py-12 bg-white dark:bg-[#112740] border-b border-matisse-100 dark:border-matisse-800/10">
+      <div className="max-w-7xl mx-auto px-6">
+        <p className="text-center text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500 mb-10">
+          Trusted by Industry Leaders
+        </p>
+        <div className="relative h-12">
+          <LogoLoop
+            logos={partners}
+            speed={60}
+            direction="left"
+            logoHeight={32}
+            gap={80}
+            hoverSpeed={0}
+            scaleOnHover
+            fadeOut
+            className="opacity-50 hover:opacity-100 transition-opacity duration-500"
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export const HowItWorks: React.FC = () => {
   const steps = [
     { title: "Data Integration", desc: "Sync your existing invoices and client history.", icon: <BrainCircuit size={24} /> },
@@ -86,7 +125,7 @@ export const HowItWorks: React.FC = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-stretch">
           {steps.map((s, i) => (
             <motion.div
               key={i}
@@ -94,17 +133,27 @@ export const HowItWorks: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-matisse-100 dark:border-matisse-800/10 hover:border-matisse-500/50 dark:hover:border-matisse-300/30 transition-all duration-500 hover:shadow-2xl hover:shadow-matisse-500/5"
+              className="h-full"
             >
-              <div className="w-16 h-16 rounded-[1.5rem] bg-matisse-50 dark:bg-matisse-500/10 flex items-center justify-center text-matisse-600 dark:text-matisse-300 mb-8 group-hover:scale-110 group-hover:bg-matisse-500 group-hover:text-white transition-all duration-500 shadow-sm">
-                {s.icon}
-              </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4 tracking-tight">
-                <span className="text-slate-300 dark:text-matisse-800/40 mr-2 font-bold tracking-tighter">0{i + 1}</span> {s.title}
-              </h3>
-              <p className="text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
-                {s.desc}
-              </p>
+              <ElectricBorder
+                color={i % 2 === 0 ? "#2563eb" : "#8b5cf6"}
+                speed={0.8}
+                chaos={0.1}
+                borderRadius={40}
+                className="h-full"
+              >
+                <div className="group p-10 rounded-[2.5rem] bg-white dark:bg-white/[0.02] border border-matisse-100 dark:border-matisse-800/10 hover:border-transparent transition-all duration-500 hover:shadow-2xl hover:shadow-matisse-500/5 h-full flex flex-col">
+                  <div className="w-16 h-16 rounded-[1.5rem] bg-matisse-50 dark:bg-matisse-500/10 flex items-center justify-center text-matisse-600 dark:text-matisse-300 mb-8 group-hover:scale-110 group-hover:bg-matisse-500 group-hover:text-white transition-all duration-500 shadow-sm flex-shrink-0">
+                    {s.icon}
+                  </div>
+                  <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4 tracking-tight">
+                    <span className="text-slate-300 dark:text-matisse-800/40 mr-2 font-bold tracking-tighter">0{i + 1}</span> {s.title}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400 font-normal leading-relaxed flex-grow">
+                    {s.desc}
+                  </p>
+                </div>
+              </ElectricBorder>
             </motion.div>
           ))}
         </div>
@@ -135,7 +184,7 @@ export const CTA: React.FC = () => {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-[10rem] font-semibold text-slate-900 dark:text-white tracking-tighter leading-[0.8] mb-12"
+            className="text-5xl md:text-7xl font-semibold text-slate-900 dark:text-white tracking-tighter leading-[1.1] mb-12"
           >
             Ready to <br />
             <span className="text-matisse-600 dark:text-matisse-400">Scale?</span>
