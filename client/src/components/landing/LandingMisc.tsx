@@ -138,8 +138,8 @@ export const CTA: React.FC = () => {
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="text-6xl md:text-[10rem] font-semibold text-white tracking-tighter leading-[0.8] mb-12"
           >
-            Ready to Scale <br />
-            <span className="text-calypso-400">your revenue?</span>
+            Ready to <br />
+            <span className="text-calypso-400">Scale?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
