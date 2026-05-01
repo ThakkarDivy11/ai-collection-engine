@@ -30,17 +30,7 @@ export const animateHeroSection = (container: HTMLElement) => {
     { y: 0, opacity: 1, scale: 1, duration: 0.8, stagger: 0.2, delay: 0.8, ease: 'back.out(1.7)' }
   );
 
-  // Animate dashboard preview
-  gsap.fromTo('.hero-dashboard',
-    { y: 100, opacity: 0, scale: 0.95 },
-    { y: 0, opacity: 1, scale: 1, duration: 1.2, delay: 1, ease: 'power3.out' }
-  );
 
-  // Animate dashboard elements with stagger
-  gsap.fromTo('.hero-dashboard > div > div',
-    { y: 50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, delay: 1.2, ease: 'power2.out' }
-  );
 };
 
 export const animateFeaturesSection = (container: HTMLElement) => {

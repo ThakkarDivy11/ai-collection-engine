@@ -45,17 +45,15 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative flex flex-col items-center pt-32 pb-12 px-6 z-10 overflow-visible">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <GsapThreeHeroBackground />
-      </div>
+    <section ref={containerRef} className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-24 px-6 z-10 overflow-visible">
+      <GsapThreeHeroBackground />
 
       {/* Floating decorative elements */}
       <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-calypso-500/10 dark:bg-calypso-400/10 blur-xl floating-element" />
       <div className="absolute top-40 right-20 w-32 h-32 rounded-full bg-emerald-500/10 dark:bg-emerald-400/10 blur-xl floating-element" />
       <div className="absolute bottom-40 left-1/4 w-16 h-16 rounded-full bg-blue-500/10 dark:bg-blue-400/10 blur-xl floating-element" />
 
-      <div className="max-w-7xl mx-auto text-center relative z-10">
+      <div className="max-w-7xl mx-auto text-center mb-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -87,11 +85,13 @@ const Hero: React.FC = () => {
               Start Recovery
             </button>
 
-            <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:bg-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
+            <button className="hero-button px-12 py-6 bg-white dark:bg-transparent text-slate-900 dark:text-calypso-300 font-semibold rounded-3xl border border-slate-200 dark:border-calypso-800/30 transition-all hover:bg-slate-50 dark:hover:bg-calypso-900/20 backdrop-blur-xl text-lg flex items-center gap-3 group will-change-transform">
               See Platform <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
+
+
       </section>
     );
   };

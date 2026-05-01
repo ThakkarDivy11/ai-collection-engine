@@ -131,27 +131,18 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
     });
   };
 
-  // Chart Dimensions
-  const chartWidth = 600;
-  const chartHeight = 250;
-  const paddingX = 60;
-  const paddingY = 40;
-  const usableWidth = chartWidth - paddingX * 2;
-  const usableHeight = chartHeight - paddingY * 2;
-  const barSpacing = usableWidth / (chartData.length - 1 || 1);
-
-  // Helper to get X coordinate for a data point
-  const getX = (i) => paddingX + i * barSpacing;
-  
-  // Helper to get Y coordinate for a data point
-  const getY = (value) => (chartHeight - paddingY) - (value / (maxValue || 1)) * usableHeight;
-
   // Generate smooth curve path for line chart
   const generateSmoothPath = () => {
-    const points = chartData.map((d, i) => ({
-      x: getX(i),
-      y: getY(d.revenue)
-    }));
+    const width = 600;
+    const height = 250;
+    const padding = 40;
+    const barWidth = (width - padding * 2) / chartData.length;
+
+    const points = chartData.map((d, i) => {
+      const x = padding + i * barWidth + barWidth / 2;
+      const y = height - padding - (d.revenue / maxValue) * (height - padding * 2);
+      return { x, y };
+    });
 
     // Create smooth bezier curve
     let path = `M ${points[0].x} ${points[0].y}`;
@@ -186,7 +177,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
         </div>
       )}
 
-      <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+      <svg viewBox="0 0 600 250" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         <defs>
           {/* Blue gradient for left bars */}
           <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -222,10 +213,10 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
           <line
             key={`grid-${i}`}
             className="grid-line text-slate-400 dark:text-slate-600"
-            x1={paddingX - 20}
-            y1={paddingY + i * (usableHeight / 4)}
-            x2={chartWidth - paddingX + 20}
-            y2={paddingY + i * (usableHeight / 4)}
+            x1="40"
+            y1={40 + i * 50}
+            x2="560"
+            y2={40 + i * 50}
             stroke="currentColor"
             strokeWidth="1"
             strokeOpacity="0.1"
@@ -234,19 +225,19 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
 
         {/* Bars */}
         {chartData.map((d, i) => {
-          const x = getX(i);
-          const y = getY(d.revenue);
-          const height = (chartHeight - paddingY) - y;
+          const height = (d.revenue / maxValue) * 170;
+          const x = 50 + i * 70;
+          const y = 210 - height;
           const isLeft = i < chartData.length / 2;
 
           return (
             <g key={`bar-${i}`}>
               <rect
                 className="chart-bar cursor-pointer"
-                x={x - 15}
+                x={x}
                 y={y}
-                width={30}
-                height={Math.max(0, height)}
+                width={40}
+                height={height}
                 rx={6}
                 fill={isLeft ? 'url(#blueGradient)' : 'url(#greenGradient)'}
                 filter={hoveredBar === i ? 'url(#glow)' : 'none'}
@@ -260,10 +251,10 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
 
               {/* Bar label */}
               <text
-                x={x}
-                y={chartHeight - 15}
+                x={x + 20}
+                y={230}
                 textAnchor="middle"
-                className="text-[10px] font-semibold fill-slate-500 dark:fill-slate-400"
+                className="text-xs font-semibold fill-slate-500 dark:fill-slate-400"
               >
                 {d.name}
               </text>
@@ -289,8 +280,8 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
 
         {/* Data points on line */}
         {chartData.map((d, i) => {
-          const x = getX(i);
-          const y = getY(d.revenue);
+          const x = 50 + i * 70 + 20;
+          const y = 210 - (d.revenue / maxValue) * 170;
 
           return (
             <g key={`dot-${i}`}>
