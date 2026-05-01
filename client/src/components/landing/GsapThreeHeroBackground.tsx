@@ -133,6 +133,7 @@ const FloatingOrbs = memo(({ isDark }: { isDark: boolean }) => {
 const GsapThreeHeroBackground: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const groupRef = useRef<THREE.Group>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const [isDark, setIsDark] = useState(false);
   const [dpr, setDpr] = useState(1);
 
@@ -263,7 +264,7 @@ const GsapThreeHeroBackground: React.FC = () => {
         <Suspense fallback={null}>
           <PerformanceMonitor onIncline={() => setDpr(1.5)} onDecline={() => setDpr(1)}>
             <AdaptiveDpr pixelated />
-            <AdaptiveEvents />
+
             
             {/* Lighting - Enhanced for Dark Mode Visibility */}
             <ambientLight intensity={isDark ? 0.6 : 0.5} />
