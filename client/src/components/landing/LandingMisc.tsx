@@ -69,7 +69,7 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-40 px-6 bg-calypso-50/50 dark:bg-white/[0.01]">
+    <section id="how-it-works" className="pt-0 pb-40 px-6 bg-calypso-50/50 dark:bg-white/[0.01]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-32">
           <motion.div
