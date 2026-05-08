@@ -12,7 +12,7 @@ export default function Payments() {
         clientId: "",
         amount: "",
         dueDate: "",
-        invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
+                    invoiceNumber: `INV-${Math.floor(100000 + Math.random() * 900000)}`,
     });
 
     const fetchData = useCallback(async () => {
@@ -64,7 +64,7 @@ export default function Payments() {
                     clientId: "",
                     amount: "",
                     dueDate: "",
-                    invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
+                    invoiceNumber: `INV-${Math.floor(100000 + Math.random() * 900000)}`,
                 });
                 fetchData();
             }

@@ -40,7 +40,7 @@ const generateCompletion = async (prompt, systemPrompt = "You are a professional
         
         try {
             const response = await mistralClient.chat.completions.create({
-                model: process.env.AI_MODEL || "mistral-tiny",
+                model: process.env.MISTRAL_MODEL || "mistral-small-latest",
                 messages: messages,
                 temperature: 0.7,
             });
