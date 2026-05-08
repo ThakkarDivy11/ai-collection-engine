@@ -36,7 +36,12 @@ exports.createInvoice = async (req, res) => {
 
         res.status(201).json(newInvoice);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("Invoice Creation Error:", error);
+        res.status(500).json({ 
+            message: "Internal Server Error", 
+            error: error.message,
+            stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        });
     }
 };
 
