@@ -430,7 +430,11 @@ export default function CustomerDashboard() {
                                                 <td className="px-10 py-7">
                                                     <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400 text-xs font-bold tabular-nums">
                                                         <Clock size={16} className="stroke-[2.5px] opacity-50" />
-                                                        {new Date(invoice.dueDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
+                                                        {(() => {
+                                                            const d = new Date(invoice.dueDate);
+                                                            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                                                            return `${String(d.getUTCDate()).padStart(2, '0')} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+                                                        })()}
                                                     </div>
                                                 </td>
                                                 <td className="px-10 py-7">

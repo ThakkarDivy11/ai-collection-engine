@@ -143,7 +143,12 @@ export default function Payments() {
                                             )}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 text-slate-600 dark:text-slate-400">{new Date(invoice.dueDate).toLocaleDateString()}</td>
+                                    <td className="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                        {(() => {
+                                            const d = new Date(invoice.dueDate);
+                                            return `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}/${d.getUTCFullYear()}`;
+                                        })()}
+                                    </td>
                                     <td className="px-6 py-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${invoice.status === "paid" ? "bg-matisse-500/10 text-matisse-400" :
                                             invoice.status === "overdue" ? "bg-rose-500/10 text-rose-400" : "bg-matisse-500/10 text-matisse-400"
