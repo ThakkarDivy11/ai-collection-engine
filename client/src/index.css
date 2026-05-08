@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-sky: #53a0dd; /* matisse 400 */
+  --brand-dark: #030303;
+  --gradient-angle: 0deg;
+  --gradient-angle-offset: 0deg;
+  --gradient-percent: 20%;
+  --gradient-shine: #53a0dd; /* matisse 400 */
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-angle-offset {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-percent {
+  syntax: "<percentage>";
+  initial-value: 20%;
+  inherits: false;
+}
+
+@property --gradient-shine {
+  syntax: "<color>";
+  initial-value: #53a0dd;
+  inherits: false;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 selection:bg-matisse-500/30 transition-colors duration-300;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .dark body {
+    @apply bg-[#0b1424] text-slate-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+    letter-spacing: -0.025em;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/80 dark:bg-slate-900/40 backdrop-blur-xl border border-white/40 dark:border-white/5;
+  }
+  
+  .premium-shadow {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 4px 10px -5px rgba(0, 0, 0, 0.02);
+  }
+
+  .premium-shadow-hover {
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 8px 20px -10px rgba(0, 0, 0, 0.04);
+  }
+
+  .sidebar-active {
+    @apply bg-matisse-600 text-white shadow-lg shadow-matisse-600/20;
+  }
+  
+  .sidebar-hover {
+    @apply hover:bg-slate-100 dark:hover:bg-white/5;
+  }
+}
+
+@layer components {
+  .text-glow {
+    text-shadow: 0 0 25px rgba(45, 132, 202, 0.4);
+  }
+
+  .grid-bg {
+    background-size: 100px 200px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  }
+
+  .beam-line {
+    stroke-dasharray: 80 1000;
+    stroke-linecap: round;
+  }
+
+  .shiny-cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    padding: 1.25rem 2.5rem;
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #ffffff;
+    background: linear-gradient(#030303, #030303) padding-box,
+      conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)), transparent 0%, #2d84ca 5%, var(--gradient-shine) 15%, #2d84ca 30%, transparent 40%, transparent 100%) border-box;
+    border: 2px solid transparent;
+    box-shadow: inset 0 0 0 1px #1a1818;
+    cursor: pointer;
+    isolation: isolate;
+    animation: border-spin 2.5s linear infinite;
+  }
+
+  .shiny-cta::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    --size: calc(100% - 6px);
+    --position: 2px;
+    --space: 4px;
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle at var(--position) var(--position), white 0.5px, transparent 0) padding-box;
+    background-size: var(--space) var(--space);
+    background-repeat: space;
+    mask-image: conic-gradient(from calc(var(--gradient-angle) + 45deg), black, transparent 10% 90%, black);
+    border-radius: inherit;
+    opacity: 0.4;
+  }
+
+  .shiny-cta::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(-50deg, transparent, #2d84ca, transparent);
+    mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+    opacity: 0.6;
+    animation: shimmer 4s linear infinite;
+  }
+
+  .mask-gradient-fade {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .spotlight-card {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  }
+
+  @keyframes border-spin {
+    to {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  @keyframes shimmer {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @keyframes beam {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes sonar-wave {
+    0% {
+      r: 10px;
+      opacity: 0.8;
+      stroke-width: 1px;
+    }
+
+    100% {
+      r: 80px;
+      opacity: 0;
+      stroke-width: 0px;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-beam {
+    animation: beam 3s linear infinite;
+  }
+
+  .animate-sonar {
+    animation: sonar-wave 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+
+  .font-serif {
+    font-family: 'Newsreader', serif;
+  }
+
+  /* Gemini 3 Pro Entry Animations */
+  @keyframes fade-slide-blur-in {
+    0% {
+      opacity: 0.01;
+      transform: translateY(20px) scale(0.98);
+      filter: blur(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .animate-reveal {
+    animation: fade-slide-blur-in 1s cubic-bezier(0.2, 1, 0.3, 1) both;
+  }
+
+  .will-change-transform {
+    will-change: transform, opacity;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Aurora Background System */
+  .scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--bg-color, #000500);
+    z-index: -1;
+  }
+
+  .floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    background: radial-gradient(ellipse at center, var(--glow-color-1, rgba(45, 132, 202, 0.4)) 0%, transparent 70%);
+    animation: floorGlow 4s ease-in-out infinite;
+    transform-origin: bottom;
+  }
+
+  .main-column {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--light-color, #2d84ca), transparent);
+    box-shadow: 0 0 40px var(--glow-color-1, #2d84ca);
+    animation: mainGlow 3s ease-in-out infinite alternate;
+    opacity: 0.7;
+  }
+
+  .light-stream-container {
+    position: absolute;
+    inset: 0;
+  }
+
+  .light-beam {
+    position: absolute;
+    bottom: -10%;
+    height: 120%;
+    background: linear-gradient(to top, transparent, var(--light-color, #2d84ca), transparent);
+    opacity: 0;
+    animation: rise linear infinite, fade linear infinite;
+  }
+
+  @keyframes rise {
+    0% { transform: translateY(100%); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-110%); opacity: 0; }
+  }
+
+  @keyframes fade {
+    0%, 100% { opacity: 0; }
+    5%, 80% { opacity: 0.7; }
+  }
+
+  @keyframes floorGlow {
+    0%, 100% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  @keyframes mainGlow {
+    from { opacity: 0.6; filter: blur(25px); }
+    to { opacity: 0.8; filter: blur(15px); }
+  }
+}
+
+:root {
+  --bg-color: #f2f7fd; /* matisse 50 */
+  --light-color: #2d84ca; /* matisse 500 */
+  --glow-color-1: rgba(45, 132, 202, 0.2);
+  --glow-color-2: rgba(83, 160, 221, 0.1);
+}
+
+.dark {
+  --bg-color: #112740; /* matisse 950 */
+  --light-color: #8fc0ea; /* matisse 300 */
+  --glow-color-1: rgba(143, 192, 234, 0.4);
+  --glow-color-2: rgba(143, 192, 234, 0.2);
+}

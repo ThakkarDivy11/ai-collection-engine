@@ -1,0 +1,6 @@
+tree 95fc3010df13b31ad648d38374c716cde29420a4
+parent 82e171befa1fb670408b717191cd69c5977bf928
+author ThakkarDivy11 <divythakkar318@gmail.com> 1777971026 +0530
+committer ThakkarDivy11 <divythakkar318@gmail.com> 1777971026 +0530
+
+fix: allow Vercel origins in CORS policy
