@@ -14,7 +14,7 @@ exports.createInvoice = async (req, res) => {
 
         const newInvoice = await Invoice.create({
             clientId,
-            amount,
+            amount: Number(amount),
             dueDate,
             invoiceNumber,
         });

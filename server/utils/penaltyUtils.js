@@ -8,7 +8,8 @@
  * @param {string} status - Current status of the invoice
  * @returns {Object} - { daysOverdue, penaltyAmount, finalAmount }
  */
-const calculateOverduePenalty = (amount, dueDate, status) => {
+const calculateOverduePenalty = (amt, dueDate, status) => {
+    const amount = Number(amt);
     if (status === "paid") {
         return {
             daysOverdue: 0,
