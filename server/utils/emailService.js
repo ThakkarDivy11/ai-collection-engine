@@ -6,13 +6,19 @@ dns.setDefaultResultOrder("ipv4first");
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: Number(process.env.SMTP_PORT) === 465, // true only for 465
-    family: 4, // 🔥 force IPv4 (main fix)
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: Number(process.env.SMTP_PORT) === 465,
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+    family: 4,
     auth: {
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        pass: process.env.SMTP_PASS?.replace(/\s/g, ""), // Auto-remove spaces
     },
+    tls: {
+        rejectUnauthorized: false // Helps with some cloud network issues
+    }
 });
 
 const sendEmail = async ({ to, subject, text, html, attachments }) => {
