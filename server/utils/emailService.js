@@ -37,6 +37,7 @@ const sendEmail = async ({ to, subject, text, html, attachments }) => {
                 subject,
                 text,
                 html,
+                attachments,
             });
             if (error) throw error;
             console.log("✅ Resend success:", data.id);

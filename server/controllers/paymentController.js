@@ -246,14 +246,26 @@ const sendPaymentSuccessEmail = async (client, invoice, amount) => {
             to: client.email,
             subject,
             text: message,
-            html: `<div style="font-family: sans-serif; line-height: 1.6; color: #333;">
-                <h2 style="color: #22c55e;">Payment Received</h2>
+            html: `<div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px;">
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <span style="background-color: #10b981; color: white; padding: 5px 15px; border-radius: 50px; font-weight: bold; font-size: 12px; letter-spacing: 1px;">PAID</span>
+                </div>
+                <h2 style="color: #10b981; margin-top: 0;">Payment Received</h2>
                 <p>Hello <strong>${client.name}</strong>,</p>
                 <p>We have successfully received your payment of <strong>₹${amount.toLocaleString()}</strong> for Invoice <strong>#${invoice.invoiceNumber}</strong>.</p>
-                <p>Please find your payment receipt attached to this email.</p>
+                <div style="background-color: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981;">
+                    <p style="margin: 0; font-size: 14px;"><strong>Payment Details:</strong></p>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #64748b;">Invoice: #${invoice.invoiceNumber}</p>
+                    <p style="margin: 2px 0 0 0; font-size: 13px; color: #64748b;">Amount: ₹${amount.toLocaleString()}</p>
+                    <p style="margin: 2px 0 0 0; font-size: 13px; color: #64748b;">Status: Successful</p>
+                </div>
+                <p>Please find your official payment receipt attached to this email as a PDF.</p>
                 <p>Thank you for your business!</p>
                 <br>
-                <p>Best Regards,<br><strong>CollectAI Team</strong></p>
+                <p style="border-top: 1px solid #eee; pt-15; font-size: 13px; color: #888;">
+                    Best Regards,<br>
+                    <strong>CollectAI Team</strong>
+                </p>
             </div>`,
             attachments: [
                 {
