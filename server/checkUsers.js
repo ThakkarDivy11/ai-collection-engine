@@ -4,7 +4,7 @@ const User = require("./models/User");
 
 const checkUsers = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/aicollection");
+        await mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://divy:divy123@cluster0.bi91qsg.mongodb.net/aicollection");
         console.log("DB Connected");
 
         const users = await User.find({}, { name: 1, email: 1, role: 1 });

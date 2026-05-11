@@ -5,40 +5,59 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Payments() {
     const [invoices, setInvoices] = useState([]);
     const [clients, setClients] = useState([]);
+    const [admins, setAdmins] = useState([]); // For Super Admin view
+    const [selectedAdmin, setSelectedAdmin] = useState(null); // ID of the admin being viewed
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const isSuperAdmin = user.role === "superadmin";
+
     const [formData, setFormData] = useState({
         clientId: "",
         amount: "",
         dueDate: "",
-                    invoiceNumber: `INV-${Math.floor(100000 + Math.random() * 900000)}`,
+        invoiceNumber: `INV-${Math.floor(100000 + Math.random() * 900000)}`,
     });
 
     const fetchData = useCallback(async () => {
         setLoading(true);
         try {
             const token = localStorage.getItem("token");
-            const [invRes, cliRes] = await Promise.all([
-                fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices`, {
+            
+            if (isSuperAdmin && !selectedAdmin) {
+                // Fetch admins for the initial view
+                const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/super-admin/admins-with-revenue`, {
                     headers: { "Authorization": `Bearer ${token}` }
-                }),
-                fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients`, {
-                    headers: { "Authorization": `Bearer ${token}` }
-                })
-            ]);
+                });
+                const data = await res.json();
+                setAdmins(data);
+            } else {
+                // Fetch invoices (optionally filtered by selected admin)
+                const url = (isSuperAdmin && selectedAdmin)
+                    ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices?adminId=${selectedAdmin}`
+                    : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices`;
+                
+                const [invRes, cliRes] = await Promise.all([
+                    fetch(url, { headers: { "Authorization": `Bearer ${token}` } }),
+                    fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients`, {
+                        headers: { "Authorization": `Bearer ${token}` }
+                    })
+                ]);
 
-            const invData = await invRes.json();
-            const cliData = await cliRes.json();
+                const invData = await invRes.json();
+                const cliData = await cliRes.json();
 
-            setInvoices(Array.isArray(invData) ? invData : []);
-            setClients(Array.isArray(cliData) ? cliData : (cliData.clients || []));
+                setInvoices(Array.isArray(invData) ? invData : []);
+                setClients(Array.isArray(cliData) ? cliData : (cliData.clients || []));
+            }
         } catch (error) {
             console.error("Failed to fetch data", error);
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [isSuperAdmin, selectedAdmin]);
 
     useEffect(() => {
         fetchData();
@@ -78,29 +97,84 @@ export default function Payments() {
     return (
         <div className="space-y-8 pb-12">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Payments & Invoices</h1>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Track transactions and issue new billing requests.</p>
+                <div className="flex items-center gap-4">
+                    {isSuperAdmin && selectedAdmin && (
+                        <button 
+                            onClick={() => setSelectedAdmin(null)}
+                            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all text-slate-500"
+                        >
+                            <X size={24} />
+                        </button>
+                    )}
+                    <div>
+                        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">
+                            {isSuperAdmin && !selectedAdmin ? "Admins Revenue Overview" : "Payments & Invoices"}
+                        </h1>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                            {isSuperAdmin && !selectedAdmin ? "Select an admin to view their detailed client payments." : "Track transactions and issue new billing requests."}
+                        </p>
+                    </div>
                 </div>
-                <button
-                    onClick={() => setShowModal(true)}
-                    className="bg-matisse-600 hover:bg-matisse-700 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-matisse-600/20"
-                >
-                    <Plus size={20} />
-                    Create Invoice
-                </button>
+                {!isSuperAdmin && (
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="bg-matisse-600 hover:bg-matisse-700 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-matisse-600/20"
+                    >
+                        <Plus size={20} />
+                        Create Invoice
+                    </button>
+                )}
             </div>
 
-            <div className="bg-white dark:bg-slate-900/40 p-5 rounded-3xl border border-slate-200 dark:border-white/5 flex items-center gap-4 premium-shadow transition-all duration-300">
-                <div className="p-2.5 bg-slate-100 dark:bg-white/5 rounded-xl text-slate-400">
-                    <Search size={20} />
+            {isSuperAdmin && !selectedAdmin ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {loading ? (
+                        <div className="col-span-full py-20 text-center">
+                            <Loader2 className="mx-auto animate-spin text-matisse-500" size={32} />
+                        </div>
+                    ) : admins.length === 0 ? (
+                        <div className="col-span-full py-20 text-center text-slate-500">No admins found.</div>
+                    ) : admins.map((admin) => (
+                        <motion.div
+                            key={admin._id}
+                            whileHover={{ y: -5 }}
+                            onClick={() => setSelectedAdmin(admin._id)}
+                            className="bg-white dark:bg-slate-900/40 p-6 rounded-[2rem] border border-slate-200 dark:border-white/5 premium-shadow cursor-pointer group"
+                        >
+                            <div className="flex justify-between items-start mb-4">
+                                <div className="w-12 h-12 rounded-2xl bg-rose-500/10 flex items-center justify-center text-rose-500 font-bold text-xl group-hover:bg-rose-500 group-hover:text-white transition-all">
+                                    {admin.name[0]}
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Revenue</div>
+                                    <div className="text-xl font-black text-slate-900 dark:text-white">₹{admin.totalRevenue.toLocaleString()}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white">{admin.name}</h3>
+                                <p className="text-sm text-slate-500">{admin.email}</p>
+                            </div>
+                            <div className="mt-6 pt-6 border-t border-slate-100 dark:border-white/5 flex justify-between items-center">
+                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{admin.clientCount} Clients</span>
+                                <span className="text-matisse-500 text-xs font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                                    View Payments →
+                                </span>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
-                <input
-                    type="text"
-                    placeholder="Search invoices..."
-                    className="bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium"
-                />
-            </div>
+            ) : (
+                <>
+                    <div className="bg-white dark:bg-slate-900/40 p-5 rounded-3xl border border-slate-200 dark:border-white/5 flex items-center gap-4 premium-shadow transition-all duration-300">
+                        <div className="p-2.5 bg-slate-100 dark:bg-white/5 rounded-xl text-slate-400">
+                            <Search size={20} />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Search invoices..."
+                            className="bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium"
+                        />
+                    </div>
 
             <div className="bg-white dark:bg-slate-900/40 rounded-[2rem] border border-slate-200 dark:border-white/5 overflow-hidden premium-shadow transition-all duration-300">
                 <div className="overflow-x-auto">
@@ -165,6 +239,9 @@ export default function Payments() {
                     </table>
                 </div>
             </div>
+
+                </>
+            )}
 
             {/* Create Invoice Modal */}
             <AnimatePresence>

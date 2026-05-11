@@ -158,7 +158,22 @@ exports.stripeWebhook = async (req, res) => {
 
 exports.getPayments = async (req, res) => {
     try {
-        const payments = await Payment.find().populate("clientId", "name company email").sort({ createdAt: -1 });
+        const isSuperAdmin = req.user.role === "superadmin";
+        let query = {};
+
+        if (isSuperAdmin && req.query.adminId) {
+            // Drill-down for Super Admin: filter by a specific admin's clients
+            const targetClients = await Client.find({ createdBy: req.query.adminId }).select("_id");
+            const clientIds = targetClients.map(c => c._id);
+            query = { clientId: { $in: clientIds } };
+        } else if (!isSuperAdmin) {
+            // Standard Admin: filter by their own clients
+            const myClients = await Client.find({ createdBy: req.user._id }).select("_id");
+            const clientIds = myClients.map(c => c._id);
+            query = { clientId: { $in: clientIds } };
+        }
+
+        const payments = await Payment.find(query).populate("clientId", "name company email").sort({ createdAt: -1 });
         res.json(payments);
     } catch (error) {
         res.status(500).json({ message: error.message });

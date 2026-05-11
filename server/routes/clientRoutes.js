@@ -41,16 +41,32 @@ router.get("/", protect, admin, async (req, res) => {
         const { search, page = 1, limit = 10 } = req.query;
         const query = {};
 
+        // Data Isolation: If not superadmin, only show clients created by this admin
+        if (req.user.role !== "superadmin") {
+            query.createdBy = req.user._id;
+        }
+
         if (search) {
-            query.$or = [
+            const searchConditions = [
                 { name: { $regex: search, $options: "i" } },
                 { company: { $regex: search, $options: "i" } },
                 { email: { $regex: search, $options: "i" } },
             ];
+            
+            if (query.createdBy) {
+                query.$and = [
+                    { createdBy: query.createdBy },
+                    { $or: searchConditions }
+                ];
+                delete query.createdBy; // Handled in $and
+            } else {
+                query.$or = searchConditions;
+            }
         }
 
         const clients = await Client.find(query)
             .select("-password")
+            .populate("createdBy", "name") // Populate admin name
             .limit(limit * 1)
             .skip((page - 1) * limit)
             .sort({ createdAt: -1 });

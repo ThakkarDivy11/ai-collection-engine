@@ -60,6 +60,9 @@ export default function Settings() {
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
 
+    // Get real user data
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+
     const handleSave = () => {
         setSaving(true);
         // Simulate API call
@@ -132,16 +135,16 @@ export default function Settings() {
                                 className="space-y-8"
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <InputField label="Full Name" icon={User} defaultValue="Admin User" />
-                                    <InputField label="Email Address" icon={Mail} defaultValue="admin@collectai.com" />
-                                    <InputField label="Role" icon={ShieldCheck} defaultValue="System Administrator" disabled />
+                                    <InputField label="Full Name" icon={User} defaultValue={user.name || "Admin User"} />
+                                    <InputField label="Email Address" icon={Mail} defaultValue={user.email || "admin@collectai.com"} />
+                                    <InputField label="Role" icon={ShieldCheck} defaultValue={user.role === "superadmin" ? "System Super Admin" : "System Admin"} disabled />
                                     <InputField label="Timezone" icon={Globe} defaultValue="(GMT+05:30) India Standard Time" />
                                 </div>
                                 <div className="pt-8 border-t border-gray-100 dark:border-slate-800/50">
                                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">Profile Appearance</h3>
                                     <div className="flex items-center gap-6">
-                                        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-matisse-500 to-purple-600 flex items-center justify-center text-3xl font-bold text-white shadow-xl shadow-matisse-500/20">
-                                            A
+                                        <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${user.role === 'superadmin' ? 'from-rose-500 to-rose-700 shadow-rose-500/20' : 'from-matisse-500 to-purple-600 shadow-matisse-500/20'} flex items-center justify-center text-3xl font-bold text-white shadow-xl`}>
+                                            {(user.name || "A")[0]}
                                         </div>
                                         <div className="space-y-2">
                                             <button className="bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm px-4 py-2 rounded-lg transition-colors font-medium">Change Avatar</button>

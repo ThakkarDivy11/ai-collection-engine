@@ -16,7 +16,11 @@ const pageTitles = {
 const TopNavbar = () => {
     const location = useLocation();
     const page = pageTitles[location.pathname] || { title: "Dashboard", sub: "" };
-    const userName = "Admin";
+    
+    // Get real user data from localStorage
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const userName = user.name || "Admin";
+    const userRole = user.role === "superadmin" ? "System Super Admin" : "System Admin";
 
     return (
         <header className="sticky top-0 z-30 w-full border-b border-slate-200/50 dark:border-white/5 bg-white/40 dark:bg-[#0b1424]/40 backdrop-blur-2xl transition-all duration-500">
@@ -61,7 +65,7 @@ const TopNavbar = () => {
                             <span className="text-sm font-black text-slate-900 dark:text-white leading-none tracking-tight group-hover:text-matisse-600 transition-colors">
                                 {userName}
                             </span>
-                            <span className="text-[9px] font-black text-matisse-500 uppercase tracking-[0.2em] mt-1.5 opacity-80">System Admin</span>
+                            <span className="text-[9px] font-black text-matisse-500 uppercase tracking-[0.2em] mt-1.5 opacity-80">{userRole}</span>
                         </div>
                         <div className="w-12 h-12 rounded-[1.25rem] bg-gradient-to-tr from-matisse-600 to-matisse-400 flex items-center justify-center text-white text-sm font-black shadow-lg shadow-matisse-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ring-4 ring-white dark:ring-slate-900/50">
                             {userName[0]}

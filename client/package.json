@@ -49,13 +49,13 @@
     "web-vitals": "^2.1.4"
   },
   "browser": {
-    "fs": "./src/empty-module.js",
-    "path": "./src/empty-module.js",
-    "os": "./src/empty-module.js",
-    "util": "./src/empty-module.js",
-    "crypto": "./src/empty-module.js",
-    "stream": "./src/empty-module.js",
-    "buffer": "./src/empty-module.js"
+    "fs": false,
+    "path": false,
+    "os": false,
+    "util": false,
+    "crypto": false,
+    "stream": false,
+    "buffer": false
   },
   "scripts": {
     "start": "react-scripts start",

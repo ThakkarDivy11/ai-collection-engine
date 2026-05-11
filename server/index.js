@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://divy:divy123@cluster0
 
 mongoose.connection.once("open", () => {
     console.log("MongoDB Connected");
-    initCron(); // Start the daily automation cron job
+    // initCron(); // Disabled legacy cron to prevent duplicate emails
     initAgentCron(); // Start the AI Agent chronological job
 });
 
@@ -35,6 +35,7 @@ app.use("/api/ai", require("./routes/aiRoutes"));
 app.use("/api/invoices", require("./routes/invoiceRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 app.use("/api/email-logs", require("./routes/emailLogRoutes"));
+app.use("/api/super-admin", require("./routes/superAdminRoutes"));
 const debugRoutes = require('./routes/debugRoutes');
 app.use('/api/debug', debugRoutes);
 

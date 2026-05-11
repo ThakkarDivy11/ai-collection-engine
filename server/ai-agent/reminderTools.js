@@ -8,51 +8,39 @@ const twilioClient = (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_
     ? twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
     : null;
 
-// ─── SendGrid (Email) ──────────────────────────────────────────────────────
-const sgMail = require("@sendgrid/mail");
-if (process.env.SENDGRID_API_KEY) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-}
+const sendEmail = require("../utils/emailService");
 
 // ─── Email Reminder ────────────────────────────────────────────────────────
 /**
- * Send an email reminder via SendGrid (falls back to console mock if not configured)
+ * Send an email reminder using the central email service (Resend/SMTP)
  * @returns {{ success: boolean, actionStatus: "sent"|"failed" }}
  */
 const sendEmailReminder = async (customerEmail, message) => {
-    console.log(`[Email] Sending to ${customerEmail}`);
     try {
-        if (!process.env.SENDGRID_API_KEY) {
-            // Dev mock — log and treat as sent so the dashboard still shows activity
-            const paymentLink = "https://ai-collection-engineee.vercel.app/login";
-            console.log(`[Email Mock] To: ${customerEmail}\n${message}\nLink: ${paymentLink}`);
-            return { success: true, actionStatus: "sent", tool: "email" };
-        }
-
-        const paymentLink = "https://ai-collection-engineee.vercel.app/login";
-        const finalMessage = `${message}\n\nYou can view and pay your invoice here: ${paymentLink}`;
-
-        await sgMail.send({
+        await sendEmail({
             to: customerEmail,
-            from: process.env.SENDGRID_FROM_EMAIL || "collections@collectai.com",
             subject: "Invoice Payment Reminder",
-            text: finalMessage,
+            text: message,
             html: `
-                <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
+                <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                    <h2 style="color: #4f46e5;">Payment Reminder</h2>
                     <p>${message.replace(/\n/g, "<br/>")}</p>
-                    <div style="margin-top: 20px;">
-                        <a href="${paymentLink}" style="background-color: #4f46e5; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                            Pay Invoice Now
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="https://ai-collection-engineee.vercel.app/login" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
+                            View & Pay Invoice
                         </a>
                     </div>
+                    <p style="margin-top: 30px; font-size: 12px; color: #777; text-align: center;">
+                        If you have already paid, please ignore this email.
+                    </p>
                 </div>
             `,
         });
 
-        console.log(`[Email] Sent successfully to ${customerEmail}`);
+        console.log(`[AI Agent] Email sent successfully to ${customerEmail}`);
         return { success: true, actionStatus: "sent", tool: "email" };
     } catch (error) {
-        console.error("[Email] Failed:", error.message);
+        console.error("[AI Agent] Email Failed:", error.message);
         return { success: false, actionStatus: "failed", tool: "email", error: error.message };
     }
 };

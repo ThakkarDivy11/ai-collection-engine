@@ -7,6 +7,20 @@ exports.getEmailLogs = async (req, res) => {
         const skip = (page - 1) * limit;
 
         const query = {};
+        
+        const isSuperAdmin = req.user.role === "superadmin";
+        if (isSuperAdmin && req.query.adminId) {
+            // Super Admin drill-down: filter by specific admin's clients
+            const targetClients = await require("../models/Client").find({ createdBy: req.query.adminId }).select("email");
+            const targetClientEmails = targetClients.map(c => c.email);
+            query.recipientEmail = { $in: targetClientEmails };
+        } else if (!isSuperAdmin) {
+            // Normal Admin: filter by their own clients
+            const myClients = await require("../models/Client").find({ createdBy: req.user._id }).select("email");
+            const myClientEmails = myClients.map(c => c.email);
+            query.recipientEmail = { $in: myClientEmails };
+        }
+
         if (req.query.status && req.query.status !== 'all') {
             query.status = req.query.status;
         }

@@ -47,7 +47,22 @@ exports.createInvoice = async (req, res) => {
 
 exports.getInvoices = async (req, res) => {
     try {
-        const invoices = await Invoice.find().populate("clientId", "name company email");
+        const isSuperAdmin = req.user.role === "superadmin";
+        let query = {};
+
+        if (isSuperAdmin && req.query.adminId) {
+            // Super Admin drill-down: filter by specific admin
+            const targetClients = await Client.find({ createdBy: req.query.adminId }).select("_id");
+            const clientIds = targetClients.map(c => c._id);
+            query = { clientId: { $in: clientIds } };
+        } else if (!isSuperAdmin) {
+            // Normal Admin: filter by their own clients
+            const myClients = await Client.find({ createdBy: req.user._id }).select("_id");
+            const clientIds = myClients.map(c => c._id);
+            query = { clientId: { $in: clientIds } };
+        }
+
+        const invoices = await Invoice.find(query).populate("clientId", "name company email");
         
         // Include penalty details for UI
         const updatedInvoices = invoices.map(inv => {

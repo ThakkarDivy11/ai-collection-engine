@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Users, IndianRupee, Activity, Clock, ArrowUpRight, ArrowDownRight, Loader2 } from "lucide-react";
+import { Users, IndianRupee, Activity, Clock, ArrowUpRight, ArrowDownRight, Loader2, Shield } from "lucide-react";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import {
@@ -146,26 +146,45 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading,
 
 export default function Dashboard() {
     const [stats, setStats] = useState(null);
+    const [superStats, setSuperStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [alert, setAlert] = useState(null);
     const [viewType, setViewType] = useState("monthly");
+
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const isSuperAdmin = user.role === "superadmin";
 
     const sparklines = useMemo(() => ({
         clients: generateSparkline(1, 7, "up"),
         revenue: generateSparkline(2, 7, "up"),
         outstanding: generateSparkline(3, 7, "down"),
         churn: generateSparkline(4, 7, "down"),
+        admins: generateSparkline(5, 7, "up"),
     }), []);
 
     const fetchStats = async () => {
         setLoading(true);
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/dashboard/stats?type=${viewType}`, {
+            const baseUrl = (process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "");
+            
+            // Fetch normal dashboard stats
+            const res = await fetch(`${baseUrl}/api/dashboard/stats?type=${viewType}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             const data = await res.json();
             setStats(data);
+
+            // Fetch super admin stats if applicable
+            if (isSuperAdmin) {
+                const superRes = await fetch(`${baseUrl}/api/super-admin/stats`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (superRes.ok) {
+                    const superData = await superRes.json();
+                    setSuperStats(superData);
+                }
+            }
         } catch (error) {
             console.error("Failed", error);
         } finally {
@@ -223,9 +242,11 @@ export default function Dashboard() {
         <div className="space-y-10 pb-16 animate-reveal">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
-                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">System Overview</h1>
+                    <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">
+                        {isSuperAdmin ? "Super Control Center" : "System Overview"}
+                    </h1>
                     <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 font-bold uppercase tracking-widest opacity-80">
-                        {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: '2-digit', month: 'long' })} • Central Hub
+                        {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: '2-digit', month: 'long' })} • {isSuperAdmin ? "Institutional Root" : "Central Hub"}
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -245,6 +266,44 @@ export default function Dashboard() {
                     <p className="font-bold text-sm tracking-tight">{alert.message}</p>
                     <button onClick={() => setAlert(null)} className="ml-auto w-8 h-8 rounded-full hover:bg-current/10 flex items-center justify-center text-xl transition-colors">&times;</button>
                 </motion.div>
+            )}
+
+            {isSuperAdmin && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <StatCard
+                        title="Global Admins"
+                        value={superStats?.totalAdmins || "0"}
+                        icon={Shield}
+                        trend="up"
+                        trendValue="+1"
+                        color="bg-rose-600"
+                        loading={loading}
+                        sparkData={sparklines.admins}
+                        chartType="bar"
+                    />
+                    <StatCard
+                        title="Institutional Revenue"
+                        value={`₹${(superStats?.totalRevenue || 0).toLocaleString()}`}
+                        icon={IndianRupee}
+                        trend="up"
+                        trendValue="+15.2%"
+                        color="bg-emerald-600"
+                        loading={loading}
+                        sparkData={sparklines.revenue}
+                        chartType="area"
+                    />
+                    <StatCard
+                        title="Active Terminals"
+                        value={superStats?.activeClients || "0"}
+                        icon={Activity}
+                        trend="up"
+                        trendValue="+4.1%"
+                        color="bg-matisse-600"
+                        loading={loading}
+                        sparkData={sparklines.clients}
+                        chartType="line"
+                    />
+                </div>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

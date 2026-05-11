@@ -5,15 +5,33 @@ const Payment = require("../models/Payment");
 exports.getDashboardStats = async (req, res) => {
     try {
         const { type = "monthly" } = req.query;
-        const totalClients = await Client.countDocuments();
-        const churnRiskCount = await Client.countDocuments({ status: "churn-risk" });
+        const isSuperAdmin = req.user.role === "superadmin";
+        
+        // Define filters
+        let clientFilter = {};
+        if (!isSuperAdmin) {
+            clientFilter = { createdBy: req.user._id };
+        }
+
+        const totalClients = await Client.countDocuments(clientFilter);
+        const churnRiskCount = await Client.countDocuments({ ...clientFilter, status: "churn-risk" });
+
+        // Get Client IDs for this admin to filter Invoices and Payments
+        let clientIds = [];
+        if (!isSuperAdmin) {
+            const myClients = await Client.find(clientFilter).select("_id");
+            clientIds = myClients.map(c => c._id);
+        }
+
+        // Define dependent filters
+        const dependentFilter = isSuperAdmin ? {} : { clientId: { $in: clientIds } };
 
         // Active Revenue: Sum of all completed payments
-        const payments = await Payment.find({ status: "completed" });
+        const payments = await Payment.find({ ...dependentFilter, status: "completed" });
         const totalRevenue = payments.reduce((acc, curr) => acc + curr.amount, 0);
 
         // Total Outstanding: Sum of all unpaid and overdue invoices
-        const outstandingInvoices = await Invoice.find({ status: { $in: ["unpaid", "overdue"] } });
+        const outstandingInvoices = await Invoice.find({ ...dependentFilter, status: { $in: ["unpaid", "overdue"] } });
         const totalOutstanding = outstandingInvoices.reduce((acc, curr) => acc + curr.amount, 0);
 
         // Specifically Overdue
@@ -22,7 +40,7 @@ exports.getDashboardStats = async (req, res) => {
             .reduce((acc, curr) => acc + curr.amount, 0);
 
         // Recent Clients
-        const recentClients = await Client.find()
+        const recentClients = await Client.find(clientFilter)
             .select("name company status createdAt")
             .sort({ createdAt: -1 })
             .limit(5);
@@ -58,11 +76,13 @@ exports.getDashboardStats = async (req, res) => {
                 const endOfDay = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59);
 
                 const dayPayments = await Payment.find({
+                    ...dependentFilter,
                     status: "completed",
                     createdAt: { $gte: startOfDay, $lte: endOfDay }
                 });
                 const dayRevenue = dayPayments.reduce((acc, curr) => acc + curr.amount, 0);
                 const dayClients = await Client.countDocuments({
+                    ...clientFilter,
                     createdAt: { $gte: startOfDay, $lte: endOfDay }
                 });
 
@@ -75,11 +95,13 @@ exports.getDashboardStats = async (req, res) => {
                 const endOfYear = new Date(year, 11, 31, 23, 59, 59);
 
                 const yearPayments = await Payment.find({
+                    ...dependentFilter,
                     status: "completed",
                     createdAt: { $gte: startOfYear, $lte: endOfYear }
                 });
                 const yearRevenue = yearPayments.reduce((acc, curr) => acc + curr.amount, 0);
                 const yearClients = await Client.countDocuments({
+                    ...clientFilter,
                     createdAt: { $gte: startOfYear, $lte: endOfYear }
                 });
 
@@ -95,11 +117,13 @@ exports.getDashboardStats = async (req, res) => {
                 const endOfMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0, 23, 59, 59);
 
                 const monthPayments = await Payment.find({
+                    ...dependentFilter,
                     status: "completed",
                     createdAt: { $gte: startOfMonth, $lte: endOfMonth }
                 });
                 const monthRevenue = monthPayments.reduce((acc, curr) => acc + curr.amount, 0);
                 const monthClients = await Client.countDocuments({
+                    ...clientFilter,
                     createdAt: { $gte: startOfMonth, $lte: endOfMonth }
                 });
 

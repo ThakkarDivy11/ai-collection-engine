@@ -28,6 +28,9 @@ export default function Clients() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const isSuperAdmin = user.role === "superadmin";
+
     const fetchClients = useCallback(async () => {
         setLoading(true);
         try {
@@ -127,6 +130,7 @@ export default function Clients() {
                             <tr className="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] border-b border-slate-100 dark:border-white/5">
                                 <th className="px-8 py-6">Client</th>
                                 <th className="px-8 py-6">Company</th>
+                                {isSuperAdmin && <th className="px-8 py-6">Managed By</th>}
                                 <th className="px-8 py-6">Status</th>
                                 <th className="px-8 py-6 text-right">Actions</th>
                             </tr>
@@ -134,7 +138,7 @@ export default function Clients() {
                         <tbody className="divide-y divide-gray-200 dark:divide-slate-800">
                             {loading ? (
                                 <tr>
-                                    <td colSpan="4" className="py-20 text-center">
+                                    <td colSpan={isSuperAdmin ? "5" : "4"} className="py-20 text-center">
                                         <Loader2 className="mx-auto animate-spin text-matisse-500" size={32} />
                                     </td>
                                 </tr>
@@ -159,6 +163,18 @@ export default function Clients() {
                                             {client.company}
                                         </div>
                                     </td>
+                                    {isSuperAdmin && (
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-6 h-6 rounded-md bg-rose-500/10 flex items-center justify-center text-[10px] font-bold text-rose-500 border border-rose-500/20">
+                                                    {(client.createdBy?.name || "A")[0]}
+                                                </div>
+                                                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                                                    {client.createdBy?.name || "System"}
+                                                </span>
+                                            </div>
+                                        </td>
+                                    )}
                                     <td className="px-6 py-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${client.status === "active" ? "bg-matisse-500/10 text-matisse-400" :
                                             client.status === "churn-risk" ? "bg-rose-500/10 text-rose-400" : "bg-slate-500/10 text-slate-400"

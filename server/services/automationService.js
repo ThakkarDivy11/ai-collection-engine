@@ -156,9 +156,9 @@ const runDailyAutomation = async () => {
 
 // Schedule for every day at 17:00 local time
 const initCron = () => {
-    console.log("Initializing daily automation cron job (Runs at 17:00 Asia/Kolkata)...");
-    // 0 17 * * * runs every day at 17:00
-    cron.schedule("0 17 * * *", () => {
+    console.log("Initializing daily automation cron job (Runs at 16:45 Asia/Kolkata)...");
+    // 45 16 * * * runs every day at 16:45
+    cron.schedule("45 16 * * *", () => {
         runDailyAutomation();
     }, {
         scheduled: true,

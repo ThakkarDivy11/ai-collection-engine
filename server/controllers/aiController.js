@@ -34,8 +34,21 @@ exports.sendAiEmail = async (req, res) => {
 
 exports.generateInsights = async (req, res) => {
     try {
-        const clients = await Client.find();
-        const payments = await Payment.find();
+        const isSuperAdmin = req.user.role === "superadmin";
+        let clientFilter = {};
+        
+        if (isSuperAdmin && req.query.adminId) {
+            clientFilter = { createdBy: req.query.adminId };
+        } else if (!isSuperAdmin) {
+            clientFilter = { createdBy: req.user._id };
+        }
+
+        const clients = await Client.find(clientFilter);
+        
+        const clientIds = clients.map(c => c._id);
+        const dependentFilter = (isSuperAdmin && !req.query.adminId) ? {} : { clientId: { $in: clientIds } };
+        
+        const payments = await Payment.find(dependentFilter);
 
         const dataSummary = {
             totalClients: clients.length,
@@ -140,6 +153,11 @@ exports.smartSearch = async (req, res) => {
         }
         filter = sanitizedFilter;
 
+        // Data Isolation: Force filter to only show clients created by this admin
+        if (req.user.role !== "superadmin") {
+            filter.createdBy = req.user._id;
+        }
+
         const results = await Client.find(filter).select("-password");
         res.json(results);
     } catch (error) {
@@ -169,9 +187,22 @@ exports.smartSearch = async (req, res) => {
 
 exports.getAiAnalytics = async (req, res) => {
     try {
-        const clients = await Client.find();
-        const invoices = await Invoice.find().populate("clientId", "name company");
-        const payments = await Payment.find();
+        const isSuperAdmin = req.user.role === "superadmin";
+        let clientFilter = {};
+        
+        if (isSuperAdmin && req.query.adminId) {
+            clientFilter = { createdBy: req.query.adminId };
+        } else if (!isSuperAdmin) {
+            clientFilter = { createdBy: req.user._id };
+        }
+
+        const clients = await Client.find(clientFilter);
+        
+        const clientIds = clients.map(c => c._id);
+        const dependentFilter = (isSuperAdmin && !req.query.adminId) ? {} : { clientId: { $in: clientIds } };
+
+        const invoices = await Invoice.find(dependentFilter).populate("clientId", "name company");
+        const payments = await Payment.find(dependentFilter);
 
         const totalClients = clients.length;
         const activeClients = clients.filter(c => c.status === "active").length;
@@ -247,8 +278,21 @@ exports.getAiAnalytics = async (req, res) => {
 
 exports.generateChurnPrediction = async (req, res) => {
     try {
-        const clients = await Client.find().select("-password");
-        const invoices = await Invoice.find();
+        const isSuperAdmin = req.user.role === "superadmin";
+        let clientFilter = {};
+        
+        if (isSuperAdmin && req.query.adminId) {
+            clientFilter = { createdBy: req.query.adminId };
+        } else if (!isSuperAdmin) {
+            clientFilter = { createdBy: req.user._id };
+        }
+
+        const clients = await Client.find(clientFilter).select("-password");
+        
+        const clientIds = clients.map(c => c._id);
+        const dependentFilter = (isSuperAdmin && !req.query.adminId) ? {} : { clientId: { $in: clientIds } };
+        
+        const invoices = await Invoice.find(dependentFilter);
 
         const clientData = clients.map(c => {
             const clientInvoices = invoices.filter(i => String(i.clientId) === String(c._id));

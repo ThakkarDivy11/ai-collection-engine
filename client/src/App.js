@@ -10,6 +10,8 @@ import Settings from "./pages/Settings";
 import EmailLogs from "./pages/EmailLogs";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SuperAdminLogin from "./pages/SuperAdminLogin";
+import AdminManagement from "./pages/AdminManagement";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import Loading from "./components/ui/Loading";
 
@@ -37,11 +39,22 @@ function App() {
 
                 {/* Authentication */}
                 <Route path="/login" element={<Login />} />
+                <Route path="/super-login" element={<SuperAdminLogin />} />
 
                 {/* Customer Dashboard (Portal) */}
                 <Route path="/customer-dashboard" element={<CustomerDashboard />} />
 
                 {/* Admin Routes (Protected) */}
+                <Route
+                    path="/admin-management"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <AdminManagement />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
                 <Route
                     path="/dashboard"
                     element={

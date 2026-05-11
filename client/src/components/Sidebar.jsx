@@ -15,12 +15,16 @@ import collectAILogo from "../assets/images/collectai-logo.png";
 const Sidebar = () => {
     const location = useLocation();
 
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const isSuperAdmin = user.role === "superadmin";
+
     const menuItems = [
         { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
         { path: "/clients", icon: Users, label: "Clients" },
         { path: "/payments", icon: CreditCard, label: "Payments" },
         { path: "/ai-insights", icon: BrainCircuit, label: "AI Insights" },
         { path: "/email-logs", icon: Mail, label: "AI Email Logs" },
+        ...(isSuperAdmin ? [{ path: "/admin-management", icon: Users, label: "Manage Admins" }] : []),
         { path: "/settings", icon: Settings, label: "Settings" },
     ];
 
@@ -31,13 +35,23 @@ const Sidebar = () => {
 
     return (
         <div className="w-64 h-screen bg-white/70 dark:bg-[#0b1424]/70 backdrop-blur-2xl border-r border-slate-200 dark:border-white/5 text-slate-900 dark:text-white flex flex-col fixed left-0 top-0 hidden md:flex transition-all duration-300 z-40">
-            <div className="px-8 py-10 flex items-center">
+            <div className="px-8 py-10 flex flex-col gap-4">
                 <Link to="/dashboard" className="flex items-center gap-3 group cursor-pointer">
-                    <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-matisse-600 to-matisse-400 flex items-center justify-center shadow-xl shadow-matisse-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                    <div className={`w-11 h-11 rounded-2xl ${isSuperAdmin ? 'bg-gradient-to-tr from-rose-600 to-rose-400 shadow-rose-600/30' : 'bg-gradient-to-tr from-matisse-600 to-matisse-400 shadow-matisse-600/30'} flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
                         <LayoutDashboard size={24} className="text-white" />
                     </div>
                     <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">CollectAI</span>
                 </Link>
+                {isSuperAdmin && (
+                    <motion.div 
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="flex items-center gap-2 px-3 py-1 bg-rose-500/10 border border-rose-500/20 rounded-lg w-fit"
+                    >
+                        <div className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+                        <span className="text-[10px] font-black text-rose-600 uppercase tracking-widest">Root Access Enabled</span>
+                    </motion.div>
+                )}
             </div>
 
             <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto custom-scrollbar">

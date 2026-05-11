@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
     BrainCircuit, Sparkles, Send, Search, Loader2, User, Building2,
     CheckCircle2, Activity, Users, IndianRupee, AlertTriangle,
-    TrendingUp, FileText, Clock, ShieldAlert, ArrowUpRight
+    TrendingUp, FileText, Clock, ShieldAlert, ArrowUpRight, X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -62,6 +62,9 @@ export default function AiInsights() {
     const [clients, setClients] = useState([]);
     const [selectedClient, setSelectedClient] = useState("");
 
+    const [admins, setAdmins] = useState([]); // For Super Admin view
+    const [selectedAdmin, setSelectedAdmin] = useState(null); // ID of the admin being viewed
+
     const [emailLoading, setEmailLoading] = useState(false);
     const [sendingEmail, setSendingEmail] = useState(false);
     const [emailType, setEmailType] = useState("Payment Reminder");
@@ -73,41 +76,76 @@ export default function AiInsights() {
 
     const [notification, setNotification] = useState(null);
 
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const isSuperAdmin = user.role === "superadmin";
     const token = localStorage.getItem("token");
 
-    // Fetch analytics on mount
+    // Fetch admins if Super Admin
     useEffect(() => {
-        const fetchAnalytics = async () => {
-            try {
-                const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/analytics`, {
-                    headers: { "Authorization": `Bearer ${token}` }
-                });
-                const data = await res.json();
-                if (res.ok) setAnalytics(data);
-            } catch (error) {
-                console.error("Failed to fetch analytics", error);
-            } finally {
-                setAnalyticsLoading(false);
-            }
-        };
-        fetchAnalytics();
-    }, [token]);
+        if (isSuperAdmin && !selectedAdmin) {
+            const fetchAdmins = async () => {
+                try {
+                    const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/super-admin/admins-with-revenue`, {
+                        headers: { "Authorization": `Bearer ${token}` }
+                    });
+                    const data = await res.json();
+                    setAdmins(data);
+                } catch (error) {
+                    console.error("Failed to fetch admins", error);
+                } finally {
+                    setAnalyticsLoading(false);
+                }
+            };
+            fetchAdmins();
+        }
+    }, [isSuperAdmin, selectedAdmin, token]);
 
-    // Fetch clients on mount
+    // Fetch analytics when selectedAdmin changes (or on mount for normal admin)
     useEffect(() => {
-        const fetchClients = async () => {
-            try {
-                const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients?limit=100`, {
-                    headers: { "Authorization": `Bearer ${token}` }
-                });
-                const data = await res.json();
-                setClients(data.clients || []);
-            } catch (error) {
-                console.error("Failed to fetch clients", error);
-            }
-        };
-        fetchClients();
-    }, [token]);
+        if (!isSuperAdmin || selectedAdmin) {
+            const fetchAnalytics = async () => {
+                setAnalyticsLoading(true);
+                try {
+                    const url = selectedAdmin 
+                        ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/analytics?adminId=${selectedAdmin}`
+                        : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/analytics`;
+                    
+                    const res = await fetch(url, {
+                        headers: { "Authorization": `Bearer ${token}` }
+                    });
+                    const data = await res.json();
+                    if (res.ok) setAnalytics(data);
+                } catch (error) {
+                    console.error("Failed to fetch analytics", error);
+                } finally {
+                    setAnalyticsLoading(false);
+                }
+            };
+            fetchAnalytics();
+        }
+    }, [token, isSuperAdmin, selectedAdmin]);
+
+    // Fetch clients
+    useEffect(() => {
+        if (!isSuperAdmin || selectedAdmin) {
+            const fetchClients = async () => {
+                try {
+                    const url = selectedAdmin
+                        ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients?limit=100&adminId=${selectedAdmin}`
+                        : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients?limit=100`;
+                        
+                    const res = await fetch(url, {
+                        headers: { "Authorization": `Bearer ${token}` }
+                    });
+                    const data = await res.json();
+                    setClients(data.clients || []);
+                } catch (error) {
+                    console.error("Failed to fetch clients", error);
+                }
+            };
+            fetchClients();
+        }
+    }, [token, isSuperAdmin, selectedAdmin]);
 
     const handleClientChange = (e) => {
         const clientId = e.target.value;
@@ -127,7 +165,11 @@ export default function AiInsights() {
     const fetchInsights = async () => {
         setInsightLoading(true);
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/insights`, {
+            const url = selectedAdmin 
+                ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/insights?adminId=${selectedAdmin}`
+                : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/insights`;
+                
+            const res = await fetch(url, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             const data = await res.json();
@@ -142,7 +184,11 @@ export default function AiInsights() {
     const fetchChurnPrediction = async () => {
         setChurnLoading(true);
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/churn-prediction`, {
+            const url = selectedAdmin 
+                ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/churn-prediction?adminId=${selectedAdmin}`
+                : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/churn-prediction`;
+
+            const res = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -249,7 +295,7 @@ export default function AiInsights() {
     };
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 pb-12">
             {/* Notification Toast */}
             <AnimatePresence>
                 {notification && (
@@ -269,13 +315,69 @@ export default function AiInsights() {
             </AnimatePresence>
 
             {/* Header */}
-            <div>
-                <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-2 flex items-center gap-3 tracking-tighter">
-                    <BrainCircuit className="text-matisse-600" size={32} />
-                    AI Insights & Analytics
-                </h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Real-time analytics powered by AI to grow your business.</p>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                    {isSuperAdmin && selectedAdmin && (
+                        <button 
+                            onClick={() => setSelectedAdmin(null)}
+                            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all text-slate-500"
+                        >
+                            <X size={24} />
+                        </button>
+                    )}
+                    <div>
+                        <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-2 flex items-center gap-3 tracking-tighter">
+                            <BrainCircuit className="text-matisse-600" size={32} />
+                            {isSuperAdmin && !selectedAdmin ? "Admins AI Overview" : "AI Insights & Analytics"}
+                        </h1>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                            {isSuperAdmin && !selectedAdmin 
+                                ? "Select an admin to analyze their portfolio performance." 
+                                : "Real-time analytics powered by AI to grow your business."}
+                        </p>
+                    </div>
+                </div>
             </div>
+
+            {isSuperAdmin && !selectedAdmin ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {analyticsLoading ? (
+                        <div className="col-span-full py-20 text-center">
+                            <Loader2 className="mx-auto animate-spin text-matisse-500" size={32} />
+                        </div>
+                    ) : admins.length === 0 ? (
+                        <div className="col-span-full py-20 text-center text-slate-500">No admins found.</div>
+                    ) : admins.map((admin) => (
+                        <motion.div
+                            key={admin._id}
+                            whileHover={{ y: -5 }}
+                            onClick={() => setSelectedAdmin(admin._id)}
+                            className="bg-white dark:bg-slate-900/40 p-6 rounded-[2rem] border border-slate-200 dark:border-white/5 premium-shadow cursor-pointer group"
+                        >
+                            <div className="flex justify-between items-start mb-4">
+                                <div className="w-12 h-12 rounded-2xl bg-matisse-500/10 flex items-center justify-center text-matisse-500 font-bold text-xl group-hover:bg-matisse-500 group-hover:text-white transition-all">
+                                    {admin.name[0]}
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Revenue</div>
+                                    <div className="text-xl font-black text-slate-900 dark:text-white">₹{admin.totalRevenue.toLocaleString()}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold text-slate-900 dark:text-white">{admin.name}</h3>
+                                <p className="text-sm text-slate-500">{admin.email}</p>
+                            </div>
+                            <div className="mt-6 pt-6 border-t border-slate-100 dark:border-white/5 flex justify-between items-center">
+                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{admin.clientCount} Clients</span>
+                                <span className="text-rose-500 text-xs font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                                    Analyze Portfolio →
+                                </span>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            ) : (
+                <>
 
             {/* ===== ANALYTICS SUMMARY CARDS ===== */}
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
@@ -712,6 +814,8 @@ export default function AiInsights() {
                     </motion.div>
                 </div>
             </div>
+            </>
+            )}
         </div>
     );
 }
