@@ -55,9 +55,14 @@ const generateInvoicePDF = async (invoice) => {
 
             // Billing Details
             doc.fontSize(10).font("Helvetica-Bold").text("BILL TO:", 350, 140);
-            doc.font("Helvetica").text(invoice.clientId.name, 350, 155);
-            doc.text(invoice.clientId.company, 350, 170);
-            doc.text(invoice.clientId.email, 350, 185);
+            if (invoice.clientId) {
+                doc.font("Helvetica").text(invoice.clientId.name || "N/A", 350, 155);
+                doc.text(invoice.clientId.company || "N/A", 350, 170);
+                doc.text(invoice.clientId.email || "N/A", 350, 185);
+            } else {
+                doc.font("Helvetica").text("Unknown Client", 350, 155);
+                doc.text("Company N/A", 350, 170);
+            }
 
             // Table Header
             const tableTop = 240;

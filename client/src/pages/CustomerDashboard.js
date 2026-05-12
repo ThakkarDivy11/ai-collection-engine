@@ -169,6 +169,11 @@ export default function CustomerDashboard() {
             const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices/download/${invoice._id}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
+            
+            if (!res.ok) {
+                throw new Error("Failed to download invoice");
+            }
+
             const blob = await res.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
@@ -177,8 +182,10 @@ export default function CustomerDashboard() {
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
         } catch (error) {
             console.error("Download failed", error);
+            alert("Failed to download invoice. Please try again.");
         }
     };
 

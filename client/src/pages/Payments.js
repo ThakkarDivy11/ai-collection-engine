@@ -94,6 +94,32 @@ export default function Payments() {
         }
     };
 
+    const handleDownload = async (invoice) => {
+        try {
+            const token = localStorage.getItem("token");
+            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices/download/${invoice._id}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            
+            if (!res.ok) {
+                throw new Error("Failed to download invoice");
+            }
+
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `Invoice_${invoice.invoiceNumber}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        } catch (error) {
+            console.error("Download failed", error);
+            alert("Failed to download invoice. Please try again.");
+        }
+    };
+
     return (
         <div className="space-y-8 pb-12">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -231,7 +257,13 @@ export default function Payments() {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <button className="text-slate-500 hover:text-white transition-all"><Download size={18} /></button>
+                                        <button 
+                                            onClick={() => handleDownload(invoice)}
+                                            className="text-slate-500 hover:text-matisse-600 dark:hover:text-white transition-all p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-xl"
+                                            title="Download PDF"
+                                        >
+                                            <Download size={18} />
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
