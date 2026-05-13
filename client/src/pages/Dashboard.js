@@ -214,6 +214,13 @@ export default function Dashboard() {
             ["Outstanding", `INR ${(stats.totalOutstanding || 0).toLocaleString()}`],
             ["Churn Risk", stats.churnRiskCount || "0"]
         ];
+
+        if (isSuperAdmin && superStats) {
+            summaryData.push(["---", "---"]);
+            summaryData.push(["Global Admins", superStats.totalAdmins || "0"]);
+            summaryData.push(["Institutional Revenue", `INR ${(superStats.totalRevenue || 0).toLocaleString()}`]);
+            summaryData.push(["Active Terminals", superStats.activeClients || "0"]);
+        }
         
         autoTable(doc, {
             startY: 50,
@@ -250,7 +257,12 @@ export default function Dashboard() {
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <button className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-slate-900/10 dark:shadow-white/5">Generate Report</button>
+                    <button 
+                        onClick={exportPDF}
+                        className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-slate-900/10 dark:shadow-white/5"
+                    >
+                        Generate Report
+                    </button>
                 </div>
             </div>
 
