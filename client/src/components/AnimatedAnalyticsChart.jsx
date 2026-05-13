@@ -33,11 +33,11 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
         >
           <defs>
             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#2d84ca" stopOpacity={0.5}/>
+              <stop offset="5%" stopColor="#2d84ca" stopOpacity={0.6}/>
               <stop offset="95%" stopColor="#2d84ca" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-10 text-slate-300 dark:text-slate-800" />
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-10 text-slate-300 dark:text-slate-600" />
           <XAxis 
             dataKey="name" 
             stroke="#64748b" 
@@ -92,7 +92,7 @@ const AnimatedAnalyticsChart = ({ data = [] }) => {
             barSize={20} 
             fill="#10b981" 
             radius={[4, 4, 0, 0]}
-            opacity={0.6}
+            opacity={0.8}
           />
         </ComposedChart>
       </ResponsiveContainer>

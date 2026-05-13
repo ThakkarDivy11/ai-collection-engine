@@ -41,10 +41,10 @@ const generateSparkline = (seed, points = 7, trend = "up") => {
 };
 
 const SPARKLINE_COLORS = {
-    "bg-matisse-600": { stroke: "#376b8b", fill: "#376b8b" },
-    "bg-rose-600": { stroke: "#e11d48", fill: "#e11d48" },
-    "bg-amber-600": { stroke: "#d97706", fill: "#d97706" },
-    "bg-emerald-600": { stroke: "#10b981", fill: "#10b981" },
+    "bg-matisse-600": { stroke: "#4f95c2", fill: "#4f95c2" },
+    "bg-rose-600": { stroke: "#f43f5e", fill: "#f43f5e" },
+    "bg-amber-600": { stroke: "#fbbf24", fill: "#fbbf24" },
+    "bg-emerald-600": { stroke: "#34d399", fill: "#34d399" },
 };
 
 const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading, sparkData, chartType = "area" }) => {
@@ -57,7 +57,7 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading,
                     <Bar 
                         dataKey="v" 
                         fill={sparkColor.fill} 
-                        opacity={0.3} 
+                        opacity={0.45} 
                         radius={[2, 2, 0, 0]}
                         animationDuration={1500}
                     />
@@ -82,7 +82,7 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading,
             <AreaChart data={sparkData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                 <defs>
                     <linearGradient id={`spark-${title.replace(/\s/g, '')}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor={sparkColor.fill} stopOpacity={0.25} />
+                        <stop offset="0%" stopColor={sparkColor.fill} stopOpacity={0.4} />
                         <stop offset="100%" stopColor={sparkColor.fill} stopOpacity={0} />
                     </linearGradient>
                 </defs>
@@ -90,7 +90,7 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading,
                     type="monotone"
                     dataKey="v"
                     stroke={sparkColor.stroke}
-                    strokeWidth={2.5}
+                    strokeWidth={3}
                     fill={`url(#spark-${title.replace(/\s/g, '')})`}
                     dot={false}
                     isAnimationActive={true}
@@ -123,7 +123,7 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading,
             </div>
 
             <div className="mb-4 relative z-10">
-                <p className="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-1.5">{title}</p>
+                <p className="text-slate-400 dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-1.5">{title}</p>
                 {loading ? (
                     <div className="h-9 w-28 bg-slate-100 dark:bg-white/5 animate-pulse rounded-xl" />
                 ) : (
@@ -134,7 +134,7 @@ const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, loading,
             </div>
 
             {!loading && sparkData && (
-                <div className="h-14 -mx-6 -mb-6 mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
+                <div className="h-14 -mx-6 -mb-6 mt-4 opacity-90 group-hover:opacity-100 transition-opacity">
                     <ResponsiveContainer width="100%" height="100%">
                         {renderChart()}
                     </ResponsiveContainer>
@@ -461,13 +461,13 @@ export default function Dashboard() {
             <div className="glass-card rounded-[3rem] overflow-hidden premium-shadow relative group">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-matisse-500/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-matisse-500/10 transition-colors duration-700" />
                 
-                <div className="p-10 border-b border-slate-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-slate-50/30 dark:bg-white/2 relative z-10">
+                <div className="p-10 border-b border-slate-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-slate-50/30 dark:bg-slate-800/40 relative z-10">
                     <div>
                         <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">Recent Ledger</h3>
-                        <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.25em] mt-2 opacity-70">Latest verified billing activities</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-black uppercase tracking-[0.25em] mt-2">Latest verified billing activities</p>
                     </div>
                     <div className="flex items-center gap-4">
-                        <div className="hidden md:flex items-center gap-2.5 px-5 py-2.5 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl text-[10px] font-black text-emerald-600 uppercase tracking-widest">
+                        <div className="hidden md:flex items-center gap-2.5 px-5 py-2.5 bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/10 dark:border-emerald-500/20 rounded-2xl text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
                             <span>Live Updates</span>
                         </div>
@@ -477,7 +477,7 @@ export default function Dashboard() {
                 <div className="overflow-x-auto relative z-10">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] border-b border-slate-100 dark:border-white/5">
+                            <tr className="text-slate-400 dark:text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] border-b border-slate-100 dark:border-white/5">
                                 <th className="px-10 py-8">Entity</th>
                                 <th className="px-10 py-8">Status</th>
                                 <th className="px-10 py-8 text-right">Volume</th>
@@ -506,7 +506,7 @@ export default function Dashboard() {
                                             </div>
                                             <div>
                                                 <div className="font-black text-slate-900 dark:text-white text-sm tracking-tight group-hover:text-matisse-600 transition-colors">{client.name}</div>
-                                                <div className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-1 opacity-70">{client.company}</div>
+                                                <div className="text-[10px] text-slate-500 dark:text-slate-400 font-black uppercase tracking-widest mt-1">{client.company}</div>
                                             </div>
                                         </div>
                                     </td>
@@ -518,7 +518,7 @@ export default function Dashboard() {
                                         </span>
                                     </td>
                                     <td className="px-10 py-7 font-black text-slate-900 dark:text-white text-right text-base tracking-tighter group-hover:scale-105 transition-transform origin-right">{client.revenue}</td>
-                                    <td className="px-10 py-7 text-slate-500 dark:text-slate-400 text-xs font-bold tabular-nums opacity-80">{client.date}</td>
+                                    <td className="px-10 py-7 text-slate-500 dark:text-slate-400 text-xs font-bold tabular-nums">{client.date}</td>
                                     <td className="px-10 py-7 text-right">
                                         <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all transform hover:rotate-90">&bull;&bull;&bull;</button>
                                     </td>

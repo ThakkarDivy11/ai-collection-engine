@@ -95,19 +95,23 @@ export default function Clients() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">Client Management</h1>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Add, edit and monitor your client portfolio.</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                        {isSuperAdmin ? "Monitor all client portfolios across the platform." : "Add, edit and monitor your client portfolio."}
+                    </p>
                 </div>
-                <button
-                    onClick={() => {
-                        setEditClient(null);
-                        setFormData({ name: "", email: "", company: "", password: "", status: "active" });
-                        setShowModal(true);
-                    }}
-                    className="bg-matisse-600 hover:bg-matisse-700 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-matisse-600/20"
-                >
-                    <Plus size={20} />
-                    Add Client
-                </button>
+                {!isSuperAdmin && (
+                    <button
+                        onClick={() => {
+                            setEditClient(null);
+                            setFormData({ name: "", email: "", company: "", password: "", status: "active" });
+                            setShowModal(true);
+                        }}
+                        className="bg-matisse-600 hover:bg-matisse-700 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all shadow-lg shadow-matisse-600/20"
+                    >
+                        <Plus size={20} />
+                        Add Client
+                    </button>
+                )}
             </div>
 
             <div className="bg-white dark:bg-slate-900/40 p-5 rounded-3xl border border-slate-200 dark:border-white/5 flex items-center gap-4 premium-shadow transition-all duration-300">
