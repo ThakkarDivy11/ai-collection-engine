@@ -78,15 +78,22 @@ const openai = {
                     console.warn("⚠️ AI Engine: Local Ollama failed. Switching to Mistral Cloud...", ollamaError.message);
                     
                     try {
+                        const mistralModel = process.env.AI_MODEL || "open-mistral-7b";
+                        console.log(`📡 AI Engine: Calling Mistral Cloud with model [${mistralModel}]...`);
+                        
                         const response = await mistralClient.chat.completions.create({
-                            model: process.env.AI_MODEL || "mistral-small-latest",
+                            model: mistralModel,
                             messages,
                             ...rest
                         });
                         console.log("✨ AI Engine: Mistral Cloud generation successful.");
                         return response;
                     } catch (mistralError) {
-                        console.error("❌ AI Engine: Critical Failure - Both engines failed.", mistralError.message);
+                        console.error("❌ AI Engine: Mistral Cloud Failure.", mistralError.message);
+                        if (mistralError.response) {
+                            console.error("📊 Mistral Error Status:", mistralError.status);
+                            console.error("📄 Mistral Error Data:", JSON.stringify(mistralError.response.data));
+                        }
                         throw mistralError;
                     }
                 }
