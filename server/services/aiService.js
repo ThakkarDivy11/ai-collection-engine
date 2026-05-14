@@ -79,7 +79,7 @@ const openai = {
                     
                     try {
                         const response = await mistralClient.chat.completions.create({
-                            model: process.env.AI_MODEL || "mistral-tiny",
+                            model: process.env.AI_MODEL || "mistral-small-latest",
                             messages,
                             ...rest
                         });
