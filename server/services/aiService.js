@@ -55,7 +55,49 @@ const generateCompletion = async (prompt, systemPrompt = "You are a professional
     }
 };
 
+/**
+ * Unified OpenAI-compatible client with automatic fallback
+ * Try Ollama (local) first, then fallback to Mistral (cloud)
+ */
+const openai = {
+    chat: {
+        completions: {
+            create: async (params) => {
+                const { model, messages, ...rest } = params;
+                
+                try {
+                    console.log("🤖 AI Engine: Attempting local execution (Ollama)...");
+                    const response = await ollamaClient.chat.completions.create({
+                        model: process.env.OLLAMA_MODEL || "llama3:latest",
+                        messages,
+                        ...rest
+                    });
+                    console.log("✅ AI Engine: Local generation successful.");
+                    return response;
+                } catch (ollamaError) {
+                    console.warn("⚠️ AI Engine: Local Ollama failed. Switching to Mistral Cloud...", ollamaError.message);
+                    
+                    try {
+                        const response = await mistralClient.chat.completions.create({
+                            model: process.env.AI_MODEL || "mistral-tiny",
+                            messages,
+                            ...rest
+                        });
+                        console.log("✨ AI Engine: Mistral Cloud generation successful.");
+                        return response;
+                    } catch (mistralError) {
+                        console.error("❌ AI Engine: Critical Failure - Both engines failed.", mistralError.message);
+                        throw mistralError;
+                    }
+                }
+            }
+        }
+    }
+};
+
 module.exports = {
     generateCompletion,
-    mistralClient // Export if needed
+    openai,
+    mistralClient,
+    ollamaClient
 };

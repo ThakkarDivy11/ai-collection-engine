@@ -42,7 +42,14 @@ function App() {
                 <Route path="/super-login" element={<SuperAdminLogin />} />
 
                 {/* Customer Dashboard (Portal) */}
-                <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+                <Route
+                    path="/customer-dashboard"
+                    element={
+                        <Layout>
+                            <CustomerDashboard />
+                        </Layout>
+                    }
+                />
 
                 {/* Admin Routes (Protected) */}
                 <Route

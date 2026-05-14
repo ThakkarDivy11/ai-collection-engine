@@ -19,8 +19,13 @@ const TopNavbar = () => {
     
     // Get real user data from localStorage
     const user = JSON.parse(localStorage.getItem("user") || "{}");
-    const userName = user.name || "Admin";
-    const userRole = user.role === "superadmin" ? "System Super Admin" : "System Admin";
+    const customer = JSON.parse(localStorage.getItem("customer") || "{}");
+    
+    const isCustomer = !!customer.id;
+    const userName = (isCustomer ? customer.name : user.name) || "User";
+    const userRole = isCustomer 
+        ? (customer.company || "Client Portal") 
+        : (user.role === "superadmin" ? "System Super Admin" : "System Admin");
 
     return (
         <header className="sticky top-0 z-30 w-full border-b border-slate-200/50 dark:border-white/5 bg-white/40 dark:bg-[#0b1424]/40 backdrop-blur-2xl transition-all duration-500">
@@ -28,23 +33,27 @@ const TopNavbar = () => {
                 {/* Left — page info */}
                 <div className="hidden sm:block min-w-0 animate-reveal">
                     <h2 className="text-2xl font-black text-slate-900 dark:text-white truncate tracking-tighter">
-                        {page.title}
+                        {isCustomer && location.pathname === "/customer-dashboard" ? "Client Portal" : page.title}
                     </h2>
-                    {page.sub && (
-                        <p className="text-[10px] text-slate-500 dark:text-slate-500 truncate mt-1.5 font-black uppercase tracking-[0.2em] opacity-70">{page.sub}</p>
+                    {(page.sub || isCustomer) && (
+                        <p className="text-[10px] text-slate-500 dark:text-slate-500 truncate mt-1.5 font-black uppercase tracking-[0.2em] opacity-70">
+                            {isCustomer && location.pathname === "/customer-dashboard" ? "Secure Billing Terminal" : page.sub}
+                        </p>
                     )}
                 </div>
 
                 {/* Right — actions */}
                 <div className="flex items-center gap-5 ml-auto">
-                    <div className="hidden md:flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/50 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 text-slate-500 dark:text-slate-400 text-sm w-80 focus-within:ring-2 focus-within:ring-matisse-500/20 transition-all group shadow-sm focus-within:shadow-md focus-within:bg-white/80 dark:focus-within:bg-white/10">
-                        <Search size={16} className="shrink-0 group-focus-within:text-matisse-500 transition-colors stroke-[2.5px]" />
-                        <input
-                            type="text"
-                            placeholder="Command search..."
-                            className="bg-transparent border-none outline-none text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 w-full font-bold uppercase tracking-wider"
-                        />
-                    </div>
+                    {!isCustomer && (
+                        <div className="hidden md:flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/50 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 text-slate-500 dark:text-slate-400 text-sm w-80 focus-within:ring-2 focus-within:ring-matisse-500/20 transition-all group shadow-sm focus-within:shadow-md focus-within:bg-white/80 dark:focus-within:bg-white/10">
+                            <Search size={16} className="shrink-0 group-focus-within:text-matisse-500 transition-colors stroke-[2.5px]" />
+                            <input
+                                type="text"
+                                placeholder="Command search..."
+                                className="bg-transparent border-none outline-none text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 w-full font-bold uppercase tracking-wider"
+                            />
+                        </div>
+                    )}
 
                     <div className="flex items-center gap-3">
                         {/* Notification bell */}
@@ -67,7 +76,7 @@ const TopNavbar = () => {
                             </span>
                             <span className="text-[9px] font-black text-matisse-500 uppercase tracking-[0.2em] mt-1.5 opacity-80">{userRole}</span>
                         </div>
-                        <div className="w-12 h-12 rounded-[1.25rem] bg-gradient-to-tr from-matisse-600 to-matisse-400 flex items-center justify-center text-white text-sm font-black shadow-lg shadow-matisse-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ring-4 ring-white dark:ring-slate-900/50">
+                        <div className={`w-12 h-12 rounded-[1.25rem] flex items-center justify-center text-white text-sm font-black shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ring-4 ring-white dark:ring-slate-900/50 ${isCustomer ? 'bg-gradient-to-tr from-emerald-600 to-emerald-400 shadow-emerald-600/30' : 'bg-gradient-to-tr from-matisse-600 to-matisse-400 shadow-matisse-600/30'}`}>
                             {userName[0]}
                         </div>
                     </div>
@@ -86,7 +95,7 @@ const Layout = ({ children }) => {
                 <Sidebar />
 
                 {/* Main */}
-                <div className="flex-1 md:ml-64 flex flex-col min-h-screen relative z-10 w-full">
+                <div className="flex-1 md:ml-72 flex flex-col min-h-screen relative z-10 w-full transition-all duration-500">
                     <TopNavbar />
 
                     <main className="flex-1 p-6 sm:p-8 overflow-y-auto">
