@@ -144,11 +144,26 @@ exports.stripeWebhook = async (req, res) => {
                     await sendPaymentSuccessEmail(populatedInv.clientId, populatedInv, populatedInv.amount);
                 }
             }
+
+            // After bulk payment, reset client status to active
+            await Client.findByIdAndUpdate(clientId, { status: "active" });
+
         } else if (invoiceId) {
             const updatedInvoice = await Invoice.findByIdAndUpdate(invoiceId, { status: "paid" }, { new: true }).populate("clientId");
             
             if (updatedInvoice && updatedInvoice.clientId) {
                 await sendPaymentSuccessEmail(updatedInvoice.clientId, updatedInvoice, amount);
+
+                // Check if this was the last unpaid/overdue invoice
+                const remainingInvoices = await Invoice.countDocuments({
+                    clientId: updatedInvoice.clientId._id,
+                    status: { $in: ["unpaid", "overdue"] }
+                });
+
+                if (remainingInvoices === 0) {
+                    await Client.findByIdAndUpdate(updatedInvoice.clientId._id, { status: "active" });
+                    console.log(`Client ${updatedInvoice.clientId.name} status reset to ACTIVE.`);
+                }
             }
         }
     }
@@ -217,11 +232,26 @@ exports.verifyPaymentSession = async (req, res) => {
                             await sendPaymentSuccessEmail(populatedInv.clientId, populatedInv, populatedInv.amount);
                         }
                     }
+
+                    // Reset client status to active
+                    await Client.findByIdAndUpdate(clientId, { status: "active" });
+
                 } else if (invoiceId) {
                     const updatedInvoice = await Invoice.findByIdAndUpdate(invoiceId, { status: "paid" }, { new: true }).populate("clientId");
                     
                     if (updatedInvoice && updatedInvoice.clientId) {
                         await sendPaymentSuccessEmail(updatedInvoice.clientId, updatedInvoice, amount);
+
+                        // Check if this was the last unpaid/overdue invoice
+                        const remainingInvoices = await Invoice.countDocuments({
+                            clientId: updatedInvoice.clientId._id,
+                            status: { $in: ["unpaid", "overdue"] }
+                        });
+
+                        if (remainingInvoices === 0) {
+                            await Client.findByIdAndUpdate(updatedInvoice.clientId._id, { status: "active" });
+                            console.log(`Client ${updatedInvoice.clientId.name} status reset to ACTIVE.`);
+                        }
                     }
                 }
             }
