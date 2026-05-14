@@ -16,7 +16,21 @@ const {
  */
 const runAgentCycle = async (req, res) => {
     try {
-        // Find unpaid invoices
+        // 1. CLEANUP: Reset status for clients who have paid everything
+        const churnRiskClients = await Client.find({ status: "churn-risk" });
+        for (const c of churnRiskClients) {
+            const outstanding = await Invoice.countDocuments({
+                clientId: c._id,
+                status: { $in: ["unpaid", "overdue"] }
+            });
+            if (outstanding === 0) {
+                c.status = "active";
+                await c.save();
+                console.log(`[AI Agent] Auto-reset client ${c.name} to ACTIVE (Zero outstanding)`);
+            }
+        }
+
+        // 2. Find unpaid invoices to process
         const overdueInvoices = await Invoice.find({ status: { $in: ["unpaid", "overdue"] } }).populate("clientId");
 
         const actionsTaken = [];
