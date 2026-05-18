@@ -31,19 +31,45 @@ const sendEmail = async ({ to, subject, text, html, attachments }) => {
         // If Resend is configured, use it (Best for Render)
         if (resend) {
             console.log("📨 Using Resend to send email...");
-            const { data, error } = await resend.emails.send({
-                from: `${process.env.SENDER_NAME || "CollectAI"} <onboarding@resend.dev>`, // Resend free tier requirement
-                to: [to],
-                subject,
-                text,
-                html,
-                attachments,
-            });
-            if (error) {
-                console.error("⚠️ Resend failed:", error.message, "- Falling back to SMTP...");
-            } else {
+            try {
+                const { data, error } = await resend.emails.send({
+                    from: `${process.env.SENDER_NAME || "CollectAI"} <onboarding@resend.dev>`, // Resend free tier requirement
+                    to: [to],
+                    subject,
+                    text,
+                    html,
+                    attachments,
+                });
+                if (error) throw error;
                 console.log("✅ Resend success:", data.id);
                 return data;
+            } catch (resendError) {
+                // If it is a validation error due to unverified domain on Resend (free tier)
+                const isValidationError = 
+                    resendError.name === 'validation_error' || 
+                    resendError.statusCode === 403 || 
+                    (resendError.message && resendError.message.includes("own email address"));
+
+                if (isValidationError) {
+                    const testEmail = "divythakkar318@gmail.com";
+                    if (to !== testEmail) {
+                        console.warn(`⚠️ Resend validation error. Redirecting email from <${to}> to verified test email <${testEmail}>...`);
+                        const { data, error } = await resend.emails.send({
+                            from: `${process.env.SENDER_NAME || "CollectAI"} <onboarding@resend.dev>`,
+                            to: [testEmail],
+                            subject: `[REDIRECTED from ${to}] ${subject}`,
+                            text: `[This email was redirected to you because your Resend account is on the free tier and the domain is unverified. Original Recipient: ${to}]\n\n${text || ""}`,
+                            html: `<div style="background:#fff3cd;color:#856404;border:1px solid #ffeeba;padding:15px;margin-bottom:20px;border-radius:4px;font-family:sans-serif;"><strong>Test Environment Redirect:</strong> This email was redirected to you because your Resend account is on the free tier and the domain is unverified. <br/><strong>Original Recipient:</strong> ${to}</div>${html || ""}`,
+                            attachments,
+                        });
+                        if (error) throw error;
+                        console.log("✅ Resend redirected success:", data.id);
+                        return data;
+                    }
+                }
+                
+                // If it's a different error, log it and let it fall back to SMTP
+                console.error("⚠️ Resend failed:", resendError.message || resendError, "- Falling back to SMTP...");
             }
         }
 
