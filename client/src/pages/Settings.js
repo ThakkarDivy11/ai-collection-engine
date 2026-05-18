@@ -135,9 +135,17 @@ export default function Settings() {
                                 className="space-y-8"
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <InputField label="Full Name" icon={User} defaultValue={user.name || "Admin User"} />
-                                    <InputField label="Email Address" icon={Mail} defaultValue={user.email || "admin@collectai.com"} />
-                                    <InputField label="Role" icon={ShieldCheck} defaultValue={user.role === "superadmin" ? "System Super Admin" : "System Admin"} disabled />
+                                    <InputField label="Full Name" icon={User} defaultValue={user.name || ""} />
+                                    <InputField label="Email Address" icon={Mail} defaultValue={user.email || ""} />
+                                    <InputField 
+                                        label="Role" 
+                                        icon={ShieldCheck} 
+                                        defaultValue={
+                                            user.role === "superadmin" ? "System Super Admin" : 
+                                            user.role === "client" ? "Customer / Client" : "Administrator"
+                                        } 
+                                        disabled 
+                                    />
                                     <InputField label="Timezone" icon={Globe} defaultValue="(GMT+05:30) India Standard Time" />
                                 </div>
                                 <div className="pt-8 border-t border-gray-100 dark:border-slate-800/50">
@@ -164,8 +172,8 @@ export default function Settings() {
                                 className="space-y-8"
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <InputField label="Company Name" icon={Building2} defaultValue="CollectAI Inc." />
-                                    <InputField label="Website" icon={Globe} defaultValue="https://collectai.com" />
+                                    <InputField label="Company Name" icon={Building2} defaultValue={user.company || "CollectAI Inc."} />
+                                    <InputField label="Website" icon={Globe} defaultValue={user.website || "https://collectai.com"} />
                                 </div>
                                 <div className="space-y-4 pt-4">
                                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Company Address</label>

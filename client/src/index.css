@@ -52,6 +52,10 @@
     @apply bg-[#0b1424] text-slate-100;
   }
 
+  .dark select option {
+    @apply bg-slate-900 text-white;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
     letter-spacing: -0.025em;

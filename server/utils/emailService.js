@@ -39,9 +39,12 @@ const sendEmail = async ({ to, subject, text, html, attachments }) => {
                 html,
                 attachments,
             });
-            if (error) throw error;
-            console.log("✅ Resend success:", data.id);
-            return data;
+            if (error) {
+                console.error("⚠️ Resend failed:", error.message, "- Falling back to SMTP...");
+            } else {
+                console.log("✅ Resend success:", data.id);
+                return data;
+            }
         }
 
         // Fallback to Nodemailer (Best for Local)

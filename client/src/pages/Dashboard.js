@@ -378,11 +378,11 @@ export default function Dashboard() {
                             <select 
                                 value={viewType}
                                 onChange={(e) => setViewType(e.target.value)}
-                                className="bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-300 outline-none cursor-pointer hover:bg-slate-200 dark:hover:bg-white/10 transition-all shadow-sm"
+                                className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-2.5 text-xs font-bold text-slate-700 dark:text-white outline-none cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition-all shadow-sm"
                             >
-                                <option value="weekly">Weekly View</option>
-                                <option value="monthly">Monthly View</option>
-                                <option value="yearly">Yearly View</option>
+                                <option value="weekly" className="dark:bg-slate-800">Weekly View</option>
+                                <option value="monthly" className="dark:bg-slate-800">Monthly View</option>
+                                <option value="yearly" className="dark:bg-slate-800">Yearly View</option>
                             </select>
                             <button className="px-5 py-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-white/10 transition-all shadow-sm active:scale-95" onClick={exportPDF}>Export</button>
                         </div>
