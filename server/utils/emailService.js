@@ -33,7 +33,7 @@ const sendEmail = async ({ to, subject, text, html, attachments }) => {
             console.log("📨 Using Resend to send email...");
             try {
                 const { data, error } = await resend.emails.send({
-                    from: `${process.env.SENDER_NAME || "CollectAI"} <onboarding@resend.dev>`, // Resend free tier requirement
+                    from: `${process.env.SENDER_NAME || "CollectAI"} <info@aicollection.divythakkar.website>`, 
                     to: [to],
                     subject,
                     text,
@@ -55,7 +55,7 @@ const sendEmail = async ({ to, subject, text, html, attachments }) => {
                     if (to !== testEmail) {
                         console.warn(`⚠️ Resend validation error. Redirecting email from <${to}> to verified test email <${testEmail}>...`);
                         const { data, error } = await resend.emails.send({
-                            from: `${process.env.SENDER_NAME || "CollectAI"} <onboarding@resend.dev>`,
+                            from: `${process.env.SENDER_NAME || "CollectAI"} <info@aicollection.divythakkar.website>`,
                             to: [testEmail],
                             subject: `[REDIRECTED from ${to}] ${subject}`,
                             text: `[This email was redirected to you because your Resend account is on the free tier and the domain is unverified. Original Recipient: ${to}]\n\n${text || ""}`,
