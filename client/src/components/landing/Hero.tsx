@@ -59,9 +59,9 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-matisse-500/10 dark:bg-matisse-300/5 text-matisse-700 dark:text-matisse-300 text-[10px] font-semibold mb-8 tracking-[0.3em] uppercase backdrop-blur-sm border border-matisse-500/10 dark:border-matisse-300/10"
+            className="flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-matisse-500 to-matisse-700 dark:from-matisse-300 dark:to-matisse-500 text-[11px] font-bold uppercase tracking-[0.3em] mb-8"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-matisse-600 dark:bg-matisse-400 shadow-[0_0_8px_rgba(207,123,64,0.5)] dark:shadow-[0_0_8px_rgba(228,186,141,0.5)]" />
+            <div className="w-4 h-[2px] bg-matisse-500" />
             <span>The Future of Recovery</span>
           </motion.div>
 
@@ -76,13 +76,13 @@ const Hero: React.FC = () => {
             ref={subRef}
             className="hero-subtitle text-lg md:text-2xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-16 leading-relaxed font-normal will-change-transform"
           >
-            CollectAI integrates Neural Churn Prediction and Autonomous Negotiators
+            CollectAI integrates AI Churn Prediction and Autonomous Negotiators
             to deliver high-scale, AI-driven payment recovery for the modern enterprise.
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-8">
             <Link to="/login">
-              <button className="hero-button px-12 py-6 bg-slate-950 dark:bg-matisse-500 dark:text-white text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-[0_30px_60px_rgba(0,0,0,0.1)] text-lg will-change-transform">
+              <button className="hero-button px-12 py-6 bg-matisse-600 hover:bg-matisse-700 dark:bg-matisse-500 dark:hover:bg-matisse-600 text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-xl shadow-matisse-500/25 text-lg will-change-transform">
                 Start Free Trial
               </button>
             </Link>

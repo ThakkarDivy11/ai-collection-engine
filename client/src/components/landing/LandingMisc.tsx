@@ -6,17 +6,17 @@ import { useInView, useMotionValue, useTransform, animate } from "framer-motion"
 import { AuroraHero } from "../ui/aurora-hero-bg";
 import { Link } from "react-router-dom";
 import LogoLoop from "../ui/LogoLoop";
-import { 
-  SiFigma, 
-  SiFramer, 
-  SiStorybook, 
-  SiReact, 
-  SiNotion, 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiStripe, 
-  SiNextdotjs, 
-  SiGithub 
+import {
+  SiFigma,
+  SiFramer,
+  SiStorybook,
+  SiReact,
+  SiNotion,
+  SiTypescript,
+  SiTailwindcss,
+  SiStripe,
+  SiNextdotjs,
+  SiGithub
 } from 'react-icons/si';
 import ElectricBorder from "../ui/ElectricBorder";
 import CardStack from "../CardStack";
@@ -53,7 +53,7 @@ export const Stats: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-6 border-y border-matisse-100 dark:border-matisse-800/20 bg-white dark:bg-[#112740]">
+    <section className="py-24 px-6 bg-white dark:bg-[#112740]">
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-12 lg:gap-8">
         {stats.map((s, i) => (
           <motion.div
@@ -90,7 +90,7 @@ export const PartnerLogos: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 bg-white dark:bg-[#112740] border-y border-matisse-100 dark:border-matisse-800/20 overflow-hidden relative [--fade-bg:white] dark:[--fade-bg:#112740]">
+    <section className="py-12 bg-white dark:bg-[#112740] overflow-hidden relative [--fade-bg:white] dark:[--fade-bg:#112740]">
       <div className="max-w-7xl mx-auto px-6">
         <p className="text-center text-xl md:text-2xl font-light text-slate-500 dark:text-slate-300 mb-10 tracking-tight">
           Trusted by <span className="text-slate-900 dark:text-white italic font-serif">innovative teams</span>
@@ -122,9 +122,9 @@ export const HowItWorks: React.FC = () => {
   const COLORS = ['#2563eb', '#8b5cf6', '#0ea5e9', '#38bdf8'];
 
   const steps = [
-    { 
-      title: "Data Integration", 
-      desc: "Sync your existing invoices and client history.", 
+    {
+      title: "Data Integration",
+      desc: "Sync your existing invoices and client history.",
       icon: <BrainCircuit size={24} />,
       chart: (
         <ResponsiveContainer width="100%" height={80}>
@@ -134,9 +134,9 @@ export const HowItWorks: React.FC = () => {
         </ResponsiveContainer>
       )
     },
-    { 
-      title: "Risk Analysis", 
-      desc: "AI predicts churn risk and default probability.", 
+    {
+      title: "Risk Analysis",
+      desc: "AI predicts churn risk and default probability.",
       icon: <Sparkles size={24} />,
       chart: (
         <ResponsiveContainer width="100%" height={80}>
@@ -146,17 +146,17 @@ export const HowItWorks: React.FC = () => {
         </ResponsiveContainer>
       )
     },
-    { 
-      title: "Auto Recovery", 
-      desc: "Neural negotiators begin recovery flows.", 
+    {
+      title: "Auto Recovery",
+      desc: "AI negotiators begin recovery flows.",
       icon: <Globe size={24} />,
       chart: (
         <ResponsiveContainer width="100%" height={80}>
           <AreaChart data={chartData3}>
             <defs>
               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
               </linearGradient>
             </defs>
             <Area type="monotone" dataKey="value" stroke="#2563eb" fillOpacity={1} fill="url(#colorValue)" />
@@ -164,9 +164,9 @@ export const HowItWorks: React.FC = () => {
         </ResponsiveContainer>
       )
     },
-    { 
-      title: "Capital Reclaimed", 
-      desc: "Payments are settled and revenue is secured.", 
+    {
+      title: "Capital Reclaimed",
+      desc: "Payments are settled and revenue is secured.",
       icon: <Zap size={24} />,
       chart: (
         <ResponsiveContainer width="100%" height={80}>
@@ -190,7 +190,7 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works" className="pt-24 pb-40 px-6 bg-matisse-50/50 dark:bg-white/[0.01]">
+    <section id="how-it-works" className="pt-24 pb-40 px-6 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
@@ -211,7 +211,7 @@ export const HowItWorks: React.FC = () => {
               transition={{ delay: 0.1, duration: 0.8 }}
               className="text-6xl md:text-8xl font-semibold text-slate-900 dark:text-white tracking-tighter leading-[1.05] mb-8"
             >
-              How Nexus <br />
+              How CollectAI <br />
               <span className="text-matisse-600 dark:text-matisse-300">Orchestrates</span>
               <br />
               <span className="text-matisse-600 dark:text-matisse-300">Capital.</span>
@@ -248,6 +248,8 @@ export const HowItWorks: React.FC = () => {
                 randomRotation={true}
                 sensitivity={180}
                 sendToBackOnClick={true}
+                autoplay={true}
+                autoplayDelay={2000}
                 cards={steps.map((s, i) => (
                   <div
                     key={i}
@@ -284,7 +286,7 @@ export const HowItWorks: React.FC = () => {
 
 export const CTA: React.FC = () => {
   return (
-    <AuroraHero className="border-y border-white/5 pt-40 pb-20">
+    <AuroraHero className="pt-40 pb-20">
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {/* Decorative elements */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-matisse-500/10 blur-[150px] rounded-full pointer-events-none" />
@@ -294,10 +296,11 @@ export const CTA: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-matisse-500/10 border border-matisse-500/20 text-matisse-600 dark:text-matisse-300 text-[10px] font-semibold uppercase tracking-[0.4em] mb-12"
+            className="flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-matisse-500 to-matisse-700 dark:from-matisse-300 dark:to-matisse-500 text-[11px] font-bold uppercase tracking-[0.3em] mb-12"
           >
-            <span className="w-2 h-2 rounded-full bg-matisse-500 animate-pulse" />
-            Get Started Today
+            <div className="w-4 h-[2px] bg-matisse-500" />
+            <span>Get Started Today</span>
+            <div className="w-4 h-[2px] bg-matisse-500" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 40, filter: "blur(20px)" }}
@@ -314,9 +317,10 @@ export const CTA: React.FC = () => {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
-            className="text-slate-600 dark:text-slate-400 text-xl md:text-2xl mb-20 font-normal max-w-2xl mx-auto leading-relaxed"
+            className="text-slate-600 dark:text-slate-400 text-xl md:text-2xl mb-20 font-normal max-w-2xl mx-auto leading-relaxed text-center"
           >
-            Join the leading financial institutions using Nexus to automate recovery and maximize capital efficiency.
+            Join forward-thinking businesses using CollectAI <br className="hidden md:block" />
+            to automate payment recovery, reduce churn, and maximize revenue efficiency.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -339,7 +343,7 @@ export const CTA: React.FC = () => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="pt-12 pb-24 px-6 bg-white dark:bg-[#112740] border-t border-matisse-100 dark:border-matisse-800/20 relative z-10">
+    <footer className="pt-12 pb-24 px-6 bg-transparent relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="col-span-1 md:col-span-2">
@@ -353,7 +357,7 @@ export const Footer: React.FC = () => {
           <div>
             <div className="text-slate-900 dark:text-white font-semibold text-xs uppercase tracking-widest mb-8">Protocol</div>
             <div className="space-y-4">
-              {["Features", "Nexus Core", "Intelligence", "Pricing"].map(link => (
+              {["Features", "AI Core", "Intelligence", "Pricing"].map(link => (
                 <a key={link} href="#!" className="block text-slate-500 hover:text-matisse-600 dark:hover:text-matisse-300 transition-colors font-normal">{link}</a>
               ))}
             </div>
@@ -370,7 +374,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
         <div className="pt-12 border-t border-matisse-100 dark:border-matisse-800/20 flex flex-col md:flex-row justify-between gap-6 text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
-          <div>© 2026 CollectAI Neural Network. All rights reserved.</div>
+          <div>© 2026 CollectAI Collection Engine. All rights reserved.</div>
           <div className="flex gap-8">
             <a href="#!" className="hover:text-slate-900 dark:hover:text-white">Privacy Protocol</a>
             <a href="#!" className="hover:text-slate-900 dark:hover:text-white">Terms of Service</a>

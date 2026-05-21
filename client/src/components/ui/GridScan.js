@@ -1,4 +1,4 @@
-import * as faceapi from 'face-api.js/build/es6/index.js';
+import * as faceapi from 'face-api.js';
 import { BloomEffect, ChromaticAberrationEffect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';

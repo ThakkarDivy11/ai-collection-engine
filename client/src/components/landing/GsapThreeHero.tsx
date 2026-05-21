@@ -35,7 +35,7 @@ const AnimatedGlobe = () => {
   );
 };
 
-const NeuralParticles = () => {
+const AIParticles = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const { clock } = useThree();
 
@@ -136,7 +136,7 @@ const ThreeBackground = () => {
 
         {/* Three.js Elements */}
         <AnimatedGlobe />
-        <NeuralParticles />
+        <AIParticles />
         <FloatingOrbs />
 
         {/* Stars Background */}
@@ -283,9 +283,9 @@ const GsapThreeHero: React.FC = () => {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-matisse-500/10 text-matisse-700 text-[10px] font-semibold mb-8 tracking-[0.3em] uppercase backdrop-blur-sm border border-matisse-500/10"
+          className="flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-matisse-500 to-matisse-700 dark:from-matisse-300 dark:to-matisse-500 text-[11px] font-bold uppercase tracking-[0.3em] mb-8"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-matisse-600 shadow-[0_0_8px_rgba(207,123,64,0.5)]" />
+          <div className="w-4 h-[2px] bg-matisse-500" />
           <span>The Future of Recovery</span>
         </div>
 
@@ -303,13 +303,13 @@ const GsapThreeHero: React.FC = () => {
           ref={subtitleRef}
           className="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto mb-16 leading-relaxed font-normal"
         >
-          CollectAI integrates Neural Churn Prediction and Autonomous Negotiators
+          CollectAI integrates AI Churn Prediction and Autonomous Negotiators
           to deliver high-scale, AI-driven payment recovery for the modern enterprise.
         </p>
 
         {/* Buttons */}
         <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-8">
-          <button className="px-12 py-6 bg-slate-950 text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-[0_30px_60px_rgba(0,0,0,0.1)] text-lg">
+          <button className="px-12 py-6 bg-matisse-600 hover:bg-matisse-700 text-white font-semibold rounded-3xl transition-all hover:scale-[1.03] active:scale-95 shadow-xl shadow-matisse-500/25 text-lg">
             Start Recovery
           </button>
 

@@ -78,7 +78,7 @@ const InteractiveGlobe = ({ isDark }: { isDark: boolean }) => {
   );
 };
 
-const NeuralNetwork = ({ isDark }: { isDark: boolean }) => {
+const AINetwork = ({ isDark }: { isDark: boolean }) => {
   const linesRef = useRef<THREE.LineSegments>(null);
 
   const { positions } = useMemo(() => {
@@ -209,7 +209,7 @@ const PremiumThreeBackground: React.FC = () => {
 
         {/* Main Interactive Elements */}
         <InteractiveGlobe isDark={isDark} />
-        <NeuralNetwork isDark={isDark} />
+        <AINetwork isDark={isDark} />
         <FloatingDataPoints isDark={isDark} />
 
         {/* Sparkles Effect */}

@@ -46,7 +46,7 @@ const AnimatedGlobe = memo(({ isDark }: { isDark: boolean }) => {
   );
 });
 
-const NeuralParticles = memo(({ isDark, count = 300 }: { isDark: boolean; count?: number }) => {
+const AIParticles = memo(({ isDark, count = 300 }: { isDark: boolean; count?: number }) => {
   const pointsRef = useRef<THREE.Points>(null);
   const { clock } = useThree();
 
@@ -275,7 +275,7 @@ const GsapThreeHeroBackground: React.FC = () => {
             {/* Main Interactive Group */}
             <group ref={groupRef}>
               <AnimatedGlobe isDark={isDark} />
-              <NeuralParticles isDark={isDark} count={400} />
+              <AIParticles isDark={isDark} count={400} />
               <FloatingOrbs isDark={isDark} />
             </group>
 

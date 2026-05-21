@@ -11,14 +11,14 @@ const HorizontalFeatures: React.FC = () => {
 
   const features = [
     {
-      title: "Neural Churn Prediction",
+      title: "AI Churn Prediction",
       desc: "Our deep-learning engine identifies high-risk accounts 60 days before potential default, allowing for proactive intervention.",
       icon: <BrainCircuit size={48} className="text-matisse-500 dark:text-matisse-300" />,
       stat: "99.2% Accuracy",
       color: "from-matisse-500/5 dark:from-matisse-300/5",
       mockup: {
         title: "Churn Risk Monitor",
-        subtitle: "Real-time Neural Analysis",
+        subtitle: "Real-time AI Analysis",
         rows: [
           { label: "Account #8492", value: "94% Risk", color: "bg-rose-500" },
           { label: "Account #7123", value: "88% Risk", color: "bg-rose-500" },
@@ -34,7 +34,7 @@ const HorizontalFeatures: React.FC = () => {
       color: "from-matisse-400/5 dark:from-matisse-200/5",
       mockup: {
         title: "Active Negotiations",
-        subtitle: "Neural NLP Engine",
+        subtitle: "AI NLP Engine",
         rows: [
           { label: "Settlement Found", value: "₹45,000", color: "bg-matisse-500" },
           { label: "Agent Response", value: "Pending", color: "bg-matisse-500" },
@@ -109,7 +109,7 @@ const HorizontalFeatures: React.FC = () => {
 
   return (
     <div className="relative">
-      <div ref={triggerRef} className="overflow-hidden bg-matisse-50 dark:bg-[#112740]">
+      <div ref={triggerRef} className="overflow-hidden bg-transparent">
         <div ref={sectionRef} className="flex h-screen w-fit relative z-10">
           {features.map((f, i) => (
             <div key={i} className="w-screen h-screen flex items-center justify-center relative px-6 md:px-20 overflow-hidden">
@@ -119,9 +119,9 @@ const HorizontalFeatures: React.FC = () => {
                 <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center relative z-10 text-left">
                     <div className="space-y-6 md:space-y-10">
                         <MotionWrapper>
-                             <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white dark:bg-white/5 border border-matisse-100 dark:border-matisse-800/30 text-matisse-700 dark:text-matisse-300 text-[10px] font-semibold tracking-widest uppercase mb-2">
-                                <span className="w-2 h-2 rounded-full bg-matisse-500 animate-pulse" />
-                                Feature 0{i + 1}
+                             <div className="flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-matisse-500 to-matisse-700 dark:from-matisse-300 dark:to-matisse-500 text-[11px] font-bold uppercase tracking-[0.3em] mb-4">
+                                <span className="w-4 h-[2px] bg-matisse-500" />
+                                <span>Feature 0{i + 1}</span>
                              </div>
                         </MotionWrapper>
                         

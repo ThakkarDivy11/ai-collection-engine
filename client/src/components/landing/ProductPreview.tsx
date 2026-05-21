@@ -12,7 +12,7 @@ const ProductPreview: React.FC = () => {
               <span className="text-[#00ff7f] font-bold">At Global Scale.</span>
             </h2>
             <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-normal">
-              Experience the world's most sophisticated neural engine for 
+              Experience the world's most sophisticated AI engine for 
               autonomous debt resolution and payment intelligence.
             </p>
           </div>

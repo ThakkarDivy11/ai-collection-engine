@@ -130,7 +130,7 @@ export function AuroraHero({
             ref={containerRef}
             className={cn(
                 "relative w-full overflow-hidden transition-colors duration-500",
-                isDark ? "bg-[#0a0f1a]" : "bg-white",
+                "bg-transparent",
                 className
             )}
         >
@@ -141,11 +141,7 @@ export function AuroraHero({
                 style={{ mixBlendMode: isDark ? 'screen' : 'multiply' }}
             />
 
-            {/* Vignette Overlay */}
-            <div
-                className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,15,26,0.5)_100%)]"
-                aria-hidden="true"
-            />
+            {/* Vignette Overlay removed for seamless background */}
 
             <div className="relative z-10 w-full">{children}</div>
         </div>

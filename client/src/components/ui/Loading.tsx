@@ -200,7 +200,7 @@ const Loading: React.FC = () => {
           </div>
 
           <div className="loading-message">
-            <p className="loading-title">Initializing Neural Network</p>
+            <p className="loading-title">Initializing AI Engine</p>
             <p className="loading-subtitle">
               {progress < 30
                 ? "Loading AI Models..."

@@ -9,21 +9,21 @@ const Pricing: React.FC = () => {
       name: "Standard",
       price: "12%",
       sub: "per recovered asset",
-      features: ["Neural Churn Prediction", "Standard Auto-Negotiator", "Email/SMS Channels", "Basic Analytics"],
+      features: ["AI Churn Prediction", "Standard Auto-Negotiator", "Email/SMS Channels", "Basic Analytics"],
       featured: false
     },
     {
       name: "Velocity",
       price: "18%",
       sub: "per recovered asset",
-      features: ["Advanced Neural Core", "Priority Negotiators", "Multi-channel Omni", "Full Forensic Suite", "API Access"],
+      features: ["Advanced AI Core", "Priority Negotiators", "Multi-channel Omni", "Full Forensic Suite", "API Access"],
       featured: true
     },
     {
       name: "Enterprise",
       price: "Custom",
       sub: "scaled recovery ops",
-      features: ["Custom Neural Models", "White-glove Agents", "On-prem Deployment", "24/7 Priority Support", "Dedicated Strategist"],
+      features: ["Custom AI Models", "White-glove Agents", "On-prem Deployment", "24/7 Priority Support", "Dedicated Strategist"],
       featured: false
     }
   ];

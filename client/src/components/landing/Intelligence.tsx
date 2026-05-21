@@ -11,10 +11,10 @@ const Intelligence: React.FC = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-matisse-500/10 dark:bg-matisse-300/5 text-matisse-700 dark:text-matisse-300 text-[10px] font-semibold mb-10 uppercase tracking-[0.4em] border border-matisse-500/10 dark:border-matisse-300/10"
+            className="flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-matisse-500 to-matisse-700 dark:from-matisse-300 dark:to-matisse-500 text-[11px] font-bold mb-10 uppercase tracking-[0.3em]"
           >
-            <Sparkles size={12} />
-            <span>Neural Intelligence</span>
+            <Sparkles size={14} className="text-matisse-500" />
+            <span>AI Intelligence</span>
           </motion.div>
           
           <motion.h2
@@ -35,7 +35,7 @@ const Intelligence: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-xl text-slate-600 dark:text-slate-400 max-w-lg mb-16 leading-relaxed font-normal"
           >
-            The Nexus Core leverages proprietary neural networks to simulate 
+            The AI Engine leverages proprietary models to simulate 
             thousands of recovery scenarios every second, choosing the 
             optimal path for maximum capital retention.
           </motion.p>
@@ -74,7 +74,7 @@ const Intelligence: React.FC = () => {
                         <Cpu size={24} />
                     </div>
                     <div>
-                        <div className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">Nexus Core Processing</div>
+                        <div className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">AI Engine Processing</div>
                         <div className="text-[10px] font-bold text-slate-400 dark:text-matisse-500 uppercase tracking-widest">Active Simulation</div>
                     </div>
                     <div className="ml-auto text-matisse-500 font-bold text-xs animate-pulse">LIVE</div>

@@ -31,7 +31,7 @@ const navigationLinks = [
       {
         href: "#features",
         label: "AI Collection Engine",
-        description: "Neural churn prediction & autonomous negotiation.",
+        description: "AI churn prediction & autonomous negotiation.",
         icon: BrainCircuit,
       },
       {

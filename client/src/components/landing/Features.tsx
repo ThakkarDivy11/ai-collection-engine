@@ -20,7 +20,7 @@ const Features: React.FC = () => {
   const features = [
     {
       title: "Churn Prediction",
-      desc: "Identify high-risk clients before they default using our neural risk scoring.",
+      desc: "Identify high-risk clients before they default using our AI risk scoring.",
       icon: <BrainCircuit className="text-[#00ff7f]" />,
     },
     {

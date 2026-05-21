@@ -4,14 +4,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import Navbar from "../components/landing/Navbar";
 import Hero from "../components/landing/Hero";
-import { Stats, PartnerLogos, HowItWorks, CTA, Footer } from "../components/landing/LandingMisc";
+import { Stats, PartnerLogos, HowItWorks, CTA } from "../components/landing/LandingMisc";
 import HorizontalFeatures from "../components/landing/HorizontalFeatures";
 import Intelligence from "../components/landing/Intelligence";
-import Pricing from "../components/landing/Pricing";
+import AuroraPricing from "../components/ui/aurora-pricing";
+import { Footer7 } from "../components/ui/footer-7";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage: React.FC = () => {
+  console.log("Landing page loaded");
   useEffect(() => {
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
@@ -89,9 +91,8 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* PRICING - Slightly lighter background for contrast */}
-        <section className="bg-slate-900/5 dark:bg-slate-900/20 relative">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)] pointer-events-none" />
-          <Pricing />
+        <section className="relative bg-transparent">
+          <AuroraPricing />
         </section>
 
         {/* CTA - Strong gradient contrast */}
@@ -100,7 +101,7 @@ const LandingPage: React.FC = () => {
         </section>
       </main>
 
-      <Footer />
+      <Footer7 />
 
       {/* Cinematic Texture Overlay */}
       <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.02] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
