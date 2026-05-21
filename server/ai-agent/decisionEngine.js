@@ -4,8 +4,14 @@ const { generateCompletion } = require("../services/aiService");
  * Call Mistral AI to generate a personalized reminder message
  */
 const generateReminderMessage = async (customerName, amountDue, dueDate, daysOverdue, actionType) => {
-    let prompt = `You are a professional but friendly AI collections agent. 
-Write a short, polite message to a customer named ${customerName} reminding them about an unpaid invoice of $${amountDue} that was due on ${dueDate} (which is ${daysOverdue} days overdue).`;
+    let prompt = `You are a professional AI collections agent representing CollectAI. 
+Write a short, polite email to a customer named ${customerName} reminding them about an unpaid invoice of ₹${amountDue} that was due on ${dueDate} (which is ${daysOverdue} days overdue).
+
+CRITICAL RULES:
+1. DO NOT use ANY placeholders like [Your Name], [Company Name], [Job Title], [Link], etc.
+2. Sign off the email simply as "CollectAI Accounts Team".
+3. Use the ₹ (Rupee) symbol for currency, NEVER use $.
+4. Do not mention attaching a link. Just ask them to log into their dashboard to process the payment.`;
 
     if (actionType === "friendly") {
         prompt += " Keep the tone very gentle, as they might have just forgotten.";
@@ -20,7 +26,7 @@ Write a short, polite message to a customer named ${customerName} reminding them
     } catch (error) {
         console.error("AI Generation Error in decisionEngine:", error.message);
         // Fallback message just in case AI is not responding
-        return `Hello ${customerName}, this is a gentle reminder that your invoice of $${amountDue} was due on ${dueDate}. Please arrange payment at your earliest convenience.`;
+        return `Hello ${customerName},\n\nThis is a gentle reminder that your invoice of ₹${amountDue} was due on ${dueDate}. Please log into your dashboard and arrange payment at your earliest convenience.\n\nBest regards,\nCollectAI Accounts Team`;
     }
 };
 
