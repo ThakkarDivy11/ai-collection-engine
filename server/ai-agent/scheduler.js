@@ -3,10 +3,10 @@ const axios = require("axios");
 
 /**
  * Initializes the AI Agent scheduler
- * Runs every day at 16:45 server time
+ * Runs every day at 14:30 server time
  */
 const initAgentCron = () => {
-    cron.schedule("5 17 * * *", async () => {
+    cron.schedule("30 14 * * *", async () => {
         console.log("[AI Agent] Daily Cron Job Started: Checking for overdue invoices...");
 
         try {
@@ -25,7 +25,7 @@ const initAgentCron = () => {
         timezone: "Asia/Kolkata"
     });
 
-    console.log("AI Agent Daily Scheduler Initialized (runs at 17:05 Asia/Kolkata)");
+    console.log("AI Agent Daily Scheduler Initialized (runs at 14:30 Asia/Kolkata)");
 };
 
 module.exports = {
