@@ -4,6 +4,7 @@ const Client = require("../models/Client");
 const Invoice = require("../models/Invoice");
 const sendEmail = require("../utils/emailService");
 const EmailLog = require("../models/EmailLog");
+const { calculateOverduePenalty } = require("../utils/penaltyUtils");
 
 exports.createCheckoutSession = async (req, res) => {
     try {
@@ -70,7 +71,10 @@ exports.createBulkCheckoutSession = async (req, res) => {
             return res.status(400).json({ message: "No outstanding invoices to pay." });
         }
 
-        const totalAmount = unpaidInvoices.reduce((sum, inv) => sum + inv.amount, 0);
+        const totalAmount = unpaidInvoices.reduce((sum, inv) => {
+            const { finalAmount } = calculateOverduePenalty(inv.amount, inv.dueDate, inv.status);
+            return sum + finalAmount;
+        }, 0);
         const invoiceIds = unpaidInvoices.map((inv) => inv._id.toString()).join(",");
 
         const session = await stripe.checkout.sessions.create({
