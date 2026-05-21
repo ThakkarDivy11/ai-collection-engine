@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Search, Filter, Mail, CheckCircle2, XCircle, Calendar, ChevronLeft, ChevronRight, Loader2, RefreshCw } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Filter, Mail, CheckCircle2, XCircle, Calendar, ChevronLeft, ChevronRight, Loader2, RefreshCw, X } from "lucide-react";
 
 const EmailLogs = () => {
     const [logs, setLogs] = useState([]);
@@ -12,6 +12,7 @@ const EmailLogs = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
     const [statusFilter, setStatusFilter] = useState("all");
+    const [selectedLog, setSelectedLog] = useState(null);
 
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     const isSuperAdmin = user.role === "superadmin";
@@ -237,7 +238,7 @@ const EmailLogs = () => {
                                             <td className="px-6 py-4 text-right">
                                                 <button 
                                                     className="text-matisse-500 hover:text-matisse-600 font-semibold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity"
-                                                    onClick={() => alert(log.content)}
+                                                    onClick={() => setSelectedLog(log)}
                                                 >
                                                     View Content
                                                 </button>
@@ -278,6 +279,54 @@ const EmailLogs = () => {
                     </div>
                 </div>
             )}
+
+            {/* Email Content Modal */}
+            <AnimatePresence>
+                {selectedLog && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                            onClick={() => setSelectedLog(null)}
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-[2rem] w-full max-w-2xl p-8 relative z-50 premium-shadow text-slate-900 dark:text-slate-200"
+                        >
+                            <div className="flex justify-between items-start mb-6 border-b border-slate-100 dark:border-white/5 pb-6">
+                                <div>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Mail size={16} className="text-matisse-500" />
+                                        <span className="text-sm font-bold text-matisse-500 uppercase tracking-widest">Email Content</span>
+                                    </div>
+                                    <h3 className="text-xl font-black">{selectedLog.subject}</h3>
+                                    <p className="text-xs text-slate-500 mt-1 font-medium">To: {selectedLog.recipientEmail}</p>
+                                </div>
+                                <button onClick={() => setSelectedLog(null)} className="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                    <X size={20} />
+                                </button>
+                            </div>
+
+                            <div className="bg-slate-50 dark:bg-black/20 p-6 rounded-2xl border border-slate-100 dark:border-white/5 font-mono text-sm leading-relaxed whitespace-pre-wrap max-h-[60vh] overflow-y-auto">
+                                {selectedLog.content}
+                            </div>
+                            
+                            <div className="mt-6 flex justify-end">
+                                <button
+                                    onClick={() => setSelectedLog(null)}
+                                    className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-transform premium-shadow"
+                                >
+                                    Close Window
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
