@@ -10,6 +10,8 @@ export default function Payments() {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [submitting, setSubmitting] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [statusFilter, setStatusFilter] = useState("all");
     
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     const isSuperAdmin = user.role === "superadmin";
@@ -191,15 +193,30 @@ export default function Payments() {
                 </div>
             ) : (
                 <>
-                    <div className="bg-white dark:bg-slate-900/40 p-5 rounded-3xl border border-slate-200 dark:border-white/5 flex items-center gap-4 premium-shadow transition-all duration-300">
-                        <div className="p-2.5 bg-slate-100 dark:bg-white/5 rounded-xl text-slate-400">
-                            <Search size={20} />
+                    <div className="bg-white dark:bg-slate-900/40 p-5 rounded-3xl border border-slate-200 dark:border-white/5 flex flex-col md:flex-row md:items-center gap-4 premium-shadow transition-all duration-300">
+                        <div className="flex items-center gap-4 flex-1">
+                            <div className="p-2.5 bg-slate-100 dark:bg-white/5 rounded-xl text-slate-400">
+                                <Search size={20} />
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Search by invoice # or client..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium"
+                            />
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Search invoices..."
-                            className="bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 flex-1 px-0 placeholder:text-slate-400 dark:placeholder:text-slate-500 font-medium"
-                        />
+                        <div className="hidden md:block h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+                        <select 
+                            value={statusFilter}
+                            onChange={(e) => setStatusFilter(e.target.value)}
+                            className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-matisse-500 font-medium cursor-pointer w-full md:w-auto"
+                        >
+                            <option value="all" className="dark:bg-slate-800">All Status</option>
+                            <option value="paid" className="dark:bg-slate-800">Paid</option>
+                            <option value="unpaid" className="dark:bg-slate-800">Unpaid</option>
+                            <option value="overdue" className="dark:bg-slate-800">Overdue</option>
+                        </select>
                     </div>
 
             <div className="bg-white dark:bg-slate-900/40 rounded-[2rem] border border-slate-200 dark:border-white/5 overflow-hidden premium-shadow transition-all duration-300">
@@ -222,11 +239,21 @@ export default function Payments() {
                                         <Loader2 className="mx-auto animate-spin text-matisse-500" size={32} />
                                     </td>
                                 </tr>
-                            ) : invoices.length === 0 ? (
+                            ) : invoices.filter(inv => {
+                                const matchSearch = inv.invoiceNumber.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                                    (inv.clientId?.name || "").toLowerCase().includes(searchTerm.toLowerCase());
+                                const matchStatus = statusFilter === "all" || inv.status.toLowerCase() === statusFilter.toLowerCase();
+                                return matchSearch && matchStatus;
+                            }).length === 0 ? (
                                 <tr>
-                                    <td colSpan="6" className="py-20 text-center text-slate-500">No invoices found.</td>
+                                    <td colSpan="6" className="py-20 text-center text-slate-500">No invoices found matching criteria.</td>
                                 </tr>
-                            ) : invoices.map((invoice) => (
+                            ) : invoices.filter(inv => {
+                                const matchSearch = inv.invoiceNumber.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                                    (inv.clientId?.name || "").toLowerCase().includes(searchTerm.toLowerCase());
+                                const matchStatus = statusFilter === "all" || inv.status.toLowerCase() === statusFilter.toLowerCase();
+                                return matchSearch && matchStatus;
+                            }).map((invoice) => (
                                 <tr key={invoice._id} className="hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-colors">
                                     <td className="px-6 py-4 text-slate-900 dark:text-white font-mono text-sm">{invoice.invoiceNumber}</td>
                                     <td className="px-6 py-4">
