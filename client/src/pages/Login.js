@@ -71,6 +71,10 @@ export default function Login() {
                 />
             </div>
 
+            {/* Premium Overlay Layer */}
+            <div className="absolute inset-0 z-[5] bg-[#020617]/50 backdrop-blur-[2px] pointer-events-none" />
+            <div className="absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#020617]/80 to-[#020617] pointer-events-none" />
+
             <div className="min-h-screen flex flex-col items-center justify-center px-4 relative z-10">
                 
                 {/* Branding Top */}
