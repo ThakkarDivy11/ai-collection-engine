@@ -7,7 +7,7 @@ const AiVoiceCalls = () => {
 
     useEffect(() => {
         const fetchCalls = () => {
-            fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/voice-calls`)
+            fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/voice-calls`)
                 .then((res) => res.json())
                 .then((data) => {
                     if (Array.isArray(data)) {

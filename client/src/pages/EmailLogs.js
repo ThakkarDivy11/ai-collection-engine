@@ -28,7 +28,7 @@ const EmailLogs = () => {
     const fetchAdmins = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/super-admin/admins-with-revenue`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/super-admin/admins-with-revenue`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             const data = await res.json();

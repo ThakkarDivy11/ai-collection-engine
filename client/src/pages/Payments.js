@@ -28,7 +28,7 @@ export default function Payments() {
             
             if (isSuperAdmin && !selectedAdmin) {
                 // Fetch admins for the initial view
-                const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/super-admin/admins-with-revenue`, {
+                const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/super-admin/admins-with-revenue`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -36,12 +36,12 @@ export default function Payments() {
             } else {
                 // Fetch invoices (optionally filtered by selected admin)
                 const url = (isSuperAdmin && selectedAdmin)
-                    ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices?adminId=${selectedAdmin}`
-                    : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices`;
+                    ? `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/invoices?adminId=${selectedAdmin}`
+                    : `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/invoices`;
                 
                 const [invRes, cliRes] = await Promise.all([
                     fetch(url, { headers: { "Authorization": `Bearer ${token}` } }),
-                    fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients`, {
+                    fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients`, {
                         headers: { "Authorization": `Bearer ${token}` }
                     })
                 ]);
@@ -68,7 +68,7 @@ export default function Payments() {
         setSubmitting(true);
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/invoices`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export default function Payments() {
     const handleDownload = async (invoice) => {
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices/download/${invoice._id}`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/invoices/download/${invoice._id}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             

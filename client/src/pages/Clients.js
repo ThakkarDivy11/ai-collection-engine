@@ -35,7 +35,7 @@ export default function Clients() {
         setLoading(true);
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients?search=${search}&page=${currentPage}&limit=8`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients?search=${search}&page=${currentPage}&limit=8`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             const data = await res.json();
@@ -57,8 +57,8 @@ export default function Clients() {
         const token = localStorage.getItem("token");
         const method = editClient ? "PUT" : "POST";
         const url = editClient
-            ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients/${editClient._id}`
-            : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients`;
+            ? `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients/${editClient._id}`
+            : `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients`;
 
         try {
             await fetch(url, {
@@ -80,7 +80,7 @@ export default function Clients() {
         if (!window.confirm("Delete this client?")) return;
         const token = localStorage.getItem("token");
         try {
-            await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients/${id}`, {
+            await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients/${id}`, {
                 method: "DELETE",
                 headers: { "Authorization": `Bearer ${token}` }
             });

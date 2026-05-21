@@ -46,7 +46,7 @@ export default function CustomerDashboard() {
                 setLoading(false);
                 return;
             }
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices/my-invoices`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/invoices/my-invoices`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             if (!res.ok) {
@@ -81,7 +81,7 @@ export default function CustomerDashboard() {
         const verifyPayment = async (sessionId) => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/payments/verify-session/${sessionId}`, {
+                const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/payments/verify-session/${sessionId}`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -117,7 +117,7 @@ export default function CustomerDashboard() {
         setProcessingId(invoice._id);
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/payments/create-checkout-session`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/payments/create-checkout-session`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export default function CustomerDashboard() {
         setProcessingAll(true);
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/payments/create-bulk-checkout-session`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/payments/create-bulk-checkout-session`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -166,7 +166,7 @@ export default function CustomerDashboard() {
     const handleDownload = async (invoice) => {
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/invoices/download/${invoice._id}`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/invoices/download/${invoice._id}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             

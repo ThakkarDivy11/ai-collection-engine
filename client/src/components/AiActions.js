@@ -6,7 +6,7 @@ const AiActions = () => {
 
     useEffect(() => {
         const fetchActions = () => {
-            fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/actions`)
+            fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/actions`)
                 .then((res) => res.json())
                 .then((data) => {
                     console.log("AI Actions:", data);

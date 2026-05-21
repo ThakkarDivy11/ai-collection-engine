@@ -85,7 +85,7 @@ export default function AiInsights() {
         if (isSuperAdmin && !selectedAdmin) {
             const fetchAdmins = async () => {
                 try {
-                    const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/super-admin/admins-with-revenue`, {
+                    const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/super-admin/admins-with-revenue`, {
                         headers: { "Authorization": `Bearer ${token}` }
                     });
                     const data = await res.json();
@@ -107,8 +107,8 @@ export default function AiInsights() {
                 setAnalyticsLoading(true);
                 try {
                     const url = selectedAdmin 
-                        ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/analytics?adminId=${selectedAdmin}`
-                        : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/analytics`;
+                        ? `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/analytics?adminId=${selectedAdmin}`
+                        : `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/analytics`;
                     
                     const res = await fetch(url, {
                         headers: { "Authorization": `Bearer ${token}` }
@@ -131,8 +131,8 @@ export default function AiInsights() {
             const fetchClients = async () => {
                 try {
                     const url = selectedAdmin
-                        ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients?limit=100&adminId=${selectedAdmin}`
-                        : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/clients?limit=100`;
+                        ? `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients?limit=100&adminId=${selectedAdmin}`
+                        : `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/clients?limit=100`;
                         
                     const res = await fetch(url, {
                         headers: { "Authorization": `Bearer ${token}` }
@@ -166,8 +166,8 @@ export default function AiInsights() {
         setInsightLoading(true);
         try {
             const url = selectedAdmin 
-                ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/insights?adminId=${selectedAdmin}`
-                : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/insights`;
+                ? `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/insights?adminId=${selectedAdmin}`
+                : `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/insights`;
                 
             const res = await fetch(url, {
                 headers: { "Authorization": `Bearer ${token}` }
@@ -185,8 +185,8 @@ export default function AiInsights() {
         setChurnLoading(true);
         try {
             const url = selectedAdmin 
-                ? `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/churn-prediction?adminId=${selectedAdmin}`
-                : `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/churn-prediction`;
+                ? `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/churn-prediction?adminId=${selectedAdmin}`
+                : `${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/churn-prediction`;
 
             const res = await fetch(url, {
                 method: "POST",
@@ -209,7 +209,7 @@ export default function AiInsights() {
         if (!searchQuery.trim()) return;
         setSearchLoading(true);
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/smart-search`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/smart-search`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -230,7 +230,7 @@ export default function AiInsights() {
         setEmailLoading(true);
         setGeneratedEmail("");
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/generate-email`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/generate-email`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -256,7 +256,7 @@ export default function AiInsights() {
         if (!clientEmail || !generatedEmail) return;
         setSendingEmail(true);
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/ai/send-email`, {
+            const res = await fetch(`${(process.env.REACT_APP_API_URL || "http://localhost:5000").replace(/\/$/, "")}/api/ai/send-email`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
