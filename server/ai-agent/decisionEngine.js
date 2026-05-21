@@ -5,11 +5,11 @@ const { generateCompletion } = require("../services/aiService");
  */
 const generateReminderMessage = async (customerName, amountDue, dueDate, daysOverdue, actionType) => {
     let prompt = `You are a professional AI collections agent representing CollectAI. 
-Write a short, polite email to a customer named ${customerName} reminding them about an unpaid invoice of ₹${amountDue} that was due on ${dueDate} (which is ${daysOverdue} days overdue).
+Write a short, polite email body to a customer named ${customerName} reminding them about an unpaid invoice of ₹${amountDue} that was due on ${dueDate} (which is ${daysOverdue} days overdue).
 
 CRITICAL RULES:
-1. DO NOT use ANY placeholders like [Your Name], [Company Name], [Job Title], [Link], etc.
-2. Sign off the email simply as "CollectAI Accounts Team".
+1. ONLY write the main body of the email. DO NOT include a greeting (e.g., "Dear Name"). DO NOT include a sign-off or signature (e.g., "Best regards", "Sincerely", "[Your Name]").
+2. DO NOT use ANY placeholders like [Your Name], [Company Name], [Job Title], [Link], etc.
 3. Use the ₹ (Rupee) symbol for currency, NEVER use $.
 4. Do not mention attaching a link. Just ask them to log into their dashboard to process the payment.`;
 
@@ -22,7 +22,16 @@ CRITICAL RULES:
     }
 
     try {
-        return await generateCompletion(prompt, "You are a professional AI collections agent.");
+        let aiMessage = await generateCompletion(prompt, "You are a professional AI collections agent.");
+        
+        // Strip out AI hallucinations (e.g., if it still adds signatures or placeholders)
+        aiMessage = aiMessage.replace(/Best regards,[\s\S]*/i, "");
+        aiMessage = aiMessage.replace(/Sincerely,[\s\S]*/i, "");
+        aiMessage = aiMessage.replace(/Warm regards,[\s\S]*/i, "");
+        aiMessage = aiMessage.replace(/\[.*?\]/g, ""); // Remove anything in brackets
+        
+        // Manually format the final message to guarantee no placeholders
+        return `Hello ${customerName},\n\n${aiMessage.trim()}\n\nBest regards,\nCollectAI Accounts Team`;
     } catch (error) {
         console.error("AI Generation Error in decisionEngine:", error.message);
         // Fallback message just in case AI is not responding
