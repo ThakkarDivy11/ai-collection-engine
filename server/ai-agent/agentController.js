@@ -48,7 +48,7 @@ const runAgentCycle = async (req, res) => {
 
             // Execute the decided action based on overdue rules
             if (decision.action === "friendly" || decision.action === "email") {
-                toolResult = await sendEmailReminder(client.email, decision.message);
+                toolResult = await sendEmailReminder(client.email, decision.message, client.name, invoice.invoiceNumber);
                 finalActionEnum = "email";
             } else if (decision.action === "escalate") {
                 // Trigger AI voice call + mark invoice overdue
@@ -154,7 +154,7 @@ const manualSendReminder = async (req, res) => {
         const client = invoice.clientId;
         const decision = await decideAction(invoice, client); // Generate dynamic text based on current delays
 
-        await sendEmailReminder(client.email, decision.message);
+        await sendEmailReminder(client.email, decision.message, client.name, invoice.invoiceNumber);
 
         const logType = "email";
 

@@ -1,6 +1,7 @@
 const axios = require("axios");
 const Invoice = require("../models/Invoice");
 const VoiceCallLog = require("../models/VoiceCallLog");
+const EmailLog = require("../models/EmailLog");
 
 // ─── Twilio (Voice) ──────────────────────────────────────────────────────────
 const twilio = require("twilio");
@@ -15,11 +16,12 @@ const sendEmail = require("../utils/emailService");
  * Send an email reminder using the central email service (Resend/SMTP)
  * @returns {{ success: boolean, actionStatus: "sent"|"failed" }}
  */
-const sendEmailReminder = async (customerEmail, message) => {
+const sendEmailReminder = async (customerEmail, message, clientName, invoiceNumber) => {
     try {
+        const subject = "Invoice Payment Reminder";
         await sendEmail({
             to: customerEmail,
-            subject: "Invoice Payment Reminder",
+            subject: subject,
             text: message,
             html: `
                 <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
@@ -37,10 +39,31 @@ const sendEmailReminder = async (customerEmail, message) => {
             `,
         });
 
+        // Log to EmailLog dashboard
+        await EmailLog.create({
+            recipientEmail: customerEmail,
+            clientName: clientName || "Unknown",
+            invoiceNumber: invoiceNumber || "N/A",
+            subject: subject,
+            content: message,
+            status: "sent"
+        });
+
         console.log(`[AI Agent] Email sent successfully to ${customerEmail}`);
         return { success: true, actionStatus: "sent", tool: "email" };
     } catch (error) {
         console.error("[AI Agent] Email Failed:", error.message);
+        
+        await EmailLog.create({
+            recipientEmail: customerEmail,
+            clientName: clientName || "Unknown",
+            invoiceNumber: invoiceNumber || "N/A",
+            subject: "Invoice Payment Reminder",
+            content: message,
+            status: "failed",
+            error: error.message
+        });
+
         return { success: false, actionStatus: "failed", tool: "email", error: error.message };
     }
 };
