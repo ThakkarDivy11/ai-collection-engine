@@ -9,13 +9,12 @@ import {
   Points, 
   PointMaterial, 
   AdaptiveDpr, 
-  AdaptiveEvents,
-  PerformanceMonitor
+  PerformanceMonitor,
+  Environment
 } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "../../lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,21 +24,23 @@ const AnimatedGlobe = memo(({ isDark }: { isDark: boolean }) => {
 
   useFrame(() => {
     if (globeRef.current) {
-      globeRef.current.rotation.y = clock.getElapsedTime() * 0.12;
-      globeRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.1) * 0.05;
+      globeRef.current.rotation.y = clock.getElapsedTime() * 0.05;
+      globeRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.05) * 0.1;
     }
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.2}>
-      <Sphere ref={globeRef} args={[2.5, 32, 32]}>
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Sphere ref={globeRef} args={[2.8, 128, 128]}>
         <MeshDistortMaterial
-          color={isDark ? "#63b3ed" : "#2d84ca"}
+          color={isDark ? "#0f172a" : "#ffffff"}
+          roughness={0.1}
+          metalness={0.8}
           speed={1.5}
-          distort={0.3}
-          transparent
-          opacity={isDark ? 0.6 : 0.5}
-          wireframe
+          distort={0.4}
+          envMapIntensity={isDark ? 1.5 : 2}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
         />
       </Sphere>
     </Float>
@@ -55,7 +56,7 @@ const AIParticles = memo(({ isDark, count = 300 }: { isDark: boolean; count?: nu
     for (let i = 0; i < count; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      const r = 3 + Math.random() * 2;
+      const r = 4 + Math.random() * 2.5;
       pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = r * Math.cos(phi);
@@ -65,7 +66,8 @@ const AIParticles = memo(({ isDark, count = 300 }: { isDark: boolean; count?: nu
 
   useFrame(() => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y = clock.getElapsedTime() * 0.05;
+      pointsRef.current.rotation.y = clock.getElapsedTime() * 0.03;
+      pointsRef.current.rotation.z = Math.cos(clock.getElapsedTime() * 0.02) * 0.1;
     }
   });
 
@@ -78,12 +80,13 @@ const AIParticles = memo(({ isDark, count = 300 }: { isDark: boolean; count?: nu
         />
       </bufferGeometry>
       <PointMaterial
-        size={0.02}
-        color={isDark ? "#ffffff" : "#2d84ca"}
+        size={0.03}
+        color={isDark ? "#60a5fa" : "#3b82f6"}
         transparent
-        opacity={isDark ? 0.8 : 0.7}
+        opacity={isDark ? 0.9 : 0.6}
         sizeAttenuation
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </Points>
   );
@@ -95,33 +98,37 @@ const FloatingOrbs = memo(({ isDark }: { isDark: boolean }) => {
 
   useFrame(() => {
     if (orbsRef.current) {
-      orbsRef.current.rotation.y = clock.getElapsedTime() * 0.03;
+      orbsRef.current.rotation.y = clock.getElapsedTime() * 0.02;
     }
   });
 
   return (
     <group ref={orbsRef}>
-      {[...Array(6)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <Float
           key={i}
-          speed={0.8 + Math.random() * 0.5}
-          rotationIntensity={0.4}
-          floatIntensity={0.3}
+          speed={1 + Math.random()}
+          rotationIntensity={0.8}
+          floatIntensity={0.8}
         >
           <Sphere
-            args={[0.15 + Math.random() * 0.15, 12, 12]}
+            args={[0.1 + Math.random() * 0.2, 32, 32]}
             position={[
-              (Math.random() - 0.5) * 8,
-              (Math.random() - 0.5) * 8,
-              (Math.random() - 0.5) * 4
+              (Math.random() - 0.5) * 10,
+              (Math.random() - 0.5) * 10,
+              (Math.random() - 0.5) * 6
             ]}
           >
-            <meshStandardMaterial
-              color={i % 2 === 0 ? "#2d84ca" : "#7ec8e3"}
+            <meshPhysicalMaterial
+              color={i % 3 === 0 ? "#3b82f6" : i % 3 === 1 ? "#8b5cf6" : "#06b6d4"}
+              roughness={0.1}
+              metalness={0.5}
+              transmission={0.8}
+              thickness={1}
               transparent
-              opacity={isDark ? 0.6 : 0.5}
-              emissive={i % 2 === 0 ? "#2d84ca" : "#7ec8e3"}
-              emissiveIntensity={isDark ? 1.2 : 0.2}
+              opacity={0.9}
+              emissive={i % 3 === 0 ? "#3b82f6" : i % 3 === 1 ? "#8b5cf6" : "#06b6d4"}
+              emissiveIntensity={isDark ? 1 : 0.5}
             />
           </Sphere>
         </Float>
@@ -148,29 +155,27 @@ const GsapThreeHeroBackground: React.FC = () => {
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
-    // Interactive Spotlight Overlay
     const overlay = overlayRef.current;
     if (!overlay) return;
-
 
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const x = (clientX / window.innerWidth - 0.5) * 2;
       const y = (clientY / window.innerHeight - 0.5) * 2;
 
-      // Rotate 3D Group
       if (groupRef.current) {
         gsap.to(groupRef.current.rotation, {
-          y: x * 0.2,
-          x: -y * 0.2,
+          y: x * 0.15,
+          x: -y * 0.15,
           duration: 2,
           ease: "power2.out"
         });
       }
 
-      // Move Spotlight
       gsap.to(overlay, {
-        background: `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(45, 132, 202, 0.15) 0%, transparent 60%)`,
+        background: isDark
+          ? `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(59, 130, 246, 0.15) 0%, transparent 50%)`
+          : `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(59, 130, 246, 0.08) 0%, transparent 60%)`,
         duration: 0.5,
         ease: "power2.out"
       });
@@ -178,7 +183,6 @@ const GsapThreeHeroBackground: React.FC = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Scroll-triggered 3D movement
     if (groupRef.current) {
       ScrollTrigger.create({
         trigger: containerRef.current,
@@ -187,14 +191,13 @@ const GsapThreeHeroBackground: React.FC = () => {
         scrub: 1,
         onUpdate: (self) => {
           if (groupRef.current) {
-            groupRef.current.position.z = self.progress * 5;
-            groupRef.current.rotation.z = self.progress * 0.5;
+            groupRef.current.position.y = -self.progress * 2;
+            groupRef.current.rotation.z = self.progress * 0.2;
           }
         }
       });
     }
 
-    // Optimized GSAP
     gsap.to(overlay, {
       opacity: 0.8,
       duration: 5,
@@ -203,7 +206,6 @@ const GsapThreeHeroBackground: React.FC = () => {
       ease: 'sine.inOut',
     });
 
-    // Scroll Progress Bar Animation
     gsap.to('#scroll-progress', {
       scaleX: 1,
       ease: 'none',
@@ -220,7 +222,7 @@ const GsapThreeHeroBackground: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <div
@@ -228,33 +230,29 @@ const GsapThreeHeroBackground: React.FC = () => {
       className="absolute inset-0 overflow-hidden pointer-events-none transition-colors duration-1000"
       style={{
         background: isDark 
-          ? 'linear-gradient(135deg, #0a0f1a 0%, #112740 100%)' 
-          : 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%)',
+          ? 'linear-gradient(135deg, #020617 0%, #0f172a 100%)' 
+          : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
       }}
     >
-      {/* Interactive Spotlight Overlay */}
       <div 
         ref={overlayRef}
         className="absolute inset-0 pointer-events-none will-change-[transform,opacity] z-[5]"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(45, 132, 202, 0.15) 0%, transparent 60%)'
-        }}
       />
 
-      {/* Scroll Progress Bar */}
       <div 
         id="scroll-progress" 
-        className="fixed top-0 left-0 h-1 bg-matisse-500 z-[100] origin-left"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 z-[100] origin-left"
         style={{ width: '100%', transform: 'scaleX(0)' }}
       />
 
       <Canvas
-        camera={{ position: [0, 0, 10], fov: 45 }}
+        camera={{ position: [0, 0, 8], fov: 45 }}
         gl={{ 
           alpha: true, 
-          antialias: false, 
+          antialias: true, 
           stencil: false,
-          depth: true
+          depth: true,
+          powerPreference: "high-performance"
         }}
         dpr={dpr}
         eventSource={containerRef as any}
@@ -263,41 +261,39 @@ const GsapThreeHeroBackground: React.FC = () => {
         style={{ position: 'absolute', inset: 0 }}
       >
         <Suspense fallback={null}>
-          <PerformanceMonitor onIncline={() => setDpr(1.5)} onDecline={() => setDpr(1)}>
+          <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
             <AdaptiveDpr pixelated />
-
             
-            {/* Lighting - Enhanced for Dark Mode Visibility */}
-            <ambientLight intensity={isDark ? 0.6 : 0.5} />
-            <pointLight position={[10, 10, 10]} intensity={isDark ? 1.5 : 1} color={isDark ? "#ffffff" : "#2d84ca"} />
-            <pointLight position={[-10, -10, -10]} intensity={isDark ? 0.8 : 0.5} color="#2d84ca" />
+            <Environment preset={isDark ? "night" : "city"} />
+            
+            <ambientLight intensity={isDark ? 0.5 : 1} />
+            <pointLight position={[10, 10, 10]} intensity={isDark ? 5 : 3} color="#3b82f6" />
+            <pointLight position={[-10, -10, -10]} intensity={isDark ? 4 : 2} color="#8b5cf6" />
+            <pointLight position={[0, 0, 5]} intensity={isDark ? 3 : 1} color="#06b6d4" />
 
-            {/* Main Interactive Group */}
             <group ref={groupRef}>
               <AnimatedGlobe isDark={isDark} />
               <AIParticles isDark={isDark} count={400} />
               <FloatingOrbs isDark={isDark} />
             </group>
 
-            {/* Stars Background - Fixed count to avoid buffer resizing */}
             <Stars
-              radius={50}
-              depth={30}
-              count={2000}
-              factor={2}
+              radius={60}
+              depth={40}
+              count={isDark ? 3000 : 1000}
+              factor={isDark ? 3 : 2}
               saturation={0}
               fade
-              speed={0.5}
+              speed={1}
             />
 
-            {/* Sparkles Effect - Fixed count to avoid buffer resizing */}
             <Sparkles
-              count={100}
-              scale={8}
-              size={1.5}
-              speed={0.3}
-              opacity={0.4}
-              color={isDark ? "#ffffff" : "#2d84ca"}
+              count={isDark ? 150 : 80}
+              scale={12}
+              size={2}
+              speed={0.4}
+              opacity={isDark ? 0.6 : 0.3}
+              color={isDark ? "#ffffff" : "#3b82f6"}
             />
           </PerformanceMonitor>
         </Suspense>
